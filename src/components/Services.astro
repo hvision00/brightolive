@@ -1,0 +1,92 @@
+---
+// Sezione Servizi
+import { Icon } from "astro-icon/components";
+
+const services = [
+    {
+        icon: "lucide:calendar",
+        title: "Coordinamento",
+        description:
+            "Gestione completa del giorno del matrimonio, dalla preparazione alla cerimonia fino al ricevimento. Sarò presente per garantire che tutto proceda secondo i piani.",
+        link: "#contatti",
+    },
+    {
+        icon: "lucide:sparkles",
+        title: "Wedding Totale",
+        description:
+            "Pianificazione completa dall'inizio alla fine. Selezione fornitori, location, allestimenti e gestione di ogni dettaglio per il vostro giorno speciale.",
+        link: "#contatti",
+    },
+    {
+        icon: "lucide:message-circle",
+        title: "Consulenza su Misura",
+        description:
+            "Supporto personalizzato per specifiche esigenze. Dalla scelta della location ai consigli su stile e budget, un aiuto mirato per le vostre necessità.",
+        link: "#contatti",
+    },
+];
+---
+
+<section class="py-20 lg:py-32 ">
+    <div class="container mx-auto px-8 lg:px-16">
+        <!-- Titolo e Descrizione -->
+        <div class="text-center mb-16 lg:mb-20 fade-in">
+            <h2
+                class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-4"
+            >
+                SERVIZI
+            </h2>
+            <p class="text-lg md:text-xl font-light text-gray-600">
+                Soluzioni personalizzate per ogni tipo di matrimonio
+            </p>
+        </div>
+
+        <!-- Grid Servizi -->
+        <div class="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto">
+            {
+                services.map((service, index) => (
+                    <div class={`bg-gray-50 p-8 lg:p-10 group hover:shadow-lg transition-shadow duration-300 fade-in fade-in-delay-${index + 1}`}>
+                        <!-- Icona -->
+                        <div class="mb-6">
+                            <Icon
+                                name={service.icon}
+                                class="w-8 h-8 text-gray-600"
+                            />
+                        </div>
+
+                        <!-- Titolo -->
+                        <h3 class="text-2xl font-light text-gray-900 mb-4">
+                            {service.title}
+                        </h3>
+
+                        <!-- Descrizione -->
+                        <p class="text-gray-600 font-light leading-relaxed mb-6">
+                            {service.description}
+                        </p>
+
+                        <!-- Pulsante -->
+                        <a
+                            href={service.link}
+                            class="inline-flex items-center text-gray-900 font-light text-sm tracking-wide hover:text-[#7d8b6e] transition-colors duration-300 group"
+                        >
+                            Scopri di più
+                            <svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,11 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="url(#gradient2)"/>
+  <defs>
+    <linearGradient id="gradient2" x1="1200" y1="0" x2="0" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e8e5e0"/>
+      <stop offset="100%" stop-color="#d8d5d0"/>
+    </linearGradient>
+  </defs>
+  <text x="600" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="300" fill="#7d8b6e" text-anchor="middle" opacity="0.3">Slide 2 - Elegant Details</text>
+</svg>
+

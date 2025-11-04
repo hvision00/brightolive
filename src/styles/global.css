@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Font Sora */
+@font-face {
+  font-family: 'Sora';
+  src: url('/font/Sora/Sora-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-primary: #7d8b6e;
+  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
+}
+
+/* Applica il font a tutto il sito */
+body {
+  font-family: 'Sora', system-ui, -apple-system, sans-serif;
+}
+
+/* Scroll fluido per anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animazioni in entrata minimali */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay per animazioni stagger */
+.fade-in-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.fade-in-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.fade-in-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.fade-in-delay-4 {
+  transition-delay: 0.4s;
+}
+
+.fade-in-delay-5 {
+  transition-delay: 0.5s;
+}

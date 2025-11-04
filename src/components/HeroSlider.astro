@@ -1,0 +1,90 @@
+---
+// Hero section con slider automatico
+---
+
+<section
+    x-data="{
+        currentSlide: 0,
+        slides: [
+            '/heroSection/hero-1.jpg',
+            '/heroSection/hero-2.jpg',
+            '/heroSection/hero-3.jpg'
+        ],
+        autoplay: null,
+        init() {
+            this.autoplay = setInterval(() => {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            }, 5000);
+        }
+    }"
+    class="relative w-full h-screen overflow-hidden"
+>
+    <!-- Slider Background - occupa solo una parte dello schermo -->
+    <div class="absolute inset-0 flex items-center justify-center">
+        <div
+            class="relative w-[85%] h-[80%] sm:w-[80%] sm:h-[75%] lg:h-[85%] overflow-hidden"
+        >
+            <!-- Slides -->
+            <template x-for="(slide, index) in slides" :key="index">
+                <div
+                    x-show="currentSlide === index"
+                    x-transition:enter="transition ease-out duration-1000"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-1000"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class="absolute inset-0"
+                >
+                    <img
+                        :src="slide"
+                        :alt="'Slide ' + (index + 1)"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+            </template>
+
+            <!-- Overlay nero al 40% solo sul riquadro slider -->
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+        </div>
+    </div>
+
+    <!-- Contenuto sopra lo slider -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="container mx-auto px-4 sm:px-8 lg:px-16">
+            <div
+                class="max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-center"
+            >
+                <!-- Tagline -->
+                <p
+                    class="text-xs sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] text-gray-200 mb-4 sm:mb-6 uppercase fade-in"
+                >
+                    Tu ti sposi, io organizzo
+                </p>
+
+                <!-- Brand Name -->
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight text-gray-100 mb-6 sm:mb-8 fade-in fade-in-delay-1"
+                >
+                    BRIGH<span class="text-[#7d8b6e]">TO</span>LIVE
+                </h1>
+
+                <!-- Description -->
+                <p
+                    class="text-sm sm:text-base md:text-lg lg:text-xl font-regular text-gray-100 leading-relaxed mb-8 sm:mb-10 px-2 sm:px-0 fade-in fade-in-delay-2"
+                >
+                    Come wedding planner, sarò al tuo fianco per creare momenti
+                    indimenticabili, con presenza costante per sposi e invitati.
+                </p>
+
+                <!-- CTA Button -->
+                <a
+                    href="#contatti"
+                    class="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-[#7d8b6e] text-white text-xs sm:text-sm font-light tracking-wider uppercase hover:bg-[#6d7a5e] transition-all duration-300 fade-in fade-in-delay-3"
+                >
+                    Fatti sentire
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

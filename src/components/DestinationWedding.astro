@@ -1,0 +1,73 @@
+---
+// Sezione Destination Wedding
+const destinations = [
+    {
+        name: "Dolomiti",
+        image: "/destinations/dolomiti.jpg",
+    },
+    {
+        name: "Bassano del Grappa",
+        image: "/destinations/bassano.jpg",
+    },
+    {
+        name: "Venezia",
+        image: "/destinations/venezia.jpg",
+    },
+    {
+        name: "Padova",
+        image: "/destinations/padova.jpg",
+    },
+    {
+        name: "Area del Prosecco",
+        image: "/destinations/prosecco.jpg",
+    },
+];
+---
+
+<section class="py-20 lg:py-32 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+        <!-- Titolo e Descrizione -->
+        <div class="text-center mb-16 lg:mb-20 fade-in">
+            <h2
+                class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-4"
+            >
+                DESTINATION WEDDING
+            </h2>
+            <p class="text-lg md:text-xl font-light text-gray-600">
+                Location esclusive nel Nord Italia
+            </p>
+        </div>
+
+        <!-- Grid Destinazioni -->
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+            {
+                destinations.map((destination, index) => (
+                    <div class={`group fade-in fade-in-delay-${Math.min(index + 1, 5)}`}>
+                        <!-- Immagine -->
+                        <div class="relative overflow-hidden mb-4 aspect-[4/3]">
+                            <img
+                                src={destination.image}
+                                alt={destination.name}
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </div>
+
+                        <!-- Nome e Pulsante -->
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl md:text-2xl font-light text-gray-900">
+                                {destination.name}
+                            </h3>
+                            <a
+                                href="#contatti"
+                                class="px-6 py-2 border border-gray-900 text-gray-900 text-sm font-light tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300"
+                            >
+                                Scopri
+                            </a>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
