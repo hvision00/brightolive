@@ -1,5 +1,14 @@
 ---
-// Hero section con slider automatico
+// Hero section Elegante - Design completamente diverso
+// Layout split-screen asimmetrico con eleganza moderna
+import { getTranslation, type Language } from "../i18n/translations";
+
+interface Props {
+    lang?: Language;
+}
+
+const { lang = "it" } = Astro.props;
+const t = (key: any) => getTranslation(lang, key);
 ---
 
 <section
@@ -17,74 +26,201 @@
             }, 5000);
         }
     }"
-    class="relative w-full h-screen overflow-hidden"
+    class="relative w-full min-h-screen bg-[#F8F7F4]"
 >
-    <!-- Slider Background - occupa solo una parte dello schermo -->
-    <div class="absolute inset-0 flex items-center justify-center">
-        <div
-            class="relative w-[85%] h-[80%] sm:w-[80%] sm:h-[75%] lg:h-[85%] overflow-hidden"
-        >
-            <!-- Slides -->
-            <template x-for="(slide, index) in slides" :key="index">
+    <!-- Layout Split Screen Asimmetrico -->
+    <div class="container mx-auto px-8 lg:px-16 min-h-screen flex items-center">
+        <div class="grid lg:grid-cols-12 gap-0 lg:gap-16 w-full py-20 lg:py-0">
+            <!-- Colonna Sinistra - Contenuto Testuale (60%) -->
+            <div
+                class="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1"
+            >
+                <!-- Numero decorativo grande -->
                 <div
-                    x-show="currentSlide === index"
-                    x-transition:enter="transition ease-out duration-1000"
-                    x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition ease-in duration-1000"
-                    x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0"
-                    class="absolute inset-0"
+                    class="text-[180px] lg:text-[280px] font-light text-[#7d8b6e]/5 leading-none mb-[-80px] lg:mb-[-120px] fade-in"
+                    style="font-variant-numeric: oldstyle-nums;"
                 >
-                    <img
-                        :src="slide"
-                        :alt="'Slide ' + (index + 1)"
-                        class="w-full h-full object-cover"
-                    />
+                    00
                 </div>
-            </template>
 
-            <!-- Overlay nero al 40% solo sul riquadro slider -->
-            <div class="absolute inset-0 bg-black opacity-40"></div>
+                <!-- Tagline sottile -->
+                <div class="mb-6 fade-in fade-in-delay-1">
+                    <div class="flex items-center">
+                        <div class="w-12 h-px bg-[#7d8b6e]"></div>
+                        <span
+                            class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+                        >
+                            Wedding Planner
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Titolo grande asimmetrico -->
+                <h1
+                    class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.95] text-gray-900 mb-8 fade-in fade-in-delay-2"
+                >
+                    <span class="block">{t("hero_title_1")}</span>
+                    {
+                        t("hero_title_2") && (
+                            <span class="block text-[#7d8b6e] italic font-normal">
+                                {t("hero_title_2")}
+                            </span>
+                        )
+                    }
+                    {
+                        t("hero_title_3") && (
+                            <span class="block">{t("hero_title_3")}</span>
+                        )
+                    }
+                </h1>
+
+                <!-- Descrizione elegante -->
+                <div class="max-w-xl fade-in fade-in-delay-3">
+                    <p
+                        class="text-lg md:text-xl font-light text-gray-600 leading-relaxed mb-8"
+                    >
+                        {t("hero_description")}
+                    </p>
+
+                    <!-- Separatore elegante -->
+                    <div class="flex items-center my-8">
+                        <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                        <div class="mx-4 w-1 h-1 rounded-full bg-[#7d8b6e]">
+                        </div>
+                        <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                    </div>
+
+                    <!-- CTA minimalista -->
+                    <a
+                        href="#contatti"
+                        class="inline-flex items-center group text-gray-900 font-light text-sm tracking-wider uppercase hover:text-[#7d8b6e] transition-colors duration-300"
+                    >
+                        <span>{t("hero_cta")}</span>
+                        <svg
+                            class="w-6 h-6 ml-3 transform group-hover:translate-x-2 transition-transform duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Colonna Destra - Gallery Immagini (40%) -->
+            <div
+                class="lg:col-span-5 relative order-1 lg:order-2 mb-12 lg:mb-0 fade-in fade-in-delay-1"
+            >
+                <!-- Container immagini con layout elegante -->
+                <div class="relative h-[60vh] lg:h-[80vh]">
+                    <!-- Immagine principale -->
+                    <div
+                        class="absolute top-0 right-0 w-[85%] h-[70%] overflow-hidden shadow-2xl"
+                    >
+                        <template x-for="(slide, index) in slides" :key="index">
+                            <div
+                                x-show="currentSlide === index"
+                                x-transition:enter="transition ease-out duration-1000"
+                                x-transition:enter-start="opacity-0"
+                                x-transition:enter-end="opacity-100"
+                                x-transition:leave="transition ease-in duration-1000"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0"
+                                class="absolute inset-0"
+                            >
+                                <img
+                                    :src="slide"
+                                    :alt="'Elegant moment ' + (index + 1)"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                        </template>
+
+                        <!-- Overlay sottile -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+                        >
+                        </div>
+                    </div>
+
+                    <!-- Elemento decorativo floating -->
+                    <div
+                        class="absolute bottom-0 left-0 w-[60%] h-[40%] bg-[#7d8b6e] flex items-center justify-center shadow-xl"
+                    >
+                        <div class="text-center text-white p-8">
+                            <div
+                                class="text-2xl uppercase font-light mb-2"
+                                style="font-variant-numeric: oldstyle-nums;"
+                            >
+                                {t("hero_floating_title")}
+                            </div>
+                            <div
+                                class="text-sm tracking-[0.3em] uppercase font-light opacity-90"
+                            >
+                                {t("hero_floating_subtitle")}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Linea decorativa verticale -->
+                    <div
+                        class="absolute top-1/2 left-[-2rem] transform -translate-y-1/2 w-px h-32 bg-[#7d8b6e]/30 hidden lg:block"
+                    >
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Contenuto sopra lo slider -->
-    <div class="relative z-10 h-full flex items-center justify-center">
-        <div class="container mx-auto px-4 sm:px-8 lg:px-16">
-            <div
-                class="max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-center"
-            >
-                <!-- Tagline -->
-                <p
-                    class="text-xs sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] text-gray-200 mb-4 sm:mb-6 uppercase fade-in"
+    <!-- Indicatori slide minimalisti verticali -->
+    <div
+        class="hidden lg:block absolute right-8 top-1/2 transform -translate-y-1/2 z-20"
+    >
+        <div class="flex flex-col space-y-4">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button
+                    @click="currentSlide = index"
+                    class="w-px h-8 bg-gray-400/30 transition-all duration-300 relative group"
+                    :class="currentSlide === index ? 'bg-[#7d8b6e] h-16' : 'hover:bg-[#7d8b6e]/50'"
                 >
-                    Tu ti sposi, io organizzo
-                </p>
+                    <span
+                        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+                        x-text="'0' + (index + 1)"></span>
+                </button>
+            </template>
+        </div>
+    </div>
 
-                <!-- Brand Name -->
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight text-gray-100 mb-6 sm:mb-8 fade-in fade-in-delay-1"
-                >
-                    BRIGH<span class="text-[#7d8b6e]">TO</span>LIVE
-                </h1>
-
-                <!-- Description -->
-                <p
-                    class="text-sm sm:text-base md:text-lg lg:text-xl font-regular text-gray-100 leading-relaxed mb-8 sm:mb-10 px-2 sm:px-0 fade-in fade-in-delay-2"
-                >
-                    Come wedding planner, sarò al tuo fianco per creare momenti
-                    indimenticabili, con presenza costante per sposi e invitati.
-                </p>
-
-                <!-- CTA Button -->
-                <a
-                    href="#contatti"
-                    class="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-[#7d8b6e] text-white text-xs sm:text-sm font-light tracking-wider uppercase hover:bg-[#6d7a5e] transition-all duration-300 fade-in fade-in-delay-3"
-                >
-                    Fatti sentire
-                </a>
+    <!-- Scroll indicator elegante -->
+    <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+    >
+        <div class="text-xs tracking-[0.3em] text-gray-500 uppercase mb-3">
+            Scroll
+        </div>
+        <div class="w-px h-12 bg-[#7d8b6e]/30 relative overflow-hidden">
+            <div class="absolute top-0 w-full h-8 bg-[#7d8b6e] animate-scroll">
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    @keyframes scroll {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(100%);
+        }
+    }
+
+    .animate-scroll {
+        animation: scroll 2s ease-in-out infinite;
+    }
+</style>

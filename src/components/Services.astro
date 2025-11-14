@@ -1,92 +1,217 @@
 ---
-// Sezione Servizi
+// Sezione Servizi Elegante
+// Layout verticale con cards grandi e raffinate
 import { Icon } from "astro-icon/components";
+import { getTranslation, type Language } from "../i18n/translations";
+
+interface Props {
+    lang?: Language;
+}
+
+const { lang = "it" } = Astro.props;
+const t = (key: any) => getTranslation(lang, key);
 
 const services = [
     {
+        number: "01",
         icon: "lucide:calendar",
-        title: "Coordinamento",
-        description:
-            "Gestione completa del giorno del matrimonio, dalla preparazione alla cerimonia fino al ricevimento. Sarò presente per garantire che tutto proceda secondo i piani.",
-        link: "#contatti",
+        titleKey: "service_1_title",
+        subtitleKey: "service_1_subtitle",
+        descriptionKey: "service_1_description",
+        featuresKeys: [
+            "service_1_feature_1",
+            "service_1_feature_2",
+            "service_1_feature_3",
+            "service_1_feature_4",
+        ],
     },
     {
+        number: "02",
         icon: "lucide:sparkles",
-        title: "Wedding Totale",
-        description:
-            "Pianificazione completa dall'inizio alla fine. Selezione fornitori, location, allestimenti e gestione di ogni dettaglio per il vostro giorno speciale.",
-        link: "#contatti",
+        titleKey: "service_2_title",
+        subtitleKey: "service_2_subtitle",
+        descriptionKey: "service_2_description",
+        featuresKeys: [
+            "service_2_feature_1",
+            "service_2_feature_2",
+            "service_2_feature_3",
+            "service_2_feature_4",
+        ],
     },
     {
+        number: "03",
         icon: "lucide:message-circle",
-        title: "Consulenza su Misura",
-        description:
-            "Supporto personalizzato per specifiche esigenze. Dalla scelta della location ai consigli su stile e budget, un aiuto mirato per le vostre necessità.",
-        link: "#contatti",
+        titleKey: "service_3_title",
+        subtitleKey: "service_3_subtitle",
+        descriptionKey: "service_3_description",
+        featuresKeys: [
+            "service_3_feature_1",
+            "service_3_feature_2",
+            "service_3_feature_3",
+            "service_3_feature_4",
+        ],
     },
 ];
 ---
 
-<section class="py-20 lg:py-32 ">
+<section class="py-24 lg:py-32 bg-[#F8F7F4]">
     <div class="container mx-auto px-8 lg:px-16">
-        <!-- Titolo e Descrizione -->
-        <div class="text-center mb-16 lg:mb-20 fade-in">
+        <!-- Header -->
+        <div class="max-w-3xl mb-20 fade-in">
+            <div class="flex items-center mb-6">
+                <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                <span
+                    class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+                >
+                    {t("services_label")}
+                </span>
+            </div>
             <h2
-                class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-gray-900 mb-4"
+                class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight"
             >
-                SERVIZI
+                {t("services_title_1")} <span class="text-[#7d8b6e] italic">{t("services_title_2")}</span>
+                <br />{t("services_title_3")}
             </h2>
-            <p class="text-lg md:text-xl font-light text-gray-600">
-                Soluzioni personalizzate per ogni tipo di matrimonio
+            <p class="text-lg font-light text-gray-600 leading-relaxed">
+                {t("services_description")}
             </p>
         </div>
 
-        <!-- Grid Servizi -->
-        <div class="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto">
+        <!-- Services List - Layout Verticale Elegante -->
+        <div class="max-w-5xl mx-auto space-y-16 lg:space-y-24">
             {
                 services.map((service, index) => (
-                    <div class={`bg-gray-50 p-8 lg:p-10 group hover:shadow-lg transition-shadow duration-300 fade-in fade-in-delay-${index + 1}`}>
-                        <!-- Icona -->
-                        <div class="mb-6">
-                            <Icon
-                                name={service.icon}
-                                class="w-8 h-8 text-gray-600"
-                            />
+                    <div
+                        class={`fade-in fade-in-delay-${index + 1} group`}
+                    >
+                        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
+                            <!-- Colonna Sinistra - Numero e Icona -->
+                            <div class="lg:col-span-4">
+                                <div class="sticky top-8">
+                                    <!-- Numero decorativo grande -->
+                                    <div class="relative mb-8">
+                                        <div class="text-[180px] lg:text-[220px] font-light text-[#7d8b6e]/5 leading-none">
+                                            {service.number}
+                                        </div>
+                                        <!-- Icona centrata sul numero -->
+                                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                                <Icon
+                                                    name={service.icon}
+                                                    class="w-10 h-10 text-[#7d8b6e] group-hover:scale-110 transition-transform duration-300"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Separatore mobile -->
+                                    <div class="flex items-center mb-6 lg:hidden">
+                                        <div class="w-12 h-px bg-[#7d8b6e]" />
+                                        <div class="mx-3 w-1 h-1 rounded-full bg-[#7d8b6e]" />
+                                        <div class="flex-1 h-px bg-[#7d8b6e]" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Colonna Destra - Contenuto -->
+                            <div class="lg:col-span-8">
+                                <!-- Titolo e Subtitle -->
+                                <div class="mb-6">
+                                    <h3 class="text-3xl md:text-4xl font-light text-gray-900 mb-2">
+                                        {t(service.titleKey)}
+                                    </h3>
+                                    <p class="text-lg font-light text-[#7d8b6e] italic">
+                                        {t(service.subtitleKey)}
+                                    </p>
+                                </div>
+
+                                <!-- Separatore -->
+                                <div class="flex items-center mb-8">
+                                    <div class="w-16 h-px bg-[#7d8b6e]" />
+                                    <div class="mx-3 w-1 h-1 rounded-full bg-[#7d8b6e]" />
+                                    <div class="w-16 h-px bg-[#7d8b6e]" />
+                                </div>
+
+                                <!-- Descrizione -->
+                                <p class="text-base font-light text-gray-600 leading-relaxed mb-8">
+                                    {t(service.descriptionKey)}
+                                </p>
+
+                                <!-- Features List -->
+                                <div class="space-y-4 mb-8">
+                                    {service.featuresKeys.map((featureKey: string) => (
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-[#7d8b6e]" />
+                                            </div>
+                                            <span class="text-sm font-light text-gray-600 ml-3">
+                                                {t(featureKey)}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <!-- Link elegante -->
+                                <a
+                                    href="#contatti"
+                                    class="inline-flex items-center group/link text-gray-900 font-light text-sm tracking-wider uppercase hover:text-[#7d8b6e] transition-colors duration-300"
+                                >
+                                    <span>{t("services_cta")}</span>
+                                    <svg
+                                        class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
 
-                        <!-- Titolo -->
-                        <h3 class="text-2xl font-light text-gray-900 mb-4">
-                            {service.title}
-                        </h3>
-
-                        <!-- Descrizione -->
-                        <p class="text-gray-600 font-light leading-relaxed mb-6">
-                            {service.description}
-                        </p>
-
-                        <!-- Pulsante -->
-                        <a
-                            href={service.link}
-                            class="inline-flex items-center text-gray-900 font-light text-sm tracking-wide hover:text-[#7d8b6e] transition-colors duration-300 group"
-                        >
-                            Scopri di più
-                            <svg
-                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 5l7 7-7 7"
-                                />
-                            </svg>
-                        </a>
+                        <!-- Separatore tra servizi -->
+                        {index < services.length - 1 && (
+                            <div class="mt-16 lg:mt-24 flex items-center justify-center">
+                                <div class="w-24 h-px bg-[#7d8b6e]/30" />
+                                <div class="mx-4 w-1.5 h-1.5 rounded-full bg-[#7d8b6e]/30" />
+                                <div class="w-24 h-px bg-[#7d8b6e]/30" />
+                            </div>
+                        )}
                     </div>
                 ))
             }
+        </div>
+
+        <!-- CTA Finale -->
+        <div class="mt-24 lg:mt-32 text-center max-w-3xl mx-auto fade-in fade-in-delay-4">
+            <div class="bg-white p-12 lg:p-16 shadow-lg">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                    <div class="mx-4 w-1 h-1 rounded-full bg-[#7d8b6e]"></div>
+                    <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                </div>
+
+                <h3
+                    class="text-2xl md:text-3xl font-light text-gray-900 mb-4"
+                >
+                    {t("services_final_title")}
+                </h3>
+                <p class="text-base font-light text-gray-600 mb-8 leading-relaxed">
+                    {t("services_final_description")}
+                </p>
+
+                <a
+                    href="#contatti"
+                    class="inline-flex items-center justify-center px-10 py-4 bg-[#7d8b6e] text-white text-sm font-light tracking-wider uppercase hover:bg-[#6d7a5e] transition-all duration-300"
+                >
+                    {t("services_final_cta")}
+                </a>
+            </div>
         </div>
     </div>
 </section>

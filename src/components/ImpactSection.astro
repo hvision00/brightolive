@@ -1,123 +1,84 @@
 ---
-// Sezione Impact con design wow
+// Impact Section Elegante - Versione più corta e concisa
+import { getTranslation, type Language } from "../i18n/translations";
+
+interface Props {
+    lang?: Language;
+}
+
+const { lang = "it" } = Astro.props;
+const t = (key: any) => getTranslation(lang, key);
 ---
 
-<section class="relative bg-[#7d8b6e] overflow-hidden">
-    <!-- Separatore Ondulato Top -->
-    <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
-        <svg
-            class="relative block w-full h-[60px] md:h-[80px]"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M0,0 C150,100 350,0 600,50 C850,100 1050,0 1200,50 L1200,0 L0,0 Z"
-                class="fill-white"></path>
-        </svg>
-    </div>
-
-    <!-- Contenuto -->
-    <div class="relative py-32 lg:py-40 px-8 lg:px-16">
-        <div class="container mx-auto max-w-5xl">
-            <!-- Decorazione sottile sopra -->
-            <div class="flex justify-center mb-12">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-[1px] bg-white/40"></div>
-                    <div class="w-2 h-2 rounded-full bg-white/60"></div>
-                    <div class="w-12 h-[1px] bg-white/40"></div>
-                </div>
-            </div>
-
-            <!-- Testo principale -->
-            <div class="text-center space-y-8 fade-in">
-                <p
-                    class="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-white tracking-wide"
-                    style="text-shadow: 0 2px 20px rgba(0,0,0,0.1);"
-                >
-                    <span class="block mb-6 animate-fade-in">
-                        Empatia e presenza per sposi e invitati.
-                    </span>
-                    <span
-                        class="block mb-6 animate-fade-in"
-                        style="animation-delay: 0.2s;"
-                    >
-                        Matrimoni ricordati per momenti, non solo foto.
-                    </span>
-                    <span
-                        class="block mb-6 animate-fade-in"
-                        style="animation-delay: 0.4s;"
-                    >
-                        Fornitori selezionati per ogni bisogno.
-                    </span>
-                    <span
-                        class="block animate-fade-in"
-                        style="animation-delay: 0.6s;"
-                    >
-                        Un'esperienza che resta nel cuore, oltre le immagini.
-                    </span>
-                </p>
-            </div>
-
-            <!-- Decorazione sottile sotto -->
-            <div class="flex justify-center mt-12">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-[1px] bg-white/40"></div>
-                    <div class="w-2 h-2 rounded-full bg-white/60"></div>
-                    <div class="w-12 h-[1px] bg-white/40"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Separatore Ondulato Bottom -->
-    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-        <svg
-            class="relative block w-full h-[60px] md:h-[80px]"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M0,50 C150,0 350,100 600,50 C850,0 1050,100 1200,50 L1200,120 L0,120 Z"
-                class="fill-white"></path>
-        </svg>
-    </div>
-
-    <!-- Pattern sottile di sfondo -->
-    <div class="absolute inset-0 opacity-5">
+<section class="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <!-- Pattern geometrico di sfondo -->
+    <div class="absolute inset-0 opacity-[0.02]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern
-                    id="dots"
+                    id="elegant-grid"
                     x="0"
                     y="0"
-                    width="60"
-                    height="60"
+                    width="100"
+                    height="100"
                     patternUnits="userSpaceOnUse"
                 >
-                    <circle cx="30" cy="30" r="1.5" fill="white"></circle>
+                    <path
+                        d="M 100 0 L 0 0 0 100"
+                        fill="none"
+                        stroke="#7d8b6e"
+                        stroke-width="1"></path>
                 </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#dots)"></rect>
+            <rect width="100%" height="100%" fill="url(#elegant-grid)"></rect>
         </svg>
     </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+        <!-- Header semplificato -->
+        <div class="max-w-4xl mx-auto text-center mb-16 fade-in">
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                <span
+                    class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+                >
+                    {t("impact_label")}
+                </span>
+                <div class="w-16 h-px bg-[#7d8b6e]"></div>
+            </div>
+        </div>
+
+        <!-- Citazione principale unica -->
+        <div class="max-w-4xl mx-auto text-center fade-in fade-in-delay-1">
+            <!-- Virgoletta decorativa -->
+            <div
+                class="text-[80px] font-serif text-[#7d8b6e]/10 leading-none mb-[-20px]"
+            >
+                "
+            </div>
+
+            <!-- Testo principale -->
+            <blockquote
+                class="text-2xl md:text-3xl lg:text-4xl font-light text-gray-900 leading-relaxed mb-8"
+            >
+                {t("impact_quote")}
+                <br class="hidden md:block" />
+                <span class="text-[#7d8b6e] italic"
+                    >{t("impact_quote_highlight")}</span
+                >{t("impact_quote_end")}
+            </blockquote>
+
+            <!-- Separatore -->
+            <div class="flex items-center justify-center mb-8">
+                <div class="w-12 h-px bg-[#7d8b6e]"></div>
+                <div class="mx-3 w-1.5 h-1.5 rounded-full bg-[#7d8b6e]"></div>
+                <div class="w-12 h-px bg-[#7d8b6e]"></div>
+            </div>
+
+            <!-- Sotto-testo -->
+            <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">
+                {t("impact_subtext")}
+            </p>
+        </div>
+    </div>
 </section>
-
-<style>
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in {
-        animation: fade-in 1s ease-out forwards;
-        opacity: 0;
-    }
-</style>
