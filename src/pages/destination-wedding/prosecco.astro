@@ -1,0 +1,653 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// Prefisso per i link
+const langPrefix = "";
+---
+
+<BaseLayout
+  title="Sposarsi tra le Colline del Prosecco | BrightOlive Wedding Planner"
+  description="Scopri perché le Colline del Prosecco UNESCO sono la cornice perfetta per un matrimonio autentico e romantico nel cuore del Veneto."
+>
+  <!-- Hero Section - Full Width Image -->
+  <section class="relative min-h-[70vh] flex items-end overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="/destinations/prosecco.jpg"
+        alt="Colline del Prosecco al tramonto"
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"
+      >
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-8 lg:px-16 relative pb-16 lg:pb-24">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="flex items-center mb-6 fade-in">
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="text-white/70 text-sm font-light hover:text-white transition-colors"
+          >
+            Destination wedding
+          </a>
+          <span class="mx-3 text-white/50">→</span>
+          <span class="text-white text-sm font-light">Area del Prosecco</span>
+        </div>
+
+        <!-- Label -->
+        <div class="flex items-center mb-4 fade-in fade-in-delay-1">
+          <div class="w-12 h-px bg-white/50"></div>
+          <span
+            class="ml-4 text-xs tracking-[0.4em] text-white/80 uppercase font-light"
+          >
+            Patrimonio UNESCO
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 leading-tight fade-in fade-in-delay-2"
+        >
+          Perché Sposarsi tra le<br />
+          <span class="italic text-accent">Colline del Prosecco</span>
+        </h1>
+
+        <!-- Intro -->
+        <p
+          class="text-lg md:text-xl font-light text-white/90 leading-relaxed max-w-2xl fade-in fade-in-delay-3"
+        >
+          Un luogo segreto dove il tempo scorre lento e ogni panorama sembra
+          creato per essere fotografato.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center fade-in fade-in-delay-4"
+    >
+      <div class="text-xs tracking-[0.3em] text-white/60 uppercase mb-3">
+        Scopri
+      </div>
+      <div class="w-px h-12 bg-white/30 relative overflow-hidden">
+        <div class="absolute top-0 w-full h-8 bg-white/80 animate-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="py-16 lg:py-20 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-5xl mx-auto">
+        <!-- Video Container -->
+        <div
+          class="relative aspect-video bg-gray-900 overflow-hidden shadow-2xl fade-in"
+        >
+          <!-- Video Placeholder -->
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-primary to-secondary"
+          >
+            <Icon
+              name="lucide:play-circle"
+              class="w-20 h-20 text-white/80 mb-4"
+            />
+            <p class="text-white text-lg font-light">
+              Video Colline del Prosecco
+            </p>
+            <p class="text-white/60 text-sm font-light mt-2">Coming Soon</p>
+          </div>
+          <!-- Decorative Border -->
+          <div
+            class="absolute inset-0 border-4 border-white/10 pointer-events-none"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto">
+        <!-- Quote Block -->
+        <div class="text-center mb-16 fade-in">
+          <div
+            class="text-[80px] font-serif text-primary/10 leading-none mb-[-20px]"
+          >
+            "
+          </div>
+          <blockquote
+            class="text-2xl md:text-3xl font-light text-gray-900 leading-relaxed italic"
+          >
+            A solo un'ora da Venezia e dalle spettacolari Dolomiti, una
+            destinazione ancora autentica e poco battuta.
+          </blockquote>
+        </div>
+
+        <!-- Key Info Cards -->
+        <div class="grid md:grid-cols-3 gap-6 mb-16 fade-in fade-in-delay-1">
+          <div class="text-center p-6 bg-neutral">
+            <div class="text-4xl font-light text-primary mb-2">2019</div>
+            <p class="text-sm font-light text-gray-600">Patrimonio UNESCO</p>
+          </div>
+          <div class="text-center p-6 bg-neutral">
+            <div class="text-4xl font-light text-primary mb-2">1h</div>
+            <p class="text-sm font-light text-gray-600">Da Venezia</p>
+          </div>
+          <div class="text-center p-6 bg-neutral">
+            <div class="text-4xl font-light text-primary mb-2">∞</div>
+            <p class="text-sm font-light text-gray-600">Panorami mozzafiato</p>
+          </div>
+        </div>
+
+        <!-- Main Text -->
+        <div class="prose prose-lg max-w-none fade-in fade-in-delay-2">
+          <p class="text-lg font-light text-gray-700 leading-relaxed">
+            Dichiarate <strong class="font-normal text-primary"
+              >Patrimonio UNESCO nel 2019</strong
+            >, le Colline del Prosecco si estendono da Valdobbiadene a
+            Conegliano e offrono un mix perfetto di <em
+              >natura, storia e arte</em
+            >: un contesto ideale per un matrimonio elegante, intimo e
+            profondamente italiano.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wine Section -->
+  <section class="py-20 lg:py-28 bg-neutral relative overflow-hidden">
+    <!-- Decorative Element -->
+    <div
+      class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full transform translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Content -->
+        <div class="lg:col-span-6 fade-in">
+          <!-- Section Number -->
+          <div
+            class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+          >
+            01
+          </div>
+
+          <!-- Label -->
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-px bg-primary"></div>
+            <span
+              class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+            >
+              Il Territorio
+            </span>
+          </div>
+
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight"
+          >
+            Dove il Vino<br />
+            <span class="text-primary italic">Racconta la Storia</span>
+          </h2>
+
+          <div
+            class="space-y-6 text-base font-light text-gray-700 leading-relaxed"
+          >
+            <p>
+              Per chi ama il mondo del vino, questo è un vero <strong
+                class="font-normal">paradiso</strong
+              >. Qui nasce il Prosecco che ha conquistato il mondo, ma anche
+              etichette meno conosciute e preziose, come il <em
+                >Marzemino di Refrontolo</em
+              >.
+            </p>
+            <p>
+              Le cantine, i filari ordinati, le terrazze naturali affacciate sui
+              vigneti creano
+              <strong class="font-normal text-primary"
+                >scenari mozzafiato</strong
+              > per shooting e ricevimenti immersi nella quiete.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Element -->
+        <div class="lg:col-span-6 fade-in fade-in-delay-1">
+          <div class="relative">
+            <div class="bg-primary p-8 lg:p-12 text-white">
+              <Icon name="lucide:grape" class="w-12 h-12 mb-6 text-accent" />
+              <h3 class="text-2xl font-light mb-4">Il Paradiso del Prosecco</h3>
+              <ul class="space-y-3 text-white/90 font-light">
+                <li class="flex items-start">
+                  <Icon
+                    name="lucide:check"
+                    class="w-4 h-4 mr-3 mt-1 text-accent shrink-0"
+                  />
+                  Prosecco DOCG Superiore
+                </li>
+                <li class="flex items-start">
+                  <Icon
+                    name="lucide:check"
+                    class="w-4 h-4 mr-3 mt-1 text-accent shrink-0"
+                  />
+                  Marzemino di Refrontolo
+                </li>
+                <li class="flex items-start">
+                  <Icon
+                    name="lucide:check"
+                    class="w-4 h-4 mr-3 mt-1 text-accent shrink-0"
+                  />
+                  Cantine storiche per eventi
+                </li>
+                <li class="flex items-start">
+                  <Icon
+                    name="lucide:check"
+                    class="w-4 h-4 mr-3 mt-1 text-accent shrink-0"
+                  />
+                  Degustazioni esclusive
+                </li>
+              </ul>
+            </div>
+            <!-- Decorative -->
+            <div
+              class="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary/20 -z-10"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cultural Heritage Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+        <div
+          class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+        >
+          02
+        </div>
+        <div class="flex items-center justify-center mb-4">
+          <div class="w-12 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            Arte & Cultura
+          </span>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6"
+        >
+          Un Patrimonio Culturale<br />
+          <span class="text-primary italic">Affascinante</span>
+        </h2>
+        <p class="text-lg font-light text-gray-600">
+          Le Colline del Prosecco non sono solo vigne: sono un susseguirsi di
+          borghi storici e testimonianze artistiche che arricchiscono
+          l'esperienza di chi le visita.
+        </p>
+      </div>
+
+      <!-- Locations Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Vittorio Veneto -->
+        <div class="group fade-in fade-in-delay-1">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg"
+          >
+            <Icon name="lucide:landmark" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-3">
+              Vittorio Veneto
+            </h3>
+            <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
+              La celebre <em>Vittoria Alata</em>, Palazzo Minucci e il
+              suggestivo Santuario di Santa Augusta dominano questo borgo ricco
+              di storia.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Monumenti</span
+              >
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Palazzi</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Conegliano -->
+        <div class="group fade-in fade-in-delay-2">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg"
+          >
+            <Icon name="lucide:castle" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-3">Conegliano</h3>
+            <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
+              Il castello domina dall'alto la città. Villa Gera, l'ex Convento
+              di San Francesco e il Teatro Accademia sono location perfette per
+              eventi.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Castello</span
+              >
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Ville</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Valdobbiadene -->
+        <div class="group fade-in fade-in-delay-3">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg"
+          >
+            <Icon name="lucide:church" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-3">
+              Valdobbiadene e Dintorni
+            </h3>
+            <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
+              Cison di Valmarino, Follina, Rolle. La Pieve di San Pietro di
+              Feletto è perfetta per cerimonie religiose suggestive.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Borghi</span
+              >
+              <span class="text-xs px-2 py-1 bg-primary/10 text-primary"
+                >Chiese</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Highlights -->
+      <div
+        class="mt-12 p-8 lg:p-12 bg-linear-to-r from-primary/5 to-transparent border-l-4 border-primary fade-in fade-in-delay-4"
+      >
+        <p class="text-lg font-light text-gray-700 leading-relaxed">
+          <strong class="font-normal text-primary">Gioielli nascosti:</strong>
+          Le Torri di Credazzo, il Santuario di Collagù e i numerosi eremi e cappelle
+          incastonati tra i vigneti raccontano secoli di storia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nature Section -->
+  <section
+    class="py-20 lg:py-28 bg-primary text-white relative overflow-hidden"
+  >
+    <!-- Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern
+            id="nature-pattern"
+            x="0"
+            y="0"
+            width="60"
+            height="60"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="30" cy="30" r="1.5" fill="white"></circle>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#nature-pattern)"></rect>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Content -->
+        <div class="fade-in">
+          <div
+            class="text-[120px] font-light text-white/10 leading-none mb-[-40px]"
+          >
+            03
+          </div>
+
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-px bg-white/50"></div>
+            <span
+              class="ml-4 text-xs tracking-[0.4em] uppercase font-light opacity-80"
+            >
+              Natura & Tradizioni
+            </span>
+          </div>
+
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight"
+          >
+            Paesaggi<br />
+            <span class="italic">Senza Tempo</span>
+          </h2>
+
+          <p class="text-lg font-light leading-relaxed opacity-90 mb-8">
+            Qui l'armonia tra uomo e natura è <strong class="font-normal"
+              >totale</strong
+            >. Le colline custodiscono luoghi di immenso valore naturalistico e
+            testimonianze storiche toccanti.
+          </p>
+
+          <!-- Separator -->
+          <div class="flex items-center mb-8">
+            <div class="w-12 h-px bg-white/30"></div>
+            <div class="mx-3 w-1.5 h-1.5 rounded-full bg-white/50"></div>
+            <div class="w-12 h-px bg-white/30"></div>
+          </div>
+
+          <p class="text-base font-light leading-relaxed opacity-80 italic">
+            Lungo il Piave, il "Fiume Sacro alla Patria", l'Isola dei Morti è un
+            toccante museo a cielo aperto dedicato alla Prima Guerra Mondiale.
+          </p>
+        </div>
+
+        <!-- Nature Spots -->
+        <div class="space-y-4 fade-in fade-in-delay-1">
+          <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+            <div
+              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"
+            >
+              <Icon name="lucide:waves" class="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 class="font-light text-lg">Grotte del Caglieron</h4>
+              <p class="text-sm opacity-80 font-light">
+                Spettacolo naturale sotterraneo
+              </p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+            <div
+              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"
+            >
+              <Icon name="lucide:scroll-text" class="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 class="font-light text-lg">Parco Archeologico del Livelet</h4>
+              <p class="text-sm opacity-80 font-light">
+                Viaggio nella preistoria
+              </p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+            <div
+              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"
+            >
+              <Icon name="lucide:droplets" class="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 class="font-light text-lg">Laghi di Revine</h4>
+              <p class="text-sm opacity-80 font-light">
+                Specchi d'acqua incantati
+              </p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+            <div
+              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"
+            >
+              <Icon name="lucide:home" class="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 class="font-light text-lg">Molinetto della Croda</h4>
+              <p class="text-sm opacity-80 font-light">
+                Mulino storico a Refrontolo
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Section - Wedding Locations -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <div
+          class="text-[120px] font-light text-primary/10 leading-none mb-[-40px] fade-in"
+        >
+          04
+        </div>
+
+        <div class="flex items-center justify-center mb-4 fade-in">
+          <div class="w-12 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            Il Tuo Matrimonio
+          </span>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 fade-in fade-in-delay-1"
+        >
+          La Cornice Perfetta per un<br />
+          <span class="text-primary italic">Matrimonio Autentico</span>
+        </h2>
+
+        <p
+          class="text-lg font-light text-gray-600 leading-relaxed mb-8 fade-in fade-in-delay-2"
+        >
+          Ville storiche, casolari restaurati, antichi conventi e dimore immerse
+          nei vigneti: le Colline del Prosecco offrono <strong
+            class="font-normal text-primary">location straordinarie</strong
+          >
+          per chi desidera un matrimonio lontano dalle mete più inflazionate.
+        </p>
+
+        <!-- Separator -->
+        <div
+          class="flex items-center justify-center mb-8 fade-in fade-in-delay-2"
+        >
+          <div class="w-16 h-px bg-primary"></div>
+          <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary"></div>
+          <div class="w-16 h-px bg-primary"></div>
+        </div>
+
+        <!-- Final Quote -->
+        <blockquote
+          class="text-xl md:text-2xl font-light text-gray-900 italic mb-12 fade-in fade-in-delay-3"
+        >
+          "Il luogo ideale per una celebrazione intima, prestigiosa e
+          <span class="text-primary">profondamente connessa</span>
+          con l'autenticità del territorio italiano."
+        </blockquote>
+
+        <!-- Location Types -->
+        <div
+          class="flex flex-wrap justify-center gap-4 mb-12 fade-in fade-in-delay-3"
+        >
+          <span
+            class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700"
+            >Ville Storiche</span
+          >
+          <span
+            class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700"
+            >Casolari</span
+          >
+          <span
+            class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700"
+            >Antichi Conventi</span
+          >
+          <span
+            class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700"
+            >Cantine</span
+          >
+          <span
+            class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700"
+            >Dimore nei Vigneti</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 lg:py-28 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="flex items-center justify-center mb-8">
+          <div class="w-16 h-px bg-primary"></div>
+          <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary"></div>
+          <div class="w-16 h-px bg-primary"></div>
+        </div>
+
+        <h2 class="text-3xl md:text-4xl font-light text-gray-900 mb-6">
+          Innamorata delle Colline del Prosecco?
+        </h2>
+
+        <p class="text-lg font-light text-gray-600 leading-relaxed mb-10">
+          Raccontami il tuo sogno e insieme troveremo la location perfetta tra i
+          vigneti più belli d'Italia.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={langPrefix + "/contatti"}
+            class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
+          >
+            Parliamone Insieme
+          </a>
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="inline-flex items-center justify-center px-10 py-4 border border-primary text-primary text-sm font-light tracking-wider uppercase hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Altre Destinazioni
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 2s ease-in-out infinite;
+  }
+</style>

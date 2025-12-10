@@ -7,6 +7,25 @@ const currentLang = currentPath.startsWith("/en")
   : currentPath.startsWith("/es")
     ? "es"
     : "it";
+
+// Funzione per ottenere il path senza prefisso lingua
+function getCleanPath(path: string): string {
+  if (path.startsWith("/en/")) return path.substring(3);
+  if (path.startsWith("/es/")) return path.substring(3);
+  return path;
+}
+
+// Funzione per ottenere l'URL nella lingua specificata
+function getLangUrl(targetLang: string): string {
+  const cleanPath = getCleanPath(currentPath);
+  if (targetLang === "it") {
+    return cleanPath || "/";
+  }
+  return `/${targetLang}${cleanPath}`;
+}
+
+// Prefisso per i link del menu
+const langPrefix = currentLang === "it" ? "" : `/${currentLang}`;
 ---
 
 <header class="py-6 px-4 lg:px-8">
@@ -16,7 +35,7 @@ const currentLang = currentPath.startsWith("/en")
   >
     <div class="flex items-center justify-between">
       <!-- Logo a sinistra - PIÙ GRANDE -->
-      <a href="/" class="flex-shrink-0">
+      <a href={langPrefix + "/"} class="shrink-0">
         <img
           src="/logo.png"
           alt="BrightOlive Logo"
@@ -24,36 +43,76 @@ const currentLang = currentPath.startsWith("/en")
         />
       </a>
 
+      <!-- Menu centrale - Desktop -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a
+          href={langPrefix + "/"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Home
+        </a>
+        <a
+          href={langPrefix + "/chi-siamo"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Chi Siamo
+        </a>
+        <a
+          href={langPrefix + "/servizi"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Servizi
+        </a>
+        <a
+          href={langPrefix + "/destination-wedding"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Destination Wedding
+        </a>
+        <a
+          href={langPrefix + "/blog"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Blog
+        </a>
+        <a
+          href={langPrefix + "/contatti"}
+          class="text-sm font-light tracking-wide text-gray-700 hover:text-primary transition-colors duration-200"
+        >
+          Contatti
+        </a>
+      </div>
+
       <!-- Selettore lingua a destra - Desktop -->
       <div class="hidden lg:flex items-center space-x-2">
         <a
-          href="/"
+          href={getLangUrl("it")}
           class:list={[
             "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
             currentLang === "it"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600 hover:bg-gray-200",
           ]}
         >
           IT
         </a>
         <a
-          href="/en/"
+          href={getLangUrl("en")}
           class:list={[
             "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
             currentLang === "en"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600 hover:bg-gray-200",
           ]}
         >
           EN
         </a>
         <a
-          href="/es/"
+          href={getLangUrl("es")}
           class:list={[
             "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
             currentLang === "es"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600 hover:bg-gray-200",
           ]}
         >
@@ -100,36 +159,76 @@ const currentLang = currentPath.startsWith("/en")
       x-transition:leave-end="opacity-0 transform -translate-y-2"
       class="lg:hidden mt-6 pb-4 border-t border-gray-100 pt-6"
     >
+      <!-- Menu mobile -->
+      <div class="flex flex-col space-y-4 mb-6">
+        <a
+          href={langPrefix + "/"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Home
+        </a>
+        <a
+          href={langPrefix + "/chi-siamo"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Chi Siamo
+        </a>
+        <a
+          href={langPrefix + "/servizi"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Servizi
+        </a>
+        <a
+          href={langPrefix + "/destination-wedding"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Destination Wedding
+        </a>
+        <a
+          href={langPrefix + "/blog"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Blog
+        </a>
+        <a
+          href={langPrefix + "/contatti"}
+          class="text-gray-700 hover:text-primary text-sm font-light tracking-wide transition-colors"
+        >
+          Contatti
+        </a>
+      </div>
+
       <!-- Selettore lingua mobile -->
       <div class="flex items-center space-x-2">
         <a
-          href="/"
+          href={getLangUrl("it")}
           class:list={[
             "flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 text-center",
             currentLang === "it"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600",
           ]}
         >
           IT
         </a>
         <a
-          href="/en/"
+          href={getLangUrl("en")}
           class:list={[
             "flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 text-center",
             currentLang === "en"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600",
           ]}
         >
           EN
         </a>
         <a
-          href="/es/"
+          href={getLangUrl("es")}
           class:list={[
             "flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 text-center",
             currentLang === "es"
-              ? "bg-[#7d8b6e] text-white"
+              ? "bg-primary text-white"
               : "bg-gray-100 text-gray-600",
           ]}
         >

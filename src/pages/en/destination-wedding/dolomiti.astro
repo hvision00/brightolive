@@ -1,0 +1,669 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// Prefisso per i link
+const langPrefix = "/en";
+---
+
+<BaseLayout
+  title="Getting Married in the Veneto Dolomites | BrightOlive Wedding Planner"
+  description="Destination wedding nelle Dolomiti UNESCO: Cortina, Val Comelico, Passo Giau. Un matrimonio da favola tra montagne maestose e panorami mozzafiato."
+>
+  <!-- Hero Section - Full Width Image -->
+  <section class="relative min-h-[80vh] flex items-end overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="/destinations/dolomiti.jpg"
+        alt="Dolomites at sunset con enrosadira"
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20"
+      >
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-8 lg:px-16 relative pb-16 lg:pb-24">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="flex items-center mb-6 fade-in">
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="text-white/70 text-sm font-light hover:text-white transition-colors"
+          >
+            Destination wedding
+          </a>
+          <span class="mx-3 text-white/50">→</span>
+          <span class="text-white text-sm font-light">Dolomiti</span>
+        </div>
+
+        <!-- Label -->
+        <div class="flex items-center mb-4 fade-in fade-in-delay-1">
+          <div class="w-12 h-px bg-white/50"></div>
+          <span
+            class="ml-4 text-xs tracking-[0.4em] text-white/80 uppercase font-light"
+          >
+            Patrimonio UNESCO dal 2009
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 leading-tight fade-in fade-in-delay-2"
+        >
+          Sposarsi nelle<br />
+          <span class="italic text-accent">Dolomiti Venete</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="text-xl md:text-2xl font-light text-white/90 italic mb-4 fade-in fade-in-delay-3"
+        >
+          Between dream, nature and wonder
+        </p>
+
+        <!-- Intro -->
+        <p
+          class="text-lg font-light text-white/80 leading-relaxed max-w-2xl fade-in fade-in-delay-4"
+        >
+          Un luogo dove il tempo rallenta e l'amore trova il suo spazio più
+          autentico.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center fade-in fade-in-delay-5"
+    >
+      <div class="text-xs tracking-[0.3em] text-white/60 uppercase mb-3">
+        Scopri
+      </div>
+      <div class="w-px h-12 bg-white/30 relative overflow-hidden">
+        <div class="absolute top-0 w-full h-8 bg-white/80 animate-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="py-16 lg:py-20 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-5xl mx-auto">
+        <!-- Video Container -->
+        <div
+          class="relative aspect-video bg-gray-900 overflow-hidden shadow-2xl fade-in"
+        >
+          <!-- Video Placeholder -->
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-primary to-secondary"
+          >
+            <Icon
+              name="lucide:play-circle"
+              class="w-20 h-20 text-white/80 mb-4"
+            />
+            <p class="text-white text-lg font-light">Dolomites Video Venete</p>
+            <p class="text-white/60 text-sm font-light mt-2">Coming Soon</p>
+          </div>
+          <!-- Decorative Border -->
+          <div
+            class="absolute inset-0 border-4 border-white/10 pointer-events-none"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto">
+        <!-- Opening Quote -->
+        <div class="text-center mb-16 fade-in">
+          <div
+            class="text-[80px] font-serif text-primary/10 leading-none mb-[-20px]"
+          >
+            "
+          </div>
+          <blockquote
+            class="text-2xl md:text-3xl font-light text-gray-900 leading-relaxed italic"
+          >
+            If you dream of a wedding that seems out of a fairy tale, dove ogni
+            sguardo si perde tra montagne maestose e cieli infiniti,
+            <span class="text-primary"
+              >il tuo destination wedding è nelle Dolomiti.</span
+            >
+          </blockquote>
+        </div>
+
+        <!-- Main Text -->
+        <div
+          class="space-y-6 text-lg font-light text-gray-700 leading-relaxed fade-in fade-in-delay-1"
+        >
+          <p>
+            Le <strong class="font-normal text-primary">Dolomiti Venete</strong
+            >, riconosciute Patrimonio Mondiale dell'UNESCO dal 2009, offrono
+            uno scenario naturale unico al mondo: un luogo dove il tempo
+            rallenta e l'amore trova il suo spazio più autentico.
+          </p>
+          <p>
+            Organizzare il proprio matrimonio in montagna significa abbracciare
+            la magia di un paesaggio che cambia a ogni stagione, trasformando
+            ogni istante in un
+            <em>ricordo indimenticabile</em>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Dolomiti Section -->
+  <section class="py-20 lg:py-28 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Content -->
+        <div class="fade-in">
+          <!-- Section Number -->
+          <div
+            class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+          >
+            01
+          </div>
+
+          <!-- Label -->
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-px bg-primary"></div>
+            <span
+              class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+            >
+              Perché Sceglierle
+            </span>
+          </div>
+
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight"
+          >
+            L'Equilibrio Perfetto tra<br />
+            <span class="text-primary italic">Romanticismo e Natura</span>
+          </h2>
+
+          <p class="text-lg font-light text-gray-700 leading-relaxed mb-8">
+            Chi sceglie di sposarsi nelle Dolomiti cerca an emotion,
+            un'atmosfera, un racconto of love che diventa parte integrante del
+            giorno del "sì". Ecco perché sempre più coppie da tutto il mondo le
+            scelgono come destinazione dei loro sogni.
+          </p>
+
+          <!-- Separator -->
+          <div class="flex items-center mb-8">
+            <div class="w-12 h-px bg-primary"></div>
+            <div class="mx-3 w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <div class="w-12 h-px bg-primary"></div>
+          </div>
+
+          <p class="text-base font-light text-gray-600 italic">
+            Here nature becomes poetry, light becomes magic e l'amore trova il
+            suo luogo ideale per essere celebrato.
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-2 gap-4 fade-in fade-in-delay-1">
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon
+              name="lucide:mountain-snow"
+              class="w-8 h-8 mb-4 text-primary"
+            />
+            <h4 class="font-light text-gray-900 mb-2">Paesaggi da Favola</h4>
+            <p class="text-sm font-light text-gray-600">
+              Vette luminose, boschi silenziosi, prati dorati, laghi cristallini
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:heart" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Atmosfera Intima</h4>
+            <p class="text-sm font-light text-gray-600">
+              Raccolta e perfetta per un matrimonio romantico
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:camera" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Scenografie Naturali</h4>
+            <p class="text-sm font-light text-gray-600">
+              Spettacolari, ideali per shooting fotografici with a wow effect
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:sparkles" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Autenticità</h4>
+            <p class="text-sm font-light text-gray-600">
+              Tradizione che rende ogni evento unico e significativo
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cortina Section -->
+  <section
+    class="py-20 lg:py-28 bg-primary text-white relative overflow-hidden"
+  >
+    <!-- Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern
+            id="mountain-pattern"
+            x="0"
+            y="0"
+            width="100"
+            height="100"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M0 100 L50 50 L100 100"
+              fill="none"
+              stroke="white"
+              stroke-width="0.5"></path>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#mountain-pattern)"></rect>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Section Number -->
+        <div
+          class="text-[120px] font-light text-white/10 leading-none mb-[-40px] fade-in"
+        >
+          02
+        </div>
+
+        <!-- Label -->
+        <div class="flex items-center justify-center mb-4 fade-in">
+          <div class="w-12 h-px bg-white/40"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] uppercase font-light opacity-80"
+          >
+            La Perla delle Dolomiti
+          </span>
+          <div class="w-12 h-px bg-white/40"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light mb-6 fade-in fade-in-delay-1"
+        >
+          Cortina d'Ampezzo
+        </h2>
+
+        <p
+          class="text-xl font-light leading-relaxed opacity-90 mb-8 fade-in fade-in-delay-2"
+        >
+          La <strong class="font-normal">"Perla delle Dolomiti"</strong> incanta
+          con la sua eleganza sobria and its refined atmosphere, perfetta per coppie
+          che desiderano un matrimonio <em>chic</em> e immerso nella natura.
+        </p>
+
+        <!-- Features -->
+        <div class="grid md:grid-cols-4 gap-6 mt-12 fade-in fade-in-delay-3">
+          <div class="text-center">
+            <Icon
+              name="lucide:sunset"
+              class="w-8 h-8 mx-auto mb-3 text-accent"
+            />
+            <p class="text-sm font-light opacity-90">Tramonti sulle Tofane</p>
+          </div>
+          <div class="text-center">
+            <Icon name="lucide:home" class="w-8 h-8 mx-auto mb-3 text-accent" />
+            <p class="text-sm font-light opacity-90">Rifugi romantici</p>
+          </div>
+          <div class="text-center">
+            <Icon
+              name="lucide:waves"
+              class="w-8 h-8 mx-auto mb-3 text-accent"
+            />
+            <p class="text-sm font-light opacity-90">Laghi alpini</p>
+          </div>
+          <div class="text-center">
+            <Icon
+              name="lucide:crown"
+              class="w-8 h-8 mx-auto mb-3 text-accent"
+            />
+            <p class="text-sm font-light opacity-90">Accoglienza esclusiva</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+        <div
+          class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+        >
+          03
+        </div>
+        <div class="flex items-center justify-center mb-4">
+          <div class="w-12 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            I Luoghi del Cuore
+          </span>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6"
+        >
+          I Luoghi più Ricercati delle<br />
+          <span class="text-primary italic">Dolomiti Venete</span>
+        </h2>
+      </div>
+
+      <!-- Locations Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Val Comelico -->
+        <div class="group fade-in fade-in-delay-1">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg border-b-4 border-transparent group-hover:border-primary"
+          >
+            <Icon name="lucide:tree-pine" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-2">Val Comelico</h3>
+            <p class="text-sm font-light text-primary italic mb-4">
+              Un angolo di paradiso
+            </p>
+            <p class="text-sm font-light text-gray-600 leading-relaxed">
+              Dove il tempo sembra fermarsi, tra valli incontaminate e silenzi
+              che parlano al cuore.
+            </p>
+          </div>
+        </div>
+
+        <!-- Val di Zoldo -->
+        <div class="group fade-in fade-in-delay-2">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg border-b-4 border-transparent group-hover:border-primary"
+          >
+            <Icon name="lucide:trees" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-2">Val di Zoldo</h3>
+            <p class="text-sm font-light text-primary italic mb-4">
+              Magia e poesia
+            </p>
+            <p class="text-sm font-light text-gray-600 leading-relaxed">
+              Un luogo magico, semplice e poetico, dove i borghi antichi si
+              intrecciano ai profumi dei boschi.
+            </p>
+          </div>
+        </div>
+
+        <!-- Passo Giau -->
+        <div class="group fade-in fade-in-delay-3">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg border-b-4 border-transparent group-hover:border-primary"
+          >
+            <Icon name="lucide:image" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-2">Passo Giau</h3>
+            <p class="text-sm font-light text-primary italic mb-4">
+              Panorama iconico
+            </p>
+            <p class="text-sm font-light text-gray-600 leading-relaxed">
+              Qui ogni fotografia sembra un dipinto, ogni tramonto una promessa.
+            </p>
+          </div>
+        </div>
+
+        <!-- Lago Pianozes and Lago d'Ajal -->
+        <div class="group fade-in fade-in-delay-4">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg border-b-4 border-transparent group-hover:border-primary"
+          >
+            <Icon name="lucide:droplets" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-2">
+              Lago Pianozes and Lago d'Ajal
+            </h3>
+            <p class="text-sm font-light text-primary italic mb-4">
+              Specchi d'acqua
+            </p>
+            <p class="text-sm font-light text-gray-600 leading-relaxed">
+              Romantic and silent places, dove l'acqua riflette la bellezza
+              delle montagne.
+            </p>
+          </div>
+        </div>
+
+        <!-- Cadini del Brenton -->
+        <div class="group fade-in fade-in-delay-5 md:col-span-2 lg:col-span-2">
+          <div
+            class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg border-b-4 border-transparent group-hover:border-primary"
+          >
+            <Icon name="lucide:sparkles" class="w-8 h-8 mb-4 text-primary" />
+            <h3 class="text-xl font-light text-gray-900 mb-2">
+              Cadini del Brenton
+            </h3>
+            <p class="text-sm font-light text-primary italic mb-4">
+              Scenografia unica
+            </p>
+            <p class="text-sm font-light text-gray-600 leading-relaxed">
+              Per le coppie che desiderano una scenografia unica, fatta di
+              cascate, acqua turchese e natura selvaggia. Un angolo segreto dove
+              la natura mette in scena il suo spettacolo più affascinante.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magic Section -->
+  <section class="py-20 lg:py-28 bg-neutral relative overflow-hidden">
+    <!-- Decorative Element -->
+    <div
+      class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="max-w-4xl mx-auto">
+        <!-- Section Number -->
+        <div
+          class="text-[120px] font-light text-primary/10 leading-none mb-[-40px] text-center fade-in"
+        >
+          04
+        </div>
+
+        <div class="flex items-center justify-center mb-4 fade-in">
+          <div class="w-12 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            L'Esperienza
+          </span>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8 text-center fade-in fade-in-delay-1"
+        >
+          La Magia di un<br />
+          <span class="text-primary italic">Matrimonio in Montagna</span>
+        </h2>
+
+        <div
+          class="space-y-6 text-lg font-light text-gray-700 leading-relaxed fade-in fade-in-delay-2"
+        >
+          <p>
+            A wedding in the Dolomites is <strong
+              class="font-normal text-primary">an experience</strong
+            >. It is living a day suspended between heaven and earth, circondati
+            da silenzi che scaldano il cuore and landscapes that thrill. It is
+            finding a rare intimacy, away from chaos, immersed in un'atmosfera
+            che invita a respirare, to love, a sentire.
+          </p>
+          <p>
+            Nature becomes part of the scenery, giving un'estetica che
+            <em>nessun allestimento potrebbe mai replicare</em>.
+          </p>
+        </div>
+
+        <!-- Natural Elements -->
+        <div class="grid md:grid-cols-3 gap-6 mt-12 fade-in fade-in-delay-3">
+          <div class="text-center p-6 bg-white shadow-sm">
+            <Icon
+              name="lucide:sun"
+              class="w-10 h-10 mx-auto mb-4 text-[#d4a574]"
+            />
+            <h4 class="font-light text-gray-900 mb-2">Luce Dorata</h4>
+            <p class="text-sm font-light text-gray-600">
+              La magia del mattino in montagna
+            </p>
+          </div>
+          <div class="text-center p-6 bg-white shadow-sm">
+            <Icon
+              name="lucide:sunset"
+              class="w-10 h-10 mx-auto mb-4 text-[#e8a4b8]"
+            />
+            <h4 class="font-light text-gray-900 mb-2">Enrosadira</h4>
+            <p class="text-sm font-light text-gray-600">
+              Il rosa del tramonto sulle vette
+            </p>
+          </div>
+          <div class="text-center p-6 bg-white shadow-sm">
+            <Icon
+              name="lucide:stars"
+              class="w-10 h-10 mx-auto mb-4 text-primary"
+            />
+            <h4 class="font-light text-gray-900 mb-2">Cielo Stellato</h4>
+            <p class="text-sm font-light text-gray-600">
+              L'abbraccio della notte alpina
+            </p>
+          </div>
+        </div>
+
+        <!-- Final Quote -->
+        <div class="mt-16 text-center fade-in fade-in-delay-4">
+          <div class="flex items-center justify-center mb-6">
+            <div class="w-16 h-px bg-primary"></div>
+            <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <div class="w-16 h-px bg-primary"></div>
+          </div>
+          <blockquote
+            class="text-xl md:text-2xl font-light text-gray-900 italic"
+          >
+            "These are moments that remain imprinted forever,
+            <span class="text-primary">in the mind and in the photographs.</span
+            >"
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center mb-6 fade-in">
+          <div class="w-16 h-px bg-primary"></div>
+          <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary"></div>
+          <div class="w-16 h-px bg-primary"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl font-light text-gray-900 mb-6 fade-in fade-in-delay-1"
+        >
+          Un Invito a <span class="text-primary italic">Sognare</span>
+        </h2>
+
+        <div
+          class="space-y-6 text-lg font-light text-gray-700 leading-relaxed mb-10 fade-in fade-in-delay-2"
+        >
+          <p>
+            Scegliere un destination wedding nelle Dolomiti significa regalarsi
+            un matrimonio che va oltre the event: it is a journey, an emotion,
+            una promessa che trova nella bellezza delle montagne il suo luogo
+            perfetto.
+          </p>
+          <p>
+            The Veneto Dolomites are an invitation to dream, to love, a
+            celebrare il proprio sì in un <strong
+              class="font-normal text-primary">mondo incantato</strong
+            > dove tutto è possibile.
+          </p>
+        </div>
+
+        <!-- Final Message -->
+        <div class="bg-neutral p-8 lg:p-12 mb-10 fade-in fade-in-delay-3">
+          <Icon
+            name="lucide:mountain"
+            class="w-12 h-12 mx-auto mb-4 text-primary"
+          />
+          <p class="text-xl font-light text-gray-900 italic leading-relaxed">
+            Se desideri un matrimonio romantico, intimo e profondamente
+            autentico, queste montagne ti accoglieranno <span
+              class="text-primary">come un abbraccio</span
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 lg:py-28 bg-primary text-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <div class="flex items-center justify-center mb-8">
+          <div class="w-16 h-px bg-white/40"></div>
+          <div class="mx-4 w-1.5 h-1.5 rounded-full bg-white/60"></div>
+          <div class="w-16 h-px bg-white/40"></div>
+        </div>
+
+        <h2 class="text-3xl md:text-4xl font-light mb-6">
+          Pronta a Dire Sì tra le Dolomiti?
+        </h2>
+
+        <p class="text-lg font-light leading-relaxed mb-10 opacity-90">
+          Raccontami il tuo sogno e insieme troveremo la location perfetta tra
+          le montagne più belle del mondo.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={langPrefix + "/contatti"}
+            class="inline-flex items-center justify-center px-10 py-4 bg-white text-primary text-sm font-light tracking-wider uppercase hover:bg-neutral transition-all duration-300"
+          >
+            Parliamone Insieme
+          </a>
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="inline-flex items-center justify-center px-10 py-4 border border-white/50 text-white text-sm font-light tracking-wider uppercase hover:bg-white/10 transition-all duration-300"
+          >
+            Altre Destinazioni
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 2s ease-in-out infinite;
+  }
+</style>

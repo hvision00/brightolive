@@ -11,6 +11,9 @@ interface Props {
 const { lang = "it" } = Astro.props;
 const t = (key: any) => getTranslation(lang, key);
 
+// Prefisso per i link
+const langPrefix = lang === "it" ? "" : `/${lang}`;
+
 const services = [
     {
         number: "01",
@@ -54,12 +57,12 @@ const services = [
 ];
 ---
 
-<section class="py-24 lg:py-32 bg-[#F8F7F4]">
+<section class="py-24 lg:py-32 bg-neutral">
     <div class="container mx-auto px-8 lg:px-16">
         <!-- Header -->
         <div class="max-w-3xl mb-20 fade-in">
             <div class="flex items-center mb-6">
-                <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                <div class="w-16 h-px bg-primary"></div>
                 <span
                     class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
                 >
@@ -69,7 +72,7 @@ const services = [
             <h2
                 class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight"
             >
-                {t("services_title_1")} <span class="text-[#7d8b6e] italic">{t("services_title_2")}</span>
+                {t("services_title_1")} <span class="text-primary italic">{t("services_title_2")}</span>
                 <br />{t("services_title_3")}
             </h2>
             <p class="text-lg font-light text-gray-600 leading-relaxed">
@@ -90,7 +93,7 @@ const services = [
                                 <div class="sticky top-8">
                                     <!-- Numero decorativo grande -->
                                     <div class="relative mb-8">
-                                        <div class="text-[180px] lg:text-[220px] font-light text-[#7d8b6e]/5 leading-none">
+                                        <div class="text-[180px] lg:text-[220px] font-light text-primary/5 leading-none">
                                             {service.number}
                                         </div>
                                         <!-- Icona centrata sul numero -->
@@ -98,7 +101,7 @@ const services = [
                                             <div class="w-20 h-20 flex items-center justify-center bg-white rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                                                 <Icon
                                                     name={service.icon}
-                                                    class="w-10 h-10 text-[#7d8b6e] group-hover:scale-110 transition-transform duration-300"
+                                                    class="w-10 h-10 text-primary group-hover:scale-110 transition-transform duration-300"
                                                 />
                                             </div>
                                         </div>
@@ -106,9 +109,9 @@ const services = [
 
                                     <!-- Separatore mobile -->
                                     <div class="flex items-center mb-6 lg:hidden">
-                                        <div class="w-12 h-px bg-[#7d8b6e]" />
-                                        <div class="mx-3 w-1 h-1 rounded-full bg-[#7d8b6e]" />
-                                        <div class="flex-1 h-px bg-[#7d8b6e]" />
+                                        <div class="w-12 h-px bg-primary" />
+                                        <div class="mx-3 w-1 h-1 rounded-full bg-primary" />
+                                        <div class="flex-1 h-px bg-primary" />
                                     </div>
                                 </div>
                             </div>
@@ -120,16 +123,16 @@ const services = [
                                     <h3 class="text-3xl md:text-4xl font-light text-gray-900 mb-2">
                                         {t(service.titleKey)}
                                     </h3>
-                                    <p class="text-lg font-light text-[#7d8b6e] italic">
+                                    <p class="text-lg font-light text-primary italic">
                                         {t(service.subtitleKey)}
                                     </p>
                                 </div>
 
                                 <!-- Separatore -->
                                 <div class="flex items-center mb-8">
-                                    <div class="w-16 h-px bg-[#7d8b6e]" />
-                                    <div class="mx-3 w-1 h-1 rounded-full bg-[#7d8b6e]" />
-                                    <div class="w-16 h-px bg-[#7d8b6e]" />
+                                    <div class="w-16 h-px bg-primary" />
+                                    <div class="mx-3 w-1 h-1 rounded-full bg-primary" />
+                                    <div class="w-16 h-px bg-primary" />
                                 </div>
 
                                 <!-- Descrizione -->
@@ -141,8 +144,8 @@ const services = [
                                 <div class="space-y-4 mb-8">
                                     {service.featuresKeys.map((featureKey: string) => (
                                         <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-6 h-6 flex items-center justify-center">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-[#7d8b6e]" />
+                                            <div class="shrink-0 w-6 h-6 flex items-center justify-center">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-primary" />
                                             </div>
                                             <span class="text-sm font-light text-gray-600 ml-3">
                                                 {t(featureKey)}
@@ -153,8 +156,8 @@ const services = [
 
                                 <!-- Link elegante -->
                                 <a
-                                    href="#contatti"
-                                    class="inline-flex items-center group/link text-gray-900 font-light text-sm tracking-wider uppercase hover:text-[#7d8b6e] transition-colors duration-300"
+                                    href={langPrefix + "/contatti"}
+                                    class="inline-flex items-center group/link text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
                                 >
                                     <span>{t("services_cta")}</span>
                                     <svg
@@ -177,9 +180,9 @@ const services = [
                         <!-- Separatore tra servizi -->
                         {index < services.length - 1 && (
                             <div class="mt-16 lg:mt-24 flex items-center justify-center">
-                                <div class="w-24 h-px bg-[#7d8b6e]/30" />
-                                <div class="mx-4 w-1.5 h-1.5 rounded-full bg-[#7d8b6e]/30" />
-                                <div class="w-24 h-px bg-[#7d8b6e]/30" />
+                                <div class="w-24 h-px bg-primary/30" />
+                                <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary/30" />
+                                <div class="w-24 h-px bg-primary/30" />
                             </div>
                         )}
                     </div>
@@ -191,9 +194,9 @@ const services = [
         <div class="mt-24 lg:mt-32 text-center max-w-3xl mx-auto fade-in fade-in-delay-4">
             <div class="bg-white p-12 lg:p-16 shadow-lg">
                 <div class="flex items-center justify-center mb-8">
-                    <div class="w-16 h-px bg-[#7d8b6e]"></div>
-                    <div class="mx-4 w-1 h-1 rounded-full bg-[#7d8b6e]"></div>
-                    <div class="w-16 h-px bg-[#7d8b6e]"></div>
+                    <div class="w-16 h-px bg-primary"></div>
+                    <div class="mx-4 w-1 h-1 rounded-full bg-primary"></div>
+                    <div class="w-16 h-px bg-primary"></div>
                 </div>
 
                 <h3
@@ -206,8 +209,8 @@ const services = [
                 </p>
 
                 <a
-                    href="#contatti"
-                    class="inline-flex items-center justify-center px-10 py-4 bg-[#7d8b6e] text-white text-sm font-light tracking-wider uppercase hover:bg-[#6d7a5e] transition-all duration-300"
+                    href={langPrefix + "/contatti"}
+                    class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
                 >
                     {t("services_final_cta")}
                 </a>

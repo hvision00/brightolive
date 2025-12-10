@@ -1,0 +1,564 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// Prefisso per i link
+const langPrefix = "/es";
+---
+
+<BaseLayout
+  title="Matrimonio a Venezia | La Serenissima | BrightOlive Wedding Planner"
+  description="Destination wedding a Venezia: gondole, palazzi storici sul Canal Grande, location esclusive. Un matrimonio da sogno nella città più romantica del mondo."
+>
+  <!-- Hero Section - Full Width Image -->
+  <section class="relative min-h-[80vh] flex items-end overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="/destinations/venezia.jpg"
+        alt="Venezia al tramonto con gondole sul Canal Grande"
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"
+      >
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-8 lg:px-16 relative pb-16 lg:pb-24">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="flex items-center mb-6 fade-in">
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="text-white/70 text-sm font-light hover:text-white transition-colors"
+          >
+            Destination wedding
+          </a>
+          <span class="mx-3 text-white/50">→</span>
+          <span class="text-white text-sm font-light">Venezia</span>
+        </div>
+
+        <!-- Label -->
+        <div class="flex items-center mb-4 fade-in fade-in-delay-1">
+          <div class="w-12 h-px bg-white/50"></div>
+          <span
+            class="ml-4 text-xs tracking-[0.4em] text-white/80 uppercase font-light"
+          >
+            La Serenissima
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 leading-tight fade-in fade-in-delay-2"
+        >
+          Un Matrimonio da Sogno<br />
+          <span class="italic text-accent">a Venezia</span>
+        </h1>
+
+        <!-- Intro -->
+        <p
+          class="text-lg md:text-xl font-light text-white/90 leading-relaxed max-w-2xl fade-in fade-in-delay-3"
+        >
+          La ciudad más romántica del mundo, dove ogni angolo racconta una
+          storia d'amore senza tempo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center fade-in fade-in-delay-4"
+    >
+      <div class="text-xs tracking-[0.3em] text-white/60 uppercase mb-3">
+        Scopri
+      </div>
+      <div class="w-px h-12 bg-white/30 relative overflow-hidden">
+        <div class="absolute top-0 w-full h-8 bg-white/80 animate-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="py-16 lg:py-20 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-5xl mx-auto">
+        <!-- Video Container -->
+        <div
+          class="relative aspect-video bg-gray-900 overflow-hidden shadow-2xl fade-in"
+        >
+          <!-- Video Placeholder -->
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-primary to-secondary"
+          >
+            <Icon
+              name="lucide:play-circle"
+              class="w-20 h-20 text-white/80 mb-4"
+            />
+            <p class="text-white text-lg font-light">
+              Video Venecia - La Serenissima
+            </p>
+            <p class="text-white/60 text-sm font-light mt-2">Coming Soon</p>
+          </div>
+          <!-- Decorative Border -->
+          <div
+            class="absolute inset-0 border-4 border-white/10 pointer-events-none"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto">
+        <!-- Quote -->
+        <div class="text-center mb-16 fade-in">
+          <div
+            class="text-[80px] font-serif text-primary/10 leading-none mb-[-20px]"
+          >
+            "
+          </div>
+          <blockquote
+            class="text-2xl md:text-3xl font-light text-gray-900 leading-relaxed italic"
+          >
+            Non c'è città al mondo più adatta per celebrare l'amore.
+            <span class="text-primary">Venezia è poesia che prende vita.</span>
+          </blockquote>
+        </div>
+
+        <!-- Main Text -->
+        <div
+          class="space-y-6 text-lg font-light text-gray-700 leading-relaxed fade-in fade-in-delay-1"
+        >
+          <p>
+            Immagina di pronunciare il tuo "sì" mentre una <strong
+              class="font-normal text-primary"
+              >gondola scivola dolcemente</strong
+            > sul Canal Grande, con i palazzi storici che si riflettono nell'acqua.
+            Oppure in una delle magnifiche sale affrescate che hanno ospitato dogi
+            e nobili per secoli.
+          </p>
+          <p>
+            Venezia trasforma ogni matrimonio in un <em
+              >sogno ad occhi aperti</em
+            >, dove la storia si fonde con il romanticismo per creare momenti
+            che restano impressi per sempre.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Venice Section -->
+  <section class="py-20 lg:py-28 bg-neutral relative overflow-hidden">
+    <!-- Decorative Wave -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 opacity-5">
+      <svg
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+        class="w-full h-full"
+      >
+        <path d="M0,60 Q300,0 600,60 T1200,60 L1200,120 L0,120 Z" fill="#7d8b6e"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Content -->
+        <div class="fade-in">
+          <!-- Section Number -->
+          <div
+            class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+          >
+            01
+          </div>
+
+          <!-- Label -->
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-px bg-primary"></div>
+            <span
+              class="ml-4 text-xs tracking-[0-4em] text-gray-600 uppercase font-light"
+            >
+              Perché Venezia
+            </span>
+          </div>
+
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight"
+          >
+            La Città più<br />
+            <span class="text-primary italic">Romantica del Mondo</span>
+          </h2>
+
+          <p class="text-lg font-light text-gray-700 leading-relaxed mb-8">
+            Sposarsi a Venezia significa regalare a voi stessi e ai vostri
+            ospiti un'esperienza <strong class="font-normal"
+              >cinematografica</strong
+            >, un viaggio nel tempo dove ogni dettaglio parla di bellezza, arte
+            e amore eterno.
+          </p>
+
+          <!-- Separator -->
+          <div class="flex items-center mb-8">
+            <div class="w-12 h-px bg-primary"></div>
+            <div class="mx-3 w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <div class="w-12 h-px bg-primary"></div>
+          </div>
+
+          <p class="text-base font-light text-gray-600 italic">
+            "Venezia non è solo una location, è un'emozione che accompagnerà per
+            sempre il ricordo del vostro giorno più bello."
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-2 gap-4 fade-in fade-in-delay-1">
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:waves" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Canali Romantici</h4>
+            <p class="text-sm font-light text-gray-600">
+              Gondole e tramonti dorati sulla Laguna
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:landmark" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Palazzi Storici</h4>
+            <p class="text-sm font-light text-gray-600">
+              Dimore nobiliari affacciate sul Canal Grande
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:sparkles" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Atmosfera Unica</h4>
+            <p class="text-sm font-light text-gray-600">
+              Magia veneziana inimitabile
+            </p>
+          </div>
+          <div class="bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+            <Icon name="lucide:heart" class="w-8 h-8 mb-4 text-primary" />
+            <h4 class="font-light text-gray-900 mb-2">Romance Senza Tempo</h4>
+            <p class="text-sm font-light text-gray-600">
+              La città dell'amore per eccellenza
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Esclusive Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+        <div
+          class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]"
+        >
+          02
+        </div>
+        <div class="flex items-center justify-center mb-4">
+          <div class="w-12 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            Location da Sogno
+          </span>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6"
+        >
+          Location Esclusive per<br />
+          <span class="text-primary italic">Matrimoni Indimenticabili</span>
+        </h2>
+      </div>
+
+      <!-- Locations -->
+      <div class="space-y-16">
+        <!-- Palazzo Cavalli -->
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center fade-in">
+          <div class="lg:col-span-7">
+            <div class="relative h-[60vh] overflow-hidden shadow-2xl">
+              <div
+                class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent z-10"
+              >
+              </div>
+              <div
+                class="w-full h-full bg-gray-200 flex items-center justify-center"
+              >
+                <div class="text-center px-8">
+                  <Icon
+                    name="lucide:home"
+                    class="w-16 h-16 mx-auto text-gray-400 mb-4"
+                  />
+                  <p class="text-sm text-gray-500">
+                    Palazzo Cavalli sul Canal Grande
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <Icon name="lucide:crown" class="w-10 h-10 mb-4 text-primary" />
+            <h3 class="text-2xl md:text-3xl font-light text-gray-900 mb-4">
+              Palazzo Cavalli
+            </h3>
+            <p class="text-base font-light text-gray-700 leading-relaxed mb-6">
+              Situato sul Canal Grande con vista mozzafiato sul Ponte di Rialto,
+              questo palazzo storico offre sale dedicate agli sposi dove
+              l'eleganza veneziana raggiunge il suo apice. L'<strong
+                class="font-normal text-primary">arrivo in gondola</strong
+              > aggiunge un tocco di romanticismo indimenticabile.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Canal Grande</span
+              >
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Ponte di Rialto</span
+              >
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Arrivo in Gondola</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Scuola Grande -->
+        <div
+          class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center fade-in fade-in-delay-1"
+        >
+          <div class="lg:col-span-5 lg:order-1">
+            <Icon name="lucide:book-open" class="w-10 h-10 mb-4 text-primary" />
+            <h3 class="text-2xl md:text-3xl font-light text-gray-900 mb-4">
+              Scuole Grandi Veneziane
+            </h3>
+            <p class="text-base font-light text-gray-700 leading-relaxed mb-6">
+              Le <strong class="font-normal text-primary">Scuole Grandi</strong>
+              sono istituzioni storiche veneziane che custodiscono opere d'arte straordinarie.
+              La Scuola Grande di San Giovanni Evangelista e la Scuola della Misericordia
+              offrono spazi esclusivi per cerimonie civili immerse nella storia e
+              nell'arte veneziana.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Arte & Storia</span
+              >
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Location Esclusive</span
+              >
+              <span class="text-xs px-3 py-1 bg-primary/10 text-primary"
+                >Opere d'Arte</span
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-7 lg:order-2">
+            <div class="relative h-[60vh] overflow-hidden shadow-2xl">
+              <div
+                class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent z-10"
+              >
+              </div>
+              <div
+                class="w-full h-full bg-gray-200 flex items-center justify-center"
+              >
+                <div class="text-center px-8">
+                  <Icon
+                    name="lucide:building"
+                    class="w-16 h-16 mx-auto text-gray-400 mb-4"
+                  />
+                  <p class="text-sm text-gray-500">
+                    Scuola Grande San Giovanni Evangelista
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Palazzi storici vari -->
+        <div class="bg-neutral p-8 lg:p-12 fade-in fade-in-delay-2">
+          <Icon name="lucide:map-pin" class="w-10 h-10 mb-4 text-primary" />
+          <h3 class="text-2xl font-light text-gray-900 mb-4">
+            Altri Palazzi e Dimore Storiche
+          </h3>
+          <p class="text-base font-light text-gray-700 leading-relaxed mb-6">
+            Venezia offre un'infinità di palazzi storici, hotel di lusso e
+            dimore esclusive per il vostro ricevimento. Dal celebre <em
+              >Aman Venice</em
+            > con le sue suite affacciate sul Canal Grande, ai palazzi privati con
+            giardini segreti, ogni location racconta una storia unica e irripetibile.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- L'Esperienza Veneziana Section -->
+  <section
+    class="py-20 lg:py-28 bg-primary text-white relative overflow-hidden"
+  >
+    <!-- Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern
+            id="venice-pattern"
+            x="0"
+            y="0"
+            width="80"
+            height="80"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="40" cy="40" r="2" fill="white"></circle>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#venice-pattern)"></rect>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-8 lg:px-16 relative">
+      <div class="max-w-4xl mx-auto">
+        <!-- Section Number -->
+        <div
+          class="text-[120px] font-light text-white/10 leading-none mb-[-40px] text-center fade-in"
+        >
+          03
+        </div>
+
+        <div class="flex items-center justify-center mb-4 fade-in">
+          <div class="w-12 h-px bg-white/40"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] uppercase font-light opacity-80"
+          >
+            L'Esperienza
+          </span>
+          <div class="w-12 h-px bg-white/40"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-light mb-8 text-center fade-in fade-in-delay-1"
+        >
+          Un Matrimonio a Venezia è<br />
+          <span class="italic">un Viaggio nell'Incanto</span>
+        </h2>
+
+        <div
+          class="space-y-6 text-lg font-light leading-relaxed mb-12 fade-in fade-in-delay-2"
+        >
+          <p class="opacity-90">
+            Dall'arrivo in <strong class="font-normal">motoscafo privato</strong
+            > al suono delle onde della Laguna, ogni momento diventa parte di un
+            racconto magico. Gli ospiti si muovono tra calli e campielli, scoprono
+            ponti romantici e si perdono nella bellezza di una città che sembra sospesa
+            nel tempo.
+          </p>
+          <p class="opacity-90">
+            Il tramonto che tinge di oro la Laguna, le luci che si riflettono
+            sull'acqua, il silenzio della notte veneziana interrotto solo dal
+            dolce sciabordio delle gondole:
+            <em
+              >questi sono i momenti che rendono unico un matrimonio a Venezia</em
+            >.
+          </p>
+        </div>
+
+        <!-- Esperienze -->
+        <div class="grid md:grid-cols-3 gap-6 fade-in fade-in-delay-3">
+          <div class="text-center p-6 bg-white/10 backdrop-blur-sm">
+            <Icon
+              name="lucide:ship"
+              class="w-10 h-10 mx-auto mb-4 text-accent"
+            />
+            <h4 class="font-light text-lg mb-2">Arrivo in Stile</h4>
+            <p class="text-sm opacity-80 font-light">
+              Gondola o motoscafo privato
+            </p>
+          </div>
+          <div class="text-center p-6 bg-white/10 backdrop-blur-sm">
+            <Icon
+              name="lucide:sunset"
+              class="w-10 h-10 mx-auto mb-4 text-[#e8a4b8]"
+            />
+            <h4 class="font-light text-lg mb-2">Tramonti Dorati</h4>
+            <p class="text-sm opacity-80 font-light">Sulla Laguna veneziana</p>
+          </div>
+          <div class="text-center p-6 bg-white/10 backdrop-blur-sm">
+            <Icon
+              name="lucide:music"
+              class="w-10 h-10 mx-auto mb-4 text-accent"
+            />
+            <h4 class="font-light text-lg mb-2">Serenate</h4>
+            <p class="text-sm opacity-80 font-light">
+              Musica dal vivo tra i canali
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center mb-8 fade-in">
+          <div class="w-16 h-px bg-primary"></div>
+          <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary"></div>
+          <div class="w-16 h-px bg-primary"></div>
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl font-light text-gray-900 mb-6 fade-in fade-in-delay-1"
+        >
+          Pronta a Dire Sì nella<br />
+          <span class="text-primary italic">Città più Romantica del Mondo?</span
+          >
+        </h2>
+
+        <p
+          class="text-lg font-light text-gray-700 leading-relaxed mb-10 fade-in fade-in-delay-2"
+        >
+          Raccontami il tuo sogno veneziano e insieme creeremo un matrimonio che
+          sembrerà uscito da una favola.
+        </p>
+
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center fade-in fade-in-delay-3"
+        >
+          <a
+            href={langPrefix + "/contatti"}
+            class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
+          >
+            Parliamone Insieme
+          </a>
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="inline-flex items-center justify-center px-10 py-4 border border-primary text-primary text-sm font-light tracking-wider uppercase hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Altre Destinazioni
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 2s ease-in-out infinite;
+  }
+</style>
