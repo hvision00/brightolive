@@ -20,9 +20,8 @@ export const translations = {
     destinations_description:
       "Ogni location è stata selezionata per la sua unicità, eleganza e capacità di creare momenti indimenticabili.",
     destinations_cta: "Scopri di più",
-    destinations_final_text:
-      "Non hai trovato la location perfetta? Parliamone insieme.",
-    destinations_final_cta: "Contattaci",
+    destinations_final_text: "Non hai trovato la location perfetta? Scrivimi.",
+    destinations_final_cta: "Contattami",
 
     destination_dolomiti_name: "Dolomiti",
     destination_dolomiti_subtitle: "Maestosità alpina",
@@ -48,7 +47,7 @@ export const translations = {
     destination_padova_name: "Padova",
     destination_padova_subtitle: "Arte e cultura",
     destination_padova_description:
-      "Città d'arte e cultura, con giardini botanici e architetture storiche che offrono location eleganti per celebrare il vostro giorno speciale.",
+      "Città d'arte e cultura, con giardini botanici e architetture storiche che offrono location eleganti per celebrare il tuo giorno speciale.",
     destination_padova_details:
       "Architettura • Giardini storici • Eleganza urbana",
 
@@ -64,17 +63,17 @@ export const translations = {
     services_title_2: "Raffinate",
     services_title_3: "per ogni esigenza",
     services_description:
-      "Ogni servizio è personalizzato per riflettere la vostra visione e creare un'esperienza unica e memorabile.",
+      "Ogni servizio è personalizzato per riflettere la tua visione e creare un'esperienza unica e memorabile.",
     services_cta: "Richiedi informazioni",
     services_final_title: "Hai bisogno di un servizio personalizzato?",
     services_final_description:
-      "Ogni matrimonio è unico. Creiamo insieme un pacchetto su misura per le vostre esigenze specifiche.",
-    services_final_cta: "Parliamone insieme",
+      "Ogni matrimonio è unico. Creiamo insieme un pacchetto su misura per le tue esigenze specifiche.",
+    services_final_cta: "Scrivimi",
 
     service_1_title: "Coordinamento",
     service_1_subtitle: "Il giorno perfetto",
     service_1_description:
-      "Gestione completa del vostro matrimonio dal mattino alla sera. Sarò presente in ogni momento per garantire che tutto fluisca perfettamente, permettendovi di vivere ogni istante senza preoccupazioni.",
+      "Gestione completa del tuo matrimonio dal mattino alla sera. Sarò presente in ogni momento per garantire che tutto fluisca perfettamente, permettendoti di vivere ogni istante senza preoccupazioni.",
     service_1_feature_1: "Gestione timeline completa",
     service_1_feature_2: "Coordinamento fornitori",
     service_1_feature_3: "Assistenza sposi e invitati",
@@ -83,16 +82,16 @@ export const translations = {
     service_2_title: "Wedding totale",
     service_2_subtitle: "Dall'idea alla realtà",
     service_2_description:
-      "Pianificazione completa dall'inizio alla fine. Dalla scelta della location alla selezione di ogni dettaglio, creeremo insieme il matrimonio dei vostri sogni con eleganza e raffinatezza.",
+      "Pianificazione completa dall'inizio alla fine. Dalla scelta della location alla selezione di ogni dettaglio, creeremo insieme il matrimonio dei tuoi sogni con eleganza e raffinatezza.",
     service_2_feature_1: "Concept e design completo",
     service_2_feature_2: "Selezione e gestione fornitori",
     service_2_feature_3: "Budget planning e controllo",
     service_2_feature_4: "Coordinamento giorno delle nozze",
 
     service_3_title: "Consulenza su misura",
-    service_3_subtitle: "Il vostro supporto personale",
+    service_3_subtitle: "Il tuo supporto personale",
     service_3_description:
-      "Supporto mirato per specifiche esigenze. Dalla scelta della location ai consigli su stile, budget e fornitori. Un aiuto professionale quando ne avete bisogno.",
+      "Supporto mirato per specifiche esigenze. Dalla scelta della location ai consigli su stile, budget e fornitori. Un aiuto professionale quando ne hai bisogno.",
     service_3_feature_1: "Sessioni di consulenza dedicate",
     service_3_feature_2: "Ricerca e selezione location",
     service_3_feature_3: "Consigli su stile e tendenze",
@@ -101,50 +100,58 @@ export const translations = {
     // Impact Section
     impact_label: "La nostra filosofia",
     impact_quote: "Empatia e presenza per sposi e invitati.",
-    impact_quote_highlight: "Matrimoni ricordati per momenti",
-    impact_quote_end: ", non solo foto.",
-    impact_subtext:
-      "Fornitori selezionati per ogni bisogno. Un'esperienza che resta nel cuore, oltre le immagini.",
+    impact_quote_highlight: "Un matrimonio che vive nei momenti che crea",
+    impact_quote_end: ", non soltanto nelle foto.",
+    impact_subtext_1: "Fornitori selezionati per ogni bisogno.",
+    impact_subtext_2: "Un'esperienza che resta nel cuore, oltre le immagini.",
 
     // Contact Form
     contact_label: "Iniziamo insieme",
-    contact_title_1: "Raccontaci",
+    contact_title_1: "Raccontami",
     contact_title_2: "il tuo sogno",
     contact_description:
-      "Ogni matrimonio inizia con una conversazione. Condividi con noi la tua visione e creeremo insieme un'esperienza indimenticabile.",
+      "Ogni matrimonio inizia con una chiacchierata. Condividi il tuo desiderio e insieme creeremo un'esperienza indimenticabile.",
     contact_form_name: "Nome e Cognome",
     contact_form_email: "Email",
     contact_form_service: "Servizio",
-    contact_form_service_placeholder: "Seleziona",
-    contact_form_date: "Wedding date",
-    contact_form_message: "Message",
-    contact_form_message_placeholder: "Raccontaci del vostro matrimonio...",
+    contact_form_service_placeholder: "Seleziona un servizio",
+    contact_form_date: "Data del matrimonio",
+    contact_form_message: "Messaggio",
+    contact_form_message_placeholder: "Raccontami del tuo matrimonio...",
     contact_form_privacy: "Acconsento al trattamento dei dati secondo la",
     contact_form_privacy_link: "Privacy policy",
-    contact_form_submit: "Send message",
+    contact_form_submit: "Invia messaggio",
     contact_form_submitting: "Invio in corso...",
     contact_form_required: "* Campi obbligatori",
     contact_form_success:
       "Messaggio inviato con successo. Ti risponderemo entro 24 ore.",
+    contact_form_title: "Scrivimi",
+    contact_form_surname: "Cognome",
+    contact_form_phone: "Telefono",
+    contact_form_select_service: "Seleziona un servizio",
+    contact_form_service_coordinamento: "Coordinamento",
+    contact_form_service_full: "Wedding Totale",
+    contact_form_service_consulenza: "Consulenza su misura",
+    contact_form_service_altro: "Altro",
 
     // About Page (Chi Siamo)
     about_hero_quote:
       "Dietro ogni grande matrimonio, c'è qualcuno che guarda l'orologio mentre gli altri si divertono.",
     about_hero_author: "Sara De Coppi",
-    about_hero_role: "Wedding coordinator",
+    about_hero_role: "EVENT AND WEDDING CREATOR",
 
     about_intro_label: "La storia",
     about_intro_title: "Chi sono",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
     about_intro_text_1:
-      "Sono Sara De Coppi, vivo a Cison di Valmarino, un borgo tra le colline del Prosecco.",
+      "Sono una event and wedding creator, oltre ad essere di supporto ad altre professioniste Wedding Planner come wedding coordinator.",
     about_intro_text_2:
-      "Qui ho capito che organizzare matrimoni non significa solo coordinare fornitori, ma creare qualcosa che funziona davvero.",
+      "Il mio lavoro non è creare scenografie spettacolari, ma far sì che tutto funzioni senza che tu te ne accorga.",
     about_intro_text_3:
-      "Faccio la wedding coordinator. Il mio lavoro non è creare scenografie spettacolari, ma far sì che tutto funzioni senza che tu te ne accorga.",
-    about_intro_text_4:
       "Sto dietro le quinte. Mi assicuro che tutto fili liscio, che ogni dettaglio sia al posto giusto, che tu possa solo goderti la giornata.",
+    about_intro_text_4:
+      "Raccontami i tuoi sogni, il tuo modo di essere e le tue aspettative.",
 
     about_mission_label: "La missione",
     about_mission_title: "Cosa faccio per te",
@@ -171,7 +178,7 @@ export const translations = {
     about_why_bright:
       "Bright, luminoso. Come dovrebbe essere il tuo matrimonio: pieno di luce, sorrisi veri, momenti che ricordi.",
     about_why_olive:
-      "Olive, l'ulivo. Da sempre simbolo di pace e armonia. Perché un matrimonio deve essere sereno, non stressante.",
+      "Olivo, l'ulivo. Da sempre simbolo di pace e armonia. Perché un matrimonio deve essere sereno, non stressante.",
     about_why_conclusion: "Un nome semplice, per matrimoni autentici.",
 
     about_cta_title: "Vuoi conoscermi meglio?",
@@ -251,8 +258,8 @@ export const translations = {
 
     services_page_cta_title: "Non sei sicura di quale servizio scegliere?",
     services_page_cta_text:
-      "Ogni matrimonio è unico. Parliamone insieme e troviamo la soluzione perfetta per te.",
-    services_page_cta_button: "Richiedi consulenza gratuita",
+      "Ogni matrimonio è unico. Scrivimi e troviamo insieme la soluzione perfetta per te.",
+    services_page_cta_button: "Scrivimi",
 
     services_page_process_label: "Il processo",
     services_page_process_title: "Come lavoriamo insieme",
@@ -297,7 +304,7 @@ export const translations = {
     dw_bassano_style: "Style: Classic elegance, vintage",
 
     dw_venezia_full_description:
-      "Venezia è la quintessenza del romanticismo. Non c'è città al mondo più adatta per celebrare l'amore: canali che riflettono palazzi antichi, gondole che scivolano sull'acqua, tramonti che tingono di oro la Laguna. Sposarsi a Venezia significa regalare a voi stessi e ai vostri ospiti un'esperienza cinematografica, un sogno ad occhi aperti tra arte, storia e bellezza senza tempo.",
+      "Venezia è la quintessenza del romanticismo. Non c'è città al mondo più adatta per celebrare l'amore: canali che riflettono palazzi antichi, gondole che scivolano sull'acqua, tramonti che tingono di oro la Laguna. Sposarsi a Venezia significa regalare a te e ai tuoi ospiti un'esperienza cinematografica, un sogno ad occhi aperti tra arte, storia e bellezza senza tempo.",
     dw_venezia_why_title: "Perché scegliere Venezia",
     dw_venezia_why_1: "La città più romantica del mondo",
     dw_venezia_why_2: "Palazzi storici affacciati sui canali",
@@ -328,8 +335,8 @@ export const translations = {
 
     dw_page_cta_title: "Hai bisogno di aiuto nella scelta?",
     dw_page_cta_text:
-      "Ogni location ha il suo carattere unico. Parliamone insieme e troviamo il posto perfetto per il tuo matrimonio.",
-    dw_page_cta_button: "Richiedi Consulenza Location",
+      "Ogni location ha il suo carattere unico. Scrivimi e troviamo insieme il posto perfetto per il tuo matrimonio.",
+    dw_page_cta_button: "Scrivimi",
 
     dw_page_why_label: "Perché il nord Italia",
     dw_page_why_title: "Una regione, mille emozioni",
@@ -349,7 +356,7 @@ export const translations = {
     blog_no_posts: "Nessun articolo disponibile al momento.",
 
     // Contact Page
-    contact_page_hero_label: "Parliamone",
+    contact_page_hero_label: "Contatti",
     contact_page_hero_title: "Iniziamo a progettare",
     contact_page_hero_subtitle: "il tuo matrimonio",
     contact_page_hero_text:
@@ -396,9 +403,8 @@ export const translations = {
     destinations_description:
       "Each location has been selected for its uniqueness, elegance and ability to create unforgettable moments.",
     destinations_cta: "Discover more",
-    destinations_final_text:
-      "Haven't found the perfect location? Let's talk about it.",
-    destinations_final_cta: "Contact us",
+    destinations_final_text: "Haven't found the perfect location? Write me.",
+    destinations_final_cta: "Contact me",
 
     destination_dolomiti_name: "Dolomites",
     destination_dolomiti_subtitle: "Alpine majesty",
@@ -444,7 +450,7 @@ export const translations = {
     services_final_title: "Need a customized service?",
     services_final_description:
       "Every wedding is unique. Let's create together a tailor-made package for your specific needs.",
-    services_final_cta: "Let's talk about it",
+    services_final_cta: "Write me",
 
     service_1_title: "Coordination",
     service_1_subtitle: "The perfect day",
@@ -476,24 +482,24 @@ export const translations = {
     // Impact Section
     impact_label: "Our philosophy",
     impact_quote: "Empathy and presence for bride, groom and guests.",
-    impact_quote_highlight: "Weddings remembered for moments",
-    impact_quote_end: ", not just photos.",
-    impact_subtext:
-      "Selected vendors for every need. An experience that stays in the heart, beyond images.",
+    impact_quote_highlight: "A wedding that lives in the moments it creates",
+    impact_quote_end: ", not just in photos.",
+    impact_subtext_1: "Selected vendors for every need.",
+    impact_subtext_2: "An experience that stays in the heart, beyond images.",
 
     // Contact Form
     contact_label: "Let's start together",
-    contact_title_1: "Tell us",
+    contact_title_1: "Tell me",
     contact_title_2: "your dream",
     contact_description:
-      "Every wedding starts with a conversation. Share your vision with us and we will create an unforgettable experience together.",
+      "Every wedding starts with a chat. Share your wish and together we will create an unforgettable experience.",
     contact_form_name: "Full name",
     contact_form_email: "Email",
     contact_form_service: "Service",
     contact_form_service_placeholder: "Select",
     contact_form_date: "Wedding Date",
     contact_form_message: "Message",
-    contact_form_message_placeholder: "Tell us about your wedding...",
+    contact_form_message_placeholder: "Tell me about your wedding...",
     contact_form_privacy: "I consent to data processing according to the",
     contact_form_privacy_link: "Privacy Policy",
     contact_form_submit: "Send Message",
@@ -501,25 +507,33 @@ export const translations = {
     contact_form_required: "* Required fields",
     contact_form_success:
       "Message sent successfully. We will reply within 24 hours.",
+    contact_form_title: "Write me",
+    contact_form_surname: "Surname",
+    contact_form_phone: "Phone",
+    contact_form_select_service: "Select a service",
+    contact_form_service_coordinamento: "Coordination",
+    contact_form_service_full: "Full Wedding",
+    contact_form_service_consulenza: "Tailored consulting",
+    contact_form_service_altro: "Other",
 
     // About Page
     about_hero_quote:
       "Behind every great wedding, there's someone watching the clock while everyone else is having fun.",
     about_hero_author: "Sara De Coppi",
-    about_hero_role: "Wedding coordinator",
+    about_hero_role: "EVENT AND WEDDING CREATOR",
 
     about_intro_label: "The story",
     about_intro_title: "Who I am",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
     about_intro_text_1:
-      "I'm Sara De Coppi, I live in Cison di Valmarino, a village in the Prosecco hills.",
+      "I'm an event and wedding creator, as well as supporting other Wedding Planner professionals as a wedding coordinator.",
     about_intro_text_2:
-      "Here I understood that organizing weddings isn't just about coordinating vendors, but creating something that really works.",
+      "My job isn't creating spectacular scenography, but making sure everything works without you noticing.",
     about_intro_text_3:
-      "I'm a wedding coordinator. My job isn't creating spectacular scenography, but making sure everything works without you noticing.",
-    about_intro_text_4:
       "I stay behind the scenes. I make sure everything runs smoothly, that every detail is in the right place, so you can just enjoy your day.",
+    about_intro_text_4:
+      "Tell me about your dreams, your way of being and your expectations.",
 
     about_mission_label: "The mission",
     about_mission_title: "What I do for you",
@@ -621,8 +635,8 @@ export const translations = {
 
     services_page_cta_title: "Not sure which service to choose?",
     services_page_cta_text:
-      "Every wedding is unique. Let's talk about it together and find the perfect solution for you.",
-    services_page_cta_button: "Request free consultation",
+      "Every wedding is unique. Write me and let's find together the perfect solution for you.",
+    services_page_cta_button: "Write me",
 
     services_page_process_label: "The process",
     services_page_process_title: "How we work together",
@@ -698,8 +712,8 @@ export const translations = {
 
     dw_page_cta_title: "Need help choosing?",
     dw_page_cta_text:
-      "Each location has its unique character. Let's talk about it together and find the perfect place for your wedding.",
-    dw_page_cta_button: "Request location consultation",
+      "Each location has its unique character. Write me and let's find together the perfect place for your wedding.",
+    dw_page_cta_button: "Write me",
 
     dw_page_why_label: "Why northern Italy",
     dw_page_why_title: "One region, a thousand emotions",
@@ -767,8 +781,8 @@ export const translations = {
       "Cada ubicación ha sido seleccionada por su singularidad, elegancia y capacidad de crear momentos inolvidables.",
     destinations_cta: "Descubre más",
     destinations_final_text:
-      "¿No has encontrado la ubicación perfecta? Hablemos de ello.",
-    destinations_final_cta: "Contáctanos",
+      "¿No has encontrado la ubicación perfecta? Escríbeme.",
+    destinations_final_cta: "Contáctame",
 
     destination_dolomiti_name: "Dolomitas",
     destination_dolomiti_subtitle: "Majestuosidad alpina",
@@ -815,7 +829,7 @@ export const translations = {
     services_final_title: "¿Necesitas un servicio personalizado?",
     services_final_description:
       "Cada boda es única. Creemos juntos un paquete a medida para tus necesidades específicas.",
-    services_final_cta: "Hablemos",
+    services_final_cta: "Escríbeme",
 
     service_1_title: "Coordinación",
     service_1_subtitle: "El día perfecto",
@@ -847,24 +861,25 @@ export const translations = {
     // Impact Section
     impact_label: "Nuestra filosofía",
     impact_quote: "Empatía y presencia para novios e invitados.",
-    impact_quote_highlight: "Bodas recordadas por momentos",
-    impact_quote_end: ", no solo fotos.",
-    impact_subtext:
-      "Proveedores seleccionados para cada necesidad. Una experiencia que queda en el corazón, más allá de las imágenes.",
+    impact_quote_highlight: "Una boda que vive en los momentos que crea",
+    impact_quote_end: ", no solo en las fotos.",
+    impact_subtext_1: "Proveedores seleccionados para cada necesidad.",
+    impact_subtext_2:
+      "Una experiencia que queda en el corazón, más allá de las imágenes.",
 
     // Contact Form
     contact_label: "Comencemos juntos",
-    contact_title_1: "Cuéntanos",
+    contact_title_1: "Cuéntame",
     contact_title_2: "tu sueño",
     contact_description:
-      "Cada boda comienza con una conversación. Comparte tu visión con nosotros y crearemos juntos una experiencia inolvidable.",
+      "Cada boda comienza con una charla. Comparte tu deseo y juntos crearemos una experiencia inolvidable.",
     contact_form_name: "Nombre y Apellido",
     contact_form_email: "Email",
     contact_form_service: "Servicio",
     contact_form_service_placeholder: "Selecciona",
     contact_form_date: "Fecha de la Boda",
     contact_form_message: "Mensaje",
-    contact_form_message_placeholder: "Cuéntanos sobre tu boda...",
+    contact_form_message_placeholder: "Cuéntame sobre tu boda...",
     contact_form_privacy: "Consiento el tratamiento de datos según la",
     contact_form_privacy_link: "Política de Privacidad",
     contact_form_submit: "Enviar Mensaje",
@@ -872,25 +887,33 @@ export const translations = {
     contact_form_required: "* Campos obligatorios",
     contact_form_success:
       "Mensaje enviado con éxito. Responderemos en 24 horas.",
+    contact_form_title: "Escríbeme",
+    contact_form_surname: "Apellido",
+    contact_form_phone: "Teléfono",
+    contact_form_select_service: "Selecciona un servicio",
+    contact_form_service_coordinamento: "Coordinación",
+    contact_form_service_full: "Boda Completa",
+    contact_form_service_consulenza: "Consultoría a medida",
+    contact_form_service_altro: "Otro",
 
     // About Page
     about_hero_quote:
       "Detrás de cada gran boda, hay alguien mirando el reloj mientras todos los demás se divierten.",
     about_hero_author: "Sara De Coppi",
-    about_hero_role: "Wedding coordinator",
+    about_hero_role: "EVENT AND WEDDING CREATOR",
 
     about_intro_label: "La historia",
     about_intro_title: "Quién soy",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
     about_intro_text_1:
-      "Soy Sara De Coppi, vivo en Cison di Valmarino, un pueblo entre las colinas del Prosecco.",
+      "Soy una event and wedding creator, además de dar apoyo a otras profesionales Wedding Planner como coordinadora de bodas.",
     about_intro_text_2:
-      "Aquí entendí que organizar bodas no significa solo coordinar proveedores, sino crear algo que realmente funcione.",
+      "Mi trabajo no es crear escenografías espectaculares, sino hacer que todo funcione sin que te des cuenta.",
     about_intro_text_3:
-      "Soy coordinadora de bodas. Mi trabajo no es crear escenografías espectaculares, sino hacer que todo funcione sin que te des cuenta.",
-    about_intro_text_4:
       "Estoy detrás del escenario. Me aseguro de que todo fluya, que cada detalle esté en su lugar, para que solo tengas que disfrutar del día.",
+    about_intro_text_4:
+      "Cuéntame tus sueños, tu forma de ser y tus expectativas.",
 
     about_mission_label: "La misión",
     about_mission_title: "Qué hago por ti",
@@ -917,7 +940,7 @@ export const translations = {
     about_why_bright:
       "Bright, luminoso. Como debería ser tu boda: llena de luz, sonrisas reales, momentos que recuerdas.",
     about_why_olive:
-      "Olive, el olivo. Desde siempre símbolo de paz y armonía. Porque una boda debe ser serena, no estresante.",
+      "Olivo, el olivo. Desde siempre símbolo de paz y armonía. Porque una boda debe ser serena, no estresante.",
     about_why_conclusion: "Un nombre simple, para bodas auténticas.",
 
     about_cta_title: "¿Quieres conocerme mejor?",
@@ -995,8 +1018,8 @@ export const translations = {
 
     services_page_cta_title: "¿No estás segura de qué servicio elegir?",
     services_page_cta_text:
-      "Cada boda es única. Hablemos juntas y encontremos la solución perfecta para ti.",
-    services_page_cta_button: "Solicita consulta gratuita",
+      "Cada boda es única. Escríbeme y encontremos juntos la solución perfecta para ti.",
+    services_page_cta_button: "Escríbeme",
 
     services_page_process_label: "El proceso",
     services_page_process_title: "Cómo trabajamos juntas",
@@ -1072,8 +1095,8 @@ export const translations = {
 
     dw_page_cta_title: "¿Necesitas ayuda para elegir?",
     dw_page_cta_text:
-      "Cada ubicación tiene su carácter único. Hablemos juntas y encontremos el lugar perfecto para tu boda.",
-    dw_page_cta_button: "Solicita consultoría de ubicación",
+      "Cada ubicación tiene su carácter único. Escríbeme y encontremos juntos el lugar perfecto para tu boda.",
+    dw_page_cta_button: "Escríbeme",
 
     dw_page_why_label: "Por qué el norte de Italia",
     dw_page_why_title: "Una región, mil emociones",

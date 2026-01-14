@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const pageTitle = "Cookie Policy - BrightOlive";
+const pageDescription = "BrightOlive Cookie Policy";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section
+    class="relative py-20 lg:py-32 bg-gradient-to-b from-white to-gray-50"
+  >
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Label -->
+        <div class="flex items-center justify-center mb-6">
+          <div class="w-16 h-px bg-primary"></div>
+          <span
+            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
+          >
+            Legal
+          </span>
+          <div class="w-16 h-px bg-primary"></div>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6"
+        >
+          Cookie Policy
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cookie Policy Content -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto">
+        <a
+          href="https://www.iubenda.com/privacy-policy/74634405/cookie-policy"
+          class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe"
+          title="Cookie Policy ">Cookie Policy</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="text/javascript" is:inline>
+  (function (w, d) {
+    var loader = function () {
+      var s = d.createElement("script"),
+        tag = d.getElementsByTagName("script")[0];
+      s.src = "https://cdn.iubenda.com/iubenda.js";
+      tag.parentNode.insertBefore(s, tag);
+    };
+    if (w.addEventListener) {
+      w.addEventListener("load", loader, false);
+    } else if (w.attachEvent) {
+      w.attachEvent("onload", loader);
+    } else {
+      w.onload = loader;
+    }
+  })(window, document);
+</script>

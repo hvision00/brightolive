@@ -90,12 +90,10 @@ const langPrefix = "/en";
           <div
             class="space-y-6 text-base md:text-lg font-light text-gray-600 leading-relaxed"
           >
-            <p>{t("about_intro_text_1")}</p>
+            <p class="text-gray-900 font-normal">{t("about_intro_text_1")}</p>
             <p>{t("about_intro_text_2")}</p>
-            <p class="text-gray-900 font-normal">
-              {t("about_intro_text_3")}
-            </p>
-            <p>{t("about_intro_text_4")}</p>
+            <p>{t("about_intro_text_3")}</p>
+            <p class="text-primary italic">{t("about_intro_text_4")}</p>
           </div>
           <div class="mt-8 pt-8 border-t border-gray-200">
             <div class="flex items-center space-x-4">
@@ -210,25 +208,12 @@ const langPrefix = "/en";
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <div class="lg:col-span-5 fade-in">
           <div class="relative">
-            <div class="aspect-4/5 bg-gray-200 relative overflow-hidden">
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-center px-4">
-                  <svg
-                    class="w-16 h-16 mx-auto text-gray-400 mb-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
-                  <p class="text-sm text-gray-400">Boho-chic style image</p>
-                </div>
-              </div>
+            <div class="aspect-4/5 relative overflow-hidden">
+              <img
+                src="/gallery/gallery-1.jpg"
+                alt="Boho-chic wedding style"
+                class="w-full h-full object-cover"
+              />
             </div>
             <div class="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 -z-10">
             </div>
