@@ -140,7 +140,7 @@ export const translations = {
     about_hero_author: "Sara De Coppi",
     about_hero_role: "EVENT AND WEDDING CREATOR",
 
-    about_intro_label: "La storia",
+    about_intro_label: "Sara De Coppi",
     about_intro_title: "Chi sono",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
@@ -174,7 +174,7 @@ export const translations = {
     about_why_label: "Il nome",
     about_why_title: "Perché",
     about_why_highlight: "BrightOlive",
-    about_why_text_1: "Bright Olive viene da due parole semplici.",
+    about_why_text_1: "BrightOlive viene da due parole semplici.",
     about_why_bright:
       "Bright, luminoso. Come dovrebbe essere il tuo matrimonio: pieno di luce, sorrisi veri, momenti che ricordi.",
     about_why_olive:
@@ -207,7 +207,7 @@ export const translations = {
     service_coord_include_4: "Gestione imprevisti in tempo reale",
     service_coord_include_5: "Setup e supervisione allestimenti",
     service_coord_include_6: "Coordinamento cerimonia e ricevimento",
-    service_coord_how_label: "How it works",
+    service_coord_how_label: "Come funziona",
     service_coord_step_1: "Incontro conoscitivo e raccolta informazioni",
     service_coord_step_2: "Creazione timeline dettagliata",
     service_coord_step_3: "Briefing con fornitori",
@@ -229,7 +229,7 @@ export const translations = {
     service_total_include_6: "Timeline dettagliata dell'evento",
     service_total_include_7: "Coordinamento completo giorno delle nozze",
     service_total_include_8: "Assistenza pre e post matrimonio",
-    service_total_how_label: "How it works",
+    service_total_how_label: "Come funziona",
     service_total_step_1: "Incontro conoscitivo e definizione vision",
     service_total_step_2: "Ricerca location e fornitori",
     service_total_step_3: "Pianificazione dettagliata (6-12 mesi prima)",
@@ -250,13 +250,13 @@ export const translations = {
     service_consult_include_4: "Suggerimenti fornitori fidati",
     service_consult_include_5: "Revisione contratti fornitori",
     service_consult_include_6: "Supporto via email tra le sessioni",
-    service_consult_how_label: "How it works",
+    service_consult_how_label: "Come funziona",
     service_consult_step_1: "Sessione iniziale per capire le esigenze",
     service_consult_step_2: "Definizione aree di supporto",
     service_consult_step_3: "Incontri on-demand quando necessario",
     service_consult_step_4: "Supporto continuativo via email",
 
-    services_page_cta_title: "Non sei sicura di quale servizio scegliere?",
+    services_page_cta_title: "Non sei sicurə di quale servizio scegliere?",
     services_page_cta_text:
       "Ogni matrimonio è unico. Scrivimi e troviamo insieme la soluzione perfetta per te.",
     services_page_cta_button: "Scrivimi",
@@ -522,7 +522,7 @@ export const translations = {
     about_hero_author: "Sara De Coppi",
     about_hero_role: "EVENT AND WEDDING CREATOR",
 
-    about_intro_label: "The story",
+    about_intro_label: "Sara De Coppi",
     about_intro_title: "Who I am",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
@@ -555,7 +555,7 @@ export const translations = {
     about_why_label: "The name",
     about_why_title: "Why",
     about_why_highlight: "BrightOlive",
-    about_why_text_1: "Bright Olive comes from two simple words.",
+    about_why_text_1: "BrightOlive comes from two simple words.",
     about_why_bright:
       "Bright, luminous. Like your wedding should be: full of light, real smiles, moments you remember.",
     about_why_olive:
@@ -902,7 +902,7 @@ export const translations = {
     about_hero_author: "Sara De Coppi",
     about_hero_role: "EVENT AND WEDDING CREATOR",
 
-    about_intro_label: "La historia",
+    about_intro_label: "Sara De Coppi",
     about_intro_title: "Quién soy",
     about_intro_name: "Sara De Coppi",
     about_intro_location: "Cison di Valmarino",
@@ -936,7 +936,7 @@ export const translations = {
     about_why_label: "El nombre",
     about_why_title: "Por qué",
     about_why_highlight: "BrightOlive",
-    about_why_text_1: "Bright Olive viene de dos palabras simples.",
+    about_why_text_1: "BrightOlive viene de dos palabras simples.",
     about_why_bright:
       "Bright, luminoso. Como debería ser tu boda: llena de luz, sonrisas reales, momentos que recuerdas.",
     about_why_olive:

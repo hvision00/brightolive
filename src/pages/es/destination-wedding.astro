@@ -91,9 +91,25 @@ const destinations = [
                 </h1>
 
                 <!-- Descrizione -->
-                <p class="text-lg md:text-xl font-light text-gray-600 leading-relaxed fade-in fade-in-delay-2">
+                <p class="text-lg md:text-xl font-light text-gray-600 leading-relaxed mb-10 fade-in fade-in-delay-2">
                     {t("dw_page_hero_text")}
                 </p>
+
+                <!-- Dropdown Destinazioni -->
+                <div class="fade-in fade-in-delay-3">
+                    <select 
+                        id="destination-select"
+                        class="w-full max-w-md mx-auto px-6 py-4 border border-primary/30 bg-white text-gray-900 font-light text-center appearance-none cursor-pointer focus:outline-none focus:border-primary transition-colors"
+                        onchange="if(this.value) window.location.href=this.value"
+                    >
+                        <option value="">Elige un destino</option>
+                        <option value="/es/destination-wedding/prosecco">Colinas del Prosecco</option>
+                        <option value="/es/destination-wedding/dolomiti">Dolomitas</option>
+                        <option value="/es/destination-wedding/venezia">Venecia</option>
+                        <option value="/es/destination-wedding/bassano">Bassano del Grappa</option>
+                        <option value="/es/destination-wedding/padova">Padua</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
