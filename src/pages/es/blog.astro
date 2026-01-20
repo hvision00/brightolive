@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getTranslation } from "../../i18n/translations";
+import { getPostsByLanguage } from "../../lib/wordpress";
 
 const lang = "es";
 const t = (key: any) => getTranslation(lang, key);
@@ -8,8 +9,8 @@ const t = (key: any) => getTranslation(lang, key);
 // Prefisso per i link
 const langPrefix = "/es";
 
-// Blog posts data (destination wedding articles)
-const blogPosts = [
+// Blog posts STATICI (destination wedding articles) - SEMPRE VISIBILI
+const staticBlogPosts = [
   {
     id: "prosecco",
     title: "Casarse en las Colinas del Prosecco",
@@ -19,6 +20,7 @@ const blogPosts = [
     category: t("blog_category_destination"),
     date: "2024-12-01",
     link: langPrefix + "/destination-wedding/prosecco",
+    isStatic: true,
   },
   {
     id: "dolomiti",
@@ -29,6 +31,7 @@ const blogPosts = [
     category: t("blog_category_destination"),
     date: "2024-11-28",
     link: langPrefix + "/destination-wedding/dolomiti",
+    isStatic: true,
   },
   {
     id: "venezia",
@@ -39,6 +42,7 @@ const blogPosts = [
     category: t("blog_category_destination"),
     date: "2024-11-25",
     link: langPrefix + "/destination-wedding/venezia",
+    isStatic: true,
   },
   {
     id: "bassano",
@@ -49,6 +53,7 @@ const blogPosts = [
     category: t("blog_category_destination"),
     date: "2024-11-20",
     link: langPrefix + "/destination-wedding/bassano",
+    isStatic: true,
   },
   {
     id: "padova",
@@ -59,8 +64,27 @@ const blogPosts = [
     category: t("blog_category_destination"),
     date: "2024-11-15",
     link: langPrefix + "/destination-wedding/padova",
+    isStatic: true,
   },
 ];
+
+// Recupera articoli DINAMICI da WordPress
+const wpPosts = await getPostsByLanguage("es", 50);
+
+// Trasforma i post WordPress nel formato del blog
+const dynamicBlogPosts = wpPosts.map((post) => ({
+  id: post.slug,
+  title: post.title,
+  excerpt: post.excerpt.replace(/<[^>]*>/g, ""), // Rimuovi HTML dall'excerpt
+  image: post.featuredImage?.node?.sourceUrl || "/destinations/venezia.jpg", // Fallback image
+  category: post.categories.nodes[0]?.name || t("blog_category_news"),
+  date: post.date,
+  link: langPrefix + "/blog/" + post.slug,
+  isStatic: false,
+}));
+
+// COMBINA: Prima gli articoli statici, poi quelli dinamici
+const blogPosts = [...staticBlogPosts, ...dynamicBlogPosts];
 ---
 
 <BaseLayout

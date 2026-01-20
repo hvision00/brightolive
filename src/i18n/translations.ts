@@ -353,7 +353,9 @@ export const translations = {
     blog_category_destination: "Destination wedding",
     blog_category_tips: "Consigli",
     blog_category_real_wedding: "Real wedding",
+    blog_category_news: "Novità",
     blog_no_posts: "Nessun articolo disponibile al momento.",
+    blog_back_to_blog: "Torna al Blog",
 
     // Contact Page
     contact_page_hero_label: "Contatti",
@@ -730,7 +732,9 @@ export const translations = {
     blog_category_destination: "Destination wedding",
     blog_category_tips: "Tips",
     blog_category_real_wedding: "Real wedding",
+    blog_category_news: "News",
     blog_no_posts: "No articles available at the moment.",
+    blog_back_to_blog: "Back to Blog",
 
     // Contact Page
     contact_page_hero_label: "Let's talk",
@@ -1113,7 +1117,9 @@ export const translations = {
     blog_category_destination: "Destination wedding",
     blog_category_tips: "Consejos",
     blog_category_real_wedding: "Real wedding",
+    blog_category_news: "Noticias",
     blog_no_posts: "No hay artículos disponibles en este momento.",
+    blog_back_to_blog: "Volver al Blog",
 
     // Contact Page
     contact_page_hero_label: "Hablemos",

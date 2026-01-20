@@ -2,65 +2,101 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
 
 interface Props {
-    title?: string;
-    description?: string;
-    currentPage?: string;
+  title?: string;
+  description?: string;
+  currentPage?: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
 }
 
-const { 
-    title = "BrightOlive", 
-    description = "Sito web BrightOlive",
-    currentPage = "/" 
+const {
+  title = "BrightOlive Wedding Planner - Matrimoni da Sogno nel Veneto",
+  description = "Wedding planner specializzati in destination wedding nel Veneto. Organizziamo matrimoni da sogno tra Venezia, Dolomiti, Colline del Prosecco e Ville Venete.",
+  currentPage = "/",
+  image,
+  type = "website",
+  noindex = false,
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="it">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={description} />
-        <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <head>
+    <!-- SEO & Open Graph Meta Tags -->
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      noindex={noindex}
+    />
 
-        <title>{title}</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>{title}</title>
 
-        <!-- Alpine.js -->
-        <script>
-            import Alpine from "alpinejs";
-            window.Alpine = Alpine;
-            Alpine.start();
-        </script>
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KXGVTR88");
+    </script>
+    <!-- End Google Tag Manager -->
 
-        <!-- Animazioni in entrata -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("is-visible");
-                            }
-                        });
-                    },
-                    {
-                        threshold: 0.1,
-                        rootMargin: "0px 0px -50px 0px",
-                    },
-                );
+    <!-- Alpine.js -->
+    <script>
+      import Alpine from "alpinejs";
+      window.Alpine = Alpine;
+      Alpine.start();
+    </script>
 
-                // Osserva tutti gli elementi con classe fade-in
-                document.querySelectorAll(".fade-in").forEach((el) => {
-                    observer.observe(el);
-                });
+    <!-- Animazioni in entrata -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+              }
             });
-        </script>
-    </head>
-    <body class="antialiased">
-        <Header currentPage={currentPage} />
-        <slot />
-        <Footer />
-    </body>
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          }
+        );
+
+        // Osserva tutti gli elementi con classe fade-in
+        document.querySelectorAll(".fade-in").forEach((el) => {
+          observer.observe(el);
+        });
+      });
+    </script>
+  </head>
+  <body class="antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KXGVTR88"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <Header currentPage={currentPage} />
+    <slot />
+    <Footer />
+  </body>
 </html>

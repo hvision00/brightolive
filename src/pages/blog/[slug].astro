@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getTranslation } from "../../i18n/translations";
+import { getPostBySlug, getAllPostSlugs } from "../../lib/wordpress";
+
+const lang = "it";
+const t = (key: any) => getTranslation(lang, key);
+const langPrefix = lang === "it" ? "" : `/${lang}`;
+
+// Per generare le pagine statiche al build
+export async function getStaticPaths() {
+  const allSlugs = await getAllPostSlugs();
+  
+  // Filtra solo gli articoli in italiano
+  const italianSlugs = allSlugs.filter((item) => item.lang === "it");
+  
+  return italianSlugs.map((item) => ({
+    params: { slug: item.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Recupera il post da WordPress
+const post = await getPostBySlug(slug!, "it");
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+
+// Formatta la data
+const formattedDate = new Date(post.date).toLocaleDateString("it-IT", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+// Categoria principale
+const mainCategory = post.categories.nodes[0]?.name || t("blog_category_news");
+---
+
+<BaseLayout
+  title={`${post.title} | BrightOlive Wedding Planner`}
+  description={post.excerpt.replace(/<[^>]*>/g, "").slice(0, 160)}
+>
+  <!-- Article Header -->
+  <article class="pt-32 pb-20 lg:pt-40 lg:pb-28">
+    <!-- Featured Image -->
+    {
+      post.featuredImage?.node?.sourceUrl && (
+        <div class="w-full h-[60vh] md:h-[70vh] overflow-hidden mb-12">
+          <img
+            src={post.featuredImage.node.sourceUrl}
+            alt={post.featuredImage.node.altText || post.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )
+    }
+
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-4xl mx-auto">
+        <!-- Breadcrumb & Category -->
+        <div class="flex items-center gap-4 mb-6 fade-in">
+          <a
+            href={langPrefix + "/blog"}
+            class="text-sm tracking-wider uppercase font-light text-gray-600 hover:text-primary transition-colors"
+          >
+            ← {t("blog_back_to_blog") || "Torna al Blog"}
+          </a>
+          <span class="text-gray-400">|</span>
+          <span
+            class="text-xs tracking-[0.4em] text-primary uppercase font-light"
+          >
+            {mainCategory}
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 leading-tight fade-in fade-in-delay-1"
+        >
+          {post.title}
+        </h1>
+
+        <!-- Date -->
+        <time
+          class="text-sm tracking-wider uppercase font-light text-gray-500 fade-in fade-in-delay-2"
+        >
+          {formattedDate}
+        </time>
+
+        <!-- Content -->
+        <div
+          class="prose prose-lg max-w-none mt-12 fade-in fade-in-delay-3"
+          set:html={post.content}
+        />
+
+        <!-- Share & Back Button -->
+        <div class="mt-16 pt-8 border-t border-gray-200">
+          <a
+            href={langPrefix + "/blog"}
+            class="inline-flex items-center group text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
+          >
+            <svg
+              class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+            </svg>
+            <span>{t("blog_back_to_blog") || "Torna al Blog"}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Styling for WordPress content -->
+  <style>
+    .prose {
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    .prose h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: #1f2937;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .prose h3 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #1f2937;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .prose p {
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .prose a {
+      color: #8b7355;
+      text-decoration: none;
+      border-bottom: 1px solid #8b7355;
+      transition: opacity 0.3s ease;
+    }
+
+    .prose a:hover {
+      opacity: 0.7;
+    }
+
+    .prose img {
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .prose ul,
+    .prose ol {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+    }
+
+    .prose li {
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+    }
+
+    .prose blockquote {
+      border-left: 4px solid #8b7355;
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+  </style>
+</BaseLayout>

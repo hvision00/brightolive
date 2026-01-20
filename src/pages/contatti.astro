@@ -7,8 +7,9 @@ const t = (key: any) => getTranslation(lang, key);
 ---
 
 <BaseLayout
-  title="Contatti | BrightOlive Wedding Planner Nord Italia"
-  description="Contatta BrightOlive per organizzare il tuo matrimonio da sogno nel Nord Italia. Consulenza gratuita e preventivo personalizzato entro 24 ore."
+  title="Contatti Wedding Planner Veneto | Preventivo Gratuito - BrightOlive"
+  description="📞 Contattaci per il tuo matrimonio! Consulenza gratuita, preventivo personalizzato in 24h. Wedding planner a Cison di Valmarino (TV). Chiamaci ora!"
+  image="/og-image.jpg"
 >
   <!-- Hero Section -->
   <section class="py-24 lg:py-32 bg-white">
@@ -57,7 +58,11 @@ const t = (key: any) => getTranslation(lang, key);
               {t("contact_form_title")}
             </h2>
 
-            <form action="https://formspree.io/f/xbddlryz" method="POST" class="space-y-6">
+            <form
+              action="https://formspree.io/f/xbddlryz"
+              method="POST"
+              class="space-y-6"
+            >
               <!-- Nome e Cognome -->
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
@@ -201,7 +206,13 @@ const t = (key: any) => getTranslation(lang, key);
                   for="privacy"
                   class="ml-3 text-xs font-light text-gray-600 leading-relaxed"
                 >
-                  {t("contact_form_privacy")} <a href="https://www.iubenda.com/privacy-policy/74634405" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Privacy Policy</a>. *
+                  {t("contact_form_privacy")}
+                  <a
+                    href="https://www.iubenda.com/privacy-policy/74634405"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary hover:underline">Privacy Policy</a
+                  >. *
                 </label>
               </div>
 
