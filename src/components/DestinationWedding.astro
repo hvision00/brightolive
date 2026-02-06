@@ -1,65 +1,49 @@
 ---
 // Sezione Destination Wedding Elegante
 // Layout alternato magazine-style completamente diverso
-import { getTranslation, type Language } from "../i18n/translations";
+// AGGIORNATO: Ora legge i dati da Sanity CMS
+
+import { getLocalized, getLocalizedArray, getImageUrl, type Language, type HomePage, type Destination } from "../lib/sanity";
 
 interface Props {
     lang?: Language;
+    data?: HomePage | null; // Dati header/CTA
+    destinations?: Destination[]; // Lista destinazioni
 }
 
-const { lang = "it" } = Astro.props;
-const t = (key: any) => getTranslation(lang, key);
+const { lang = "it", data, destinations = [] } = Astro.props;
 
 // Prefisso per i link
 const langPrefix = lang === "it" ? "" : `/${lang}`;
 
-const destinations = [
-    {
-        number: "01",
-        nameKey: "destination_prosecco_name",
-        subtitleKey: "destination_prosecco_subtitle",
-        descriptionKey: "destination_prosecco_description",
-        image: "/destinations/prosecco.jpg",
-        detailsKey: "destination_prosecco_details",
-        articleLink: "/destination-wedding/prosecco",
-    },
-    {
-        number: "02",
-        nameKey: "destination_dolomiti_name",
-        subtitleKey: "destination_dolomiti_subtitle",
-        descriptionKey: "destination_dolomiti_description",
-        image: "/destinations/dolomiti.jpg",
-        detailsKey: "destination_dolomiti_details",
-        articleLink: "/destination-wedding/dolomiti",
-    },
-    {
-        number: "03",
-        nameKey: "destination_venezia_name",
-        subtitleKey: "destination_venezia_subtitle",
-        descriptionKey: "destination_venezia_description",
-        image: "/destinations/venezia.jpg",
-        detailsKey: "destination_venezia_details",
-        articleLink: "/destination-wedding/venezia",
-    },
-    {
-        number: "04",
-        nameKey: "destination_bassano_name",
-        subtitleKey: "destination_bassano_subtitle",
-        descriptionKey: "destination_bassano_description",
-        image: "/destinations/bassano.jpg",
-        detailsKey: "destination_bassano_details",
-        articleLink: "/destination-wedding/bassano",
-    },
-    {
-        number: "05",
-        nameKey: "destination_padova_name",
-        subtitleKey: "destination_padova_subtitle",
-        descriptionKey: "destination_padova_description",
-        image: "/destinations/padova.jpg",
-        detailsKey: "destination_padova_details",
-        articleLink: "/destination-wedding/padova",
-    },
-];
+// Helper per ottenere testo localizzato con fallback
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Testi header - usa i fallback (i testi completi sono gestiti dalle pagine destination-wedding)
+const destinationsLabel = "Le nostre location";
+const destinationsTitle1 = "Destination wedding";
+const destinationsTitle2 = "nel nord Italia";
+const destinationsDescription = "Ogni location è stata selezionata per la sua unicità, eleganza e capacità di creare momenti indimenticabili.";
+const destinationsCta = "Scopri di più";
+const destinationsFinalText = "Non hai trovato la location perfetta? Scrivimi.";
+const destinationsFinalCta = "Contattami";
+
+// Prepara le destinazioni per il template
+const preparedDestinations = destinations.map((dest, index) => {
+    const imageSource = dest.cardImage || dest.heroImage;
+    return {
+        number: (index + 1).toString().padStart(2, "0"),
+        name: getText(dest.name, ""),
+        subtitle: getText(dest.subtitle, ""),
+        description: getText(dest.shortDescription, ""),
+        details: Array.isArray(dest.details) ? getLocalizedArray(dest.details, lang) : [],
+        image: imageSource ? getImageUrl(imageSource, 1200) : "",
+        slug: dest.slug?.current || "",
+    };
+});
 ---
 
 <section class="py-24 lg:py-32 bg-white">
@@ -71,24 +55,24 @@ const destinations = [
                 <span
                     class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
                 >
-                    {t("destinations_label")}
+                    {destinationsLabel}
                 </span>
             </div>
             <h2
                 class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight"
             >
-                {t("destinations_title_1")} <br />
-                <span class="text-primary italic">{t("destinations_title_2")}</span>
+                {destinationsTitle1} <br />
+                <span class="text-primary italic">{destinationsTitle2}</span>
             </h2>
             <p class="text-lg font-light text-gray-600 leading-relaxed">
-                {t("destinations_description")}
+                {destinationsDescription}
             </p>
         </div>
 
         <!-- Destinations List - Layout Alternato -->
         <div class="space-y-24 lg:space-y-32">
             {
-                destinations.map((destination, index) => (
+                preparedDestinations.map((destination, index) => (
                     <div
                         class={`fade-in fade-in-delay-${Math.min(index + 1, 5)}`}
                     >
@@ -108,7 +92,7 @@ const destinations = [
                                 <div class="relative h-[60vh] lg:h-[70vh] overflow-hidden">
                                     <img
                                         src={destination.image}
-                                        alt={t(destination.nameKey)}
+                                        alt={destination.name}
                                         class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                                     />
                                     <!-- Overlay gradient -->
@@ -145,12 +129,12 @@ const destinations = [
 
                                 <!-- Nome location -->
                                 <h3 class="text-4xl md:text-5xl font-light text-gray-900 mb-3">
-                                    {t(destination.nameKey)}
+                                    {destination.name}
                                 </h3>
 
                                 <!-- Subtitle -->
                                 <p class="text-lg font-light text-primary mb-6 italic">
-                                    {t(destination.subtitleKey)}
+                                    {destination.subtitle}
                                 </p>
 
                                 <!-- Separatore -->
@@ -162,26 +146,26 @@ const destinations = [
 
                                 <!-- Descrizione -->
                                 <p class="text-base font-light text-gray-600 leading-relaxed mb-6">
-                                    {t(destination.descriptionKey)}
+                                    {destination.description}
                                 </p>
 
                                 <!-- Dettagli -->
-                                <div class="flex flex-wrap gap-2 mb-8">
-                                    {t(destination.detailsKey)
-                                        .split(" • ")
-                                        .map((detail: string) => (
+                                {destination.details && destination.details.length > 0 && (
+                                    <div class="flex flex-wrap gap-2 mb-8">
+                                        {destination.details.map((detail: string) => (
                                             <span class="text-xs tracking-wider uppercase text-gray-500 font-light px-3 py-1 border border-gray-200">
                                                 {detail}
                                             </span>
                                         ))}
-                                </div>
+                                    </div>
+                                )}
 
                                 <!-- Link elegante -->
                                 <a
-                                    href={destination.articleLink || "/contatti"}
+                                    href={destination.slug ? `${langPrefix}/destination-wedding/${destination.slug}` : `${langPrefix}/contatti`}
                                     class="inline-flex items-center group text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
                                 >
-                                    <span>{destination.articleLink ? t("destinations_cta") : t("destinations_final_cta")}</span>
+                                    <span>{destination.slug ? destinationsCta : destinationsFinalCta}</span>
                                     <svg
                                         class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
                                         fill="none"
@@ -213,13 +197,13 @@ const destinations = [
                 <div class="w-16 h-px bg-primary"></div>
             </div>
             <p class="text-xl font-light text-gray-600 leading-relaxed mb-8">
-                {t("destinations_final_text")}
+                {destinationsFinalText}
             </p>
             <a
                 href={langPrefix + "/contatti"}
                 class="inline-flex items-center justify-center px-10 py-4 border border-primary text-primary text-sm font-light tracking-wider uppercase hover:bg-primary hover:text-white transition-all duration-300"
             >
-                {t("destinations_final_cta")}
+                {destinationsFinalCta}
             </a>
         </div>
     </div>

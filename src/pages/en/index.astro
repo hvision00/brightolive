@@ -5,15 +5,28 @@ import DestinationWedding from "../../components/DestinationWedding.astro";
 import Services from "../../components/Services.astro";
 import ImpactSection from "../../components/ImpactSection.astro";
 import ContactForm from "../../components/ContactForm.astro";
+
+// Fetch dati da Sanity
+import { getHomePageData, getSiteSettings, getLocalized } from "../../lib/sanity";
+
+const lang = "en";
+
+// Fetch tutti i dati necessari per la homepage
+const { homePage, destinations, services } = await getHomePageData();
+const siteSettings = await getSiteSettings();
+
+// SEO da Sanity con fallback
+const seoTitle = getLocalized(siteSettings?.defaultSeoTitle, lang) || "BrightOlive - Wedding Planner Northern Italy";
+const seoDescription = getLocalized(siteSettings?.defaultSeoDescription, lang) || "Wedding planner with elegant and refined style for unforgettable weddings in Northern Italy";
 ---
 
 <BaseLayout
-    title="BrightOlive - Wedding Planner Northern Italy"
-    description="Wedding planner with elegant and refined style for unforgettable weddings in Northern Italy"
+    title={seoTitle}
+    description={seoDescription}
 >
-    <HeroSlider lang="en" />
-    <DestinationWedding lang="en" />
-    <Services lang="en" />
-    <ImpactSection lang="en" />
-    <ContactForm lang="en" />
+    <HeroSlider lang={lang} data={homePage} />
+    <DestinationWedding lang={lang} data={homePage} destinations={destinations} />
+    <Services lang={lang} data={homePage} services={services} />
+    <ImpactSection lang={lang} data={homePage} />
+    <ContactForm lang={lang} />
 </BaseLayout>

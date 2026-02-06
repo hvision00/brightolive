@@ -5,16 +5,29 @@ import DestinationWedding from "../components/DestinationWedding.astro";
 import Services from "../components/Services.astro";
 import ImpactSection from "../components/ImpactSection.astro";
 import ContactForm from "../components/ContactForm.astro";
+
+// NUOVO: Fetch dati da Sanity
+import { getHomePageData, getSiteSettings, getLocalized } from "../lib/sanity";
+
+const lang = "it";
+
+// Fetch tutti i dati necessari per la homepage
+const { homePage, destinations, services } = await getHomePageData();
+const siteSettings = await getSiteSettings();
+
+// SEO da Sanity con fallback
+const seoTitle = getLocalized(siteSettings?.defaultSeoTitle, lang) || "Wedding Planner Veneto | Destination Wedding Italia - BrightOlive";
+const seoDescription = getLocalized(siteSettings?.defaultSeoDescription, lang) || "✨ Wedding Planner specializzati in matrimoni da sogno nel Veneto. Destination wedding a Venezia, Dolomiti, Colline del Prosecco e Ville Venete.";
 ---
 
 <BaseLayout
-  title="Wedding Planner Veneto | Destination Wedding Italia - BrightOlive"
-  description="✨ Wedding Planner specializzati in matrimoni da sogno nel Veneto. Destination wedding a Venezia, Dolomiti, Colline del Prosecco e Ville Venete. Contattaci per un preventivo!"
+  title={seoTitle}
+  description={seoDescription}
   image="/og-image.jpg"
 >
-  <HeroSlider lang="it" />
-  <DestinationWedding lang="it" />
-  <Services lang="it" />
-  <ImpactSection lang="it" />
-  <ContactForm lang="it" />
+  <HeroSlider lang={lang} data={homePage} />
+  <DestinationWedding lang={lang} data={homePage} destinations={destinations} />
+  <Services lang={lang} data={homePage} services={services} />
+  <ImpactSection lang={lang} data={homePage} />
+  <ContactForm lang={lang} />
 </BaseLayout>

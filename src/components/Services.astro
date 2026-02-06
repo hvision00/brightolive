@@ -1,60 +1,56 @@
 ---
 // Sezione Servizi Elegante
 // Layout verticale con cards grandi e raffinate
+// AGGIORNATO: Ora legge i dati da Sanity CMS
+
 import { Icon } from "astro-icon/components";
-import { getTranslation, type Language } from "../i18n/translations";
+import { getLocalized, getLocalizedArray, type Language, type HomePage, type Service } from "../lib/sanity";
 
 interface Props {
     lang?: Language;
+    data?: HomePage | null; // Dati header/CTA
+    services?: Service[]; // Lista servizi
 }
 
-const { lang = "it" } = Astro.props;
-const t = (key: any) => getTranslation(lang, key);
+const { lang = "it", data, services = [] } = Astro.props;
 
 // Prefisso per i link
 const langPrefix = lang === "it" ? "" : `/${lang}`;
 
-const services = [
-    {
-        number: "01",
-        icon: "lucide:calendar",
-        titleKey: "service_1_title",
-        subtitleKey: "service_1_subtitle",
-        descriptionKey: "service_1_description",
-        featuresKeys: [
-            "service_1_feature_1",
-            "service_1_feature_2",
-            "service_1_feature_3",
-            "service_1_feature_4",
-        ],
-    },
-    {
-        number: "02",
-        icon: "lucide:sparkles",
-        titleKey: "service_2_title",
-        subtitleKey: "service_2_subtitle",
-        descriptionKey: "service_2_description",
-        featuresKeys: [
-            "service_2_feature_1",
-            "service_2_feature_2",
-            "service_2_feature_3",
-            "service_2_feature_4",
-        ],
-    },
-    {
-        number: "03",
-        icon: "lucide:message-circle",
-        titleKey: "service_3_title",
-        subtitleKey: "service_3_subtitle",
-        descriptionKey: "service_3_description",
-        featuresKeys: [
-            "service_3_feature_1",
-            "service_3_feature_2",
-            "service_3_feature_3",
-            "service_3_feature_4",
-        ],
-    },
-];
+// Helper per ottenere testo localizzato con fallback
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Testi header - da Sanity con fallback
+const servicesLabel = getText(data?.servicesLabel, "I nostri servizi");
+const servicesTitle1 = getText(data?.servicesTitle1, "Soluzioni");
+const servicesTitle2 = getText(data?.servicesTitle2, "Raffinate");
+const servicesTitle3 = getText(data?.servicesTitle3, "per ogni esigenza");
+const servicesDescription = getText(data?.servicesDescription, "Ogni servizio è personalizzato per riflettere la tua visione e creare un'esperienza unica e memorabile.");
+const servicesCta = getText(data?.servicesCta, "Richiedi informazioni");
+const servicesFinalTitle = getText(data?.servicesFinalTitle, "Hai bisogno di un servizio personalizzato?");
+const servicesFinalDescription = getText(data?.servicesFinalDescription, "Ogni matrimonio è unico. Creiamo insieme un pacchetto su misura per le tue esigenze specifiche.");
+const servicesFinalCta = getText(data?.servicesFinalCta, "Scrivimi");
+
+// Mapping icone basate sul numero del servizio
+const iconMap: Record<string, string> = {
+    "01": "lucide:calendar",
+    "02": "lucide:sparkles",
+    "03": "lucide:message-circle",
+};
+
+// Prepara i servizi per il template
+const preparedServices = services.map((service) => ({
+    number: service.number || "01",
+    icon: iconMap[service.number || "01"] || "lucide:sparkles",
+    title: getText(service.name, ""),
+    subtitle: getText(service.tagline, ""),
+    description: getText(service.intro, ""),
+    features: getLocalizedArray(service.includes, lang),
+    slug: service.slug?.current || "",
+}));
 ---
 
 <section class="py-24 lg:py-32 bg-neutral">
@@ -66,24 +62,24 @@ const services = [
                 <span
                     class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
                 >
-                    {t("services_label")}
+                    {servicesLabel}
                 </span>
             </div>
             <h2
                 class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight"
             >
-                {t("services_title_1")} <span class="text-primary italic">{t("services_title_2")}</span>
-                <br />{t("services_title_3")}
+                {servicesTitle1} <span class="text-primary italic">{servicesTitle2}</span>
+                <br />{servicesTitle3}
             </h2>
             <p class="text-lg font-light text-gray-600 leading-relaxed">
-                {t("services_description")}
+                {servicesDescription}
             </p>
         </div>
 
         <!-- Services List - Layout Verticale Elegante -->
         <div class="max-w-5xl mx-auto space-y-16 lg:space-y-24">
             {
-                services.map((service, index) => (
+                preparedServices.map((service, index) => (
                     <div
                         class={`fade-in fade-in-delay-${index + 1} group`}
                     >
@@ -121,10 +117,10 @@ const services = [
                                 <!-- Titolo e Subtitle -->
                                 <div class="mb-6">
                                     <h3 class="text-3xl md:text-4xl font-light text-gray-900 mb-2">
-                                        {t(service.titleKey)}
+                                        {service.title}
                                     </h3>
                                     <p class="text-lg font-light text-primary italic">
-                                        {t(service.subtitleKey)}
+                                        {service.subtitle}
                                     </p>
                                 </div>
 
@@ -137,29 +133,31 @@ const services = [
 
                                 <!-- Descrizione -->
                                 <p class="text-base font-light text-gray-600 leading-relaxed mb-8">
-                                    {t(service.descriptionKey)}
+                                    {service.description}
                                 </p>
 
                                 <!-- Features List -->
-                                <div class="space-y-4 mb-8">
-                                    {service.featuresKeys.map((featureKey: string) => (
-                                        <div class="flex items-start">
-                                            <div class="shrink-0 w-6 h-6 flex items-center justify-center">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-primary" />
+                                {service.features.length > 0 && (
+                                    <div class="space-y-4 mb-8">
+                                        {service.features.map((feature: string) => (
+                                            <div class="flex items-start">
+                                                <div class="shrink-0 w-6 h-6 flex items-center justify-center">
+                                                    <div class="w-1.5 h-1.5 rounded-full bg-primary" />
+                                                </div>
+                                                <span class="text-sm font-light text-gray-600 ml-3">
+                                                    {feature}
+                                                </span>
                                             </div>
-                                            <span class="text-sm font-light text-gray-600 ml-3">
-                                                {t(featureKey)}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
+                                )}
 
                                 <!-- Link elegante -->
                                 <a
-                                    href={langPrefix + "/contatti"}
+                                    href={service.slug ? `${langPrefix}/servizi/${service.slug}` : `${langPrefix}/contatti`}
                                     class="inline-flex items-center group/link text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
                                 >
-                                    <span>{t("services_cta")}</span>
+                                    <span>{servicesCta}</span>
                                     <svg
                                         class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300"
                                         fill="none"
@@ -178,7 +176,7 @@ const services = [
                         </div>
 
                         <!-- Separatore tra servizi -->
-                        {index < services.length - 1 && (
+                        {index < preparedServices.length - 1 && (
                             <div class="mt-16 lg:mt-24 flex items-center justify-center">
                                 <div class="w-24 h-px bg-primary/30" />
                                 <div class="mx-4 w-1.5 h-1.5 rounded-full bg-primary/30" />
@@ -202,17 +200,17 @@ const services = [
                 <h3
                     class="text-2xl md:text-3xl font-light text-gray-900 mb-4"
                 >
-                    {t("services_final_title")}
+                    {servicesFinalTitle}
                 </h3>
                 <p class="text-base font-light text-gray-600 mb-8 leading-relaxed">
-                    {t("services_final_description")}
+                    {servicesFinalDescription}
                 </p>
 
                 <a
                     href={langPrefix + "/contatti"}
                     class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
                 >
-                    {t("services_final_cta")}
+                    {servicesFinalCta}
                 </a>
             </div>
         </div>

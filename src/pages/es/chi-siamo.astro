@@ -1,12 +1,54 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getTranslation } from "../../i18n/translations";
+import { getAboutPage, getLocalized, getLocalizedArray, getImageUrl, type Language } from "../../lib/sanity";
 
-const lang = "es";
-const t = (key: any) => getTranslation(lang, key);
+const lang: Language = "es";
+
+// Fetch dati da Sanity
+const aboutPage = await getAboutPage();
 
 // Prefisso per i link
 const langPrefix = "/es";
+
+// Helper e dati
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+const heroQuote = getText(aboutPage?.heroQuote, "Detrás de cada gran boda, hay alguien mirando el reloj mientras todos los demás se divierten.");
+const heroAuthor = aboutPage?.heroAuthor || "Sara De Coppi";
+const heroRole = aboutPage?.heroRole || "EVENT AND WEDDING CREATOR";
+const introLabel = getText(aboutPage?.introLabel, "Sara De Coppi");
+const introTitle = getText(aboutPage?.introTitle, "Quién soy");
+const introName = aboutPage?.introName || "Sara De Coppi";
+const introLocation = aboutPage?.introLocation || "Cison di Valmarino";
+const introTexts = getLocalizedArray(aboutPage?.introTexts, lang);
+const introText1 = introTexts[0] || "Mi historia comienza en el corazón de las colinas de Prosecco...";
+const introText2 = introTexts[1] || "Cada día construyo emociones...";
+const introText3 = introTexts[2] || "Creo que cada pareja es única...";
+const introText4 = introTexts[3] || "Planificar una boda en Italia...";
+const introImageUrl = getImageUrl(aboutPage?.introImage, 600);
+const missionLabel = getText(aboutPage?.missionLabel, "La misión");
+const missionTitle = getText(aboutPage?.missionTitle, "Qué hago por ti");
+const missionPoints = getLocalizedArray(aboutPage?.missionPoints, lang);
+const missions = missionPoints.length > 0 ? missionPoints : ["Apoyo para bodas en Italia", "Ayudar a las parejas", "Transformar el desorden en armonía", "Aportar ligereza"];
+const styleLabel = getText(aboutPage?.styleLabel, "Mi enfoque");
+const styleTitle = getText(aboutPage?.styleTitle, "Un estilo que cuenta");
+const styleSubtitle = getText(aboutPage?.styleSubtitle, "Autenticidad");
+const styleText1 = getText(aboutPage?.styleText1);
+const styleText2 = getText(aboutPage?.styleText2);
+const styleKeywords = getText(aboutPage?.styleKeywords, "Boho-chic • Vintage • Naturaleza • Autenticidad");
+const whyLabel = getText(aboutPage?.whyLabel, "El nombre");
+const whyTitle = getText(aboutPage?.whyTitle, "Por qué");
+const whyHighlight = aboutPage?.whyHighlight || "BrightOlive";
+const whyText1 = getText(aboutPage?.whyText1);
+const whyBright = getText(aboutPage?.whyBright);
+const whyOlive = getText(aboutPage?.whyOlive);
+const whyConclusion = getText(aboutPage?.whyConclusion);
+const ctaTitle = getText(aboutPage?.ctaTitle, "¿Quieres conocerme mejor?");
+const ctaText = getText(aboutPage?.ctaText);
+const ctaButton = getText(aboutPage?.ctaButton, "Contáctame");
 ---
 
 <BaseLayout
@@ -48,7 +90,7 @@ const langPrefix = "/es";
         <blockquote
           class="text-2xl md:text-3xl lg:text-4xl font-light text-gray-900 leading-relaxed mb-8 fade-in fade-in-delay-1"
         >
-          {t("about_hero_quote")}
+          {heroQuote}
         </blockquote>
         <div
           class="flex items-center justify-center mb-6 fade-in fade-in-delay-2"
@@ -59,12 +101,12 @@ const langPrefix = "/es";
         </div>
         <div class="fade-in fade-in-delay-3">
           <p class="text-lg font-light text-gray-900">
-            {t("about_hero_author")}
+            {heroAuthor}
           </p>
           <p
             class="text-sm tracking-[0.3em] uppercase text-gray-500 font-light mt-1"
           >
-            {t("about_hero_role")}
+            {heroRole}
           </p>
         </div>
       </div>
@@ -79,21 +121,21 @@ const langPrefix = "/es";
             <div class="w-16 h-px bg-primary"></div>
             <span
               class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
-              >{t("about_intro_label")}</span
+              >{introLabel}</span
             >
           </div>
           <h2
             class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-8 leading-tight"
           >
-            {t("about_intro_title")}
+            {introTitle}
           </h2>
           <div
             class="space-y-6 text-base md:text-lg font-light text-gray-600 leading-relaxed"
           >
-            <p class="text-gray-900 font-normal">{t("about_intro_text_1")}</p>
-            <p>{t("about_intro_text_2")}</p>
-            <p>{t("about_intro_text_3")}</p>
-            <p class="text-primary italic">{t("about_intro_text_4")}</p>
+            <p class="text-gray-900 font-normal">{introText1}</p>
+            <p>{introText2}</p>
+            <p>{introText3}</p>
+            <p class="text-primary italic">{introText4}</p>
           </div>
           <div class="mt-8 pt-8 border-t border-gray-200">
             <div class="flex items-center space-x-4">
@@ -126,7 +168,7 @@ const langPrefix = "/es";
                   Based in
                 </p>
                 <p class="text-base font-normal text-gray-900">
-                  {t("about_intro_location")}
+                  {introLocation}
                 </p>
               </div>
             </div>
@@ -171,22 +213,17 @@ const langPrefix = "/es";
           <div class="w-16 h-px bg-primary"></div>
           <span
             class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
-            >{t("about_mission_label")}</span
+              >{missionLabel}</span
           >
           <div class="w-16 h-px bg-primary"></div>
         </div>
         <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-          {t("about_mission_title")}
+          {missionTitle}
         </h2>
       </div>
       <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {
-          [
-            t("about_mission_1"),
-            t("about_mission_2"),
-            t("about_mission_3"),
-            t("about_mission_4"),
-          ].map((mission, index) => (
+          missions.map((mission, index) => (
             <div
               class={`bg-white p-8 lg:p-10 fade-in fade-in-delay-${index + 1}`}
             >
@@ -224,14 +261,14 @@ const langPrefix = "/es";
             <div class="w-16 h-px bg-primary"></div>
             <span
               class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
-              >{t("about_style_label")}</span
+              >{styleLabel}</span
             >
           </div>
           <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-            {t("about_style_title")}
+            {styleTitle}
           </h2>
           <p class="text-xl font-light text-primary italic mb-8">
-            {t("about_style_subtitle")}
+            {styleSubtitle}
           </p>
           <div class="flex items-center mb-8">
             <div class="w-12 h-px bg-primary"></div>
@@ -241,12 +278,12 @@ const langPrefix = "/es";
           <div
             class="space-y-6 text-base md:text-lg font-light text-gray-600 leading-relaxed mb-8"
           >
-            <p>{t("about_style_text_1")}</p>
-            <p>{t("about_style_text_2")}</p>
+            <p>{styleText1}</p>
+            <p>{styleText2}</p>
           </div>
           <div class="flex flex-wrap gap-3">
             {
-              t("about_style_keywords")
+              styleKeywords
                 .split(" • ")
                 .map((keyword: string) => (
                   <span class="px-4 py-2 border border-primary/30 text-sm font-light text-gray-700 tracking-wide">
@@ -285,31 +322,31 @@ const langPrefix = "/es";
         <div class="flex items-center justify-center mb-6 fade-in">
           <div class="w-16 h-px bg-white/40"></div>
           <span class="mx-4 text-xs tracking-[0.4em] uppercase font-light"
-            >{t("about_why_label")}</span
+              >{whyLabel}</span
           >
           <div class="w-16 h-px bg-white/40"></div>
         </div>
         <h2
           class="text-4xl md:text-5xl lg:text-6xl font-light text-center mb-12 fade-in fade-in-delay-1"
         >
-          {t("about_why_title")}
-          <span class="italic font-normal">{t("about_why_highlight")}</span>
+          {whyTitle}
+          <span class="italic font-normal">{whyHighlight}</span>
         </h2>
         <div
           class="space-y-8 text-lg md:text-xl font-light leading-relaxed fade-in fade-in-delay-2"
         >
-          <p>{t("about_why_text_1")}</p>
+          <p>{whyText1}</p>
           <div class="pl-6 border-l-2 border-white/30">
             <p class="mb-4">
               <strong class="font-normal">Bright</strong>
-              {t("about_why_bright").replace("Bright ", "")}
+              {whyBright.replace(/^Bright,?\s*/i, "")}
             </p>
             <p>
               <strong class="font-normal">Olive</strong>
-              {t("about_why_olive").replace("Olive ", "")}
+              {whyOlive.replace(/^Oliv[eo],?\s*/i, "")}
             </p>
           </div>
-          <p class="text-center italic">{t("about_why_conclusion")}</p>
+          <p class="text-center italic">{whyConclusion}</p>
         </div>
       </div>
     </div>
@@ -324,16 +361,16 @@ const langPrefix = "/es";
           <div class="w-16 h-px bg-primary"></div>
         </div>
         <h2 class="text-3xl md:text-4xl font-light text-gray-900 mb-6">
-          {t("about_cta_title")}
+          {ctaTitle}
         </h2>
         <p class="text-lg font-light text-gray-600 leading-relaxed mb-8">
-          {t("about_cta_text")}
+          {ctaText}
         </p>
         <a
           href={langPrefix + "/contatti"}
           class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
         >
-          {t("about_cta_button")}
+          {ctaButton}
         </a>
       </div>
     </div>

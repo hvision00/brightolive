@@ -1,0 +1,422 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { getDestinations, getDestinationBySlug, getLocalized, getLocalizedArray, getImageUrl, type Language } from "../../../lib/sanity";
+
+export async function getStaticPaths() {
+  const destinations = await getDestinations();
+  return destinations.map((dest) => ({
+    params: { slug: dest.slug.current },
+  }));
+}
+
+const { slug } = Astro.params;
+const lang: Language = "en";
+const dest = await getDestinationBySlug(slug!);
+
+if (!dest) {
+  return Astro.redirect("/404");
+}
+
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Card data (per listing - non usato qui)
+const name = getText(dest.name, "Destinazione");
+const subtitle = getText(dest.subtitle, "");
+const shortDescription = getText(dest.shortDescription, "");
+
+// Hero
+const heroImage = getImageUrl(dest.heroImage, 1920);
+const heroLabel = getText(dest.heroLabel, "");
+const heroIntro = getText(dest.heroIntro, "");
+
+// Intro
+const introQuote = getText(dest.introQuote, "");
+const introCards = dest.introCards?.map(card => ({
+  value: getText(card.cardValue, ""),
+  label: getText(card.cardLabel, ""),
+})) || [];
+const introText = getText(dest.introText, "");
+
+// Section 01
+const section01Label = getText(dest.section01Label, "");
+const section01Title = getText(dest.section01Title, "");
+const section01Text = getText(dest.section01Text, "");
+const section01BoxTitle = getText(dest.section01BoxTitle, "");
+const section01BoxPoints = getLocalizedArray(dest.section01BoxPoints, lang);
+
+// Section 02
+const section02Label = getText(dest.section02Label, "");
+const section02Title = getText(dest.section02Title, "");
+const section02Intro = getText(dest.section02Intro, "");
+const section02Highlight = getText(dest.section02Highlight, "");
+const section02Cards = dest.section02Cards?.map(card => ({
+  icon: card.cardIcon,
+  title: getText(card.cardTitle, ""),
+  text: getText(card.cardText, ""),
+  tags: getLocalizedArray(card.cardTags, lang),
+})) || [];
+
+// Section 03
+const section03Label = getText(dest.section03Label, "");
+const section03Title = getText(dest.section03Title, "");
+const section03Intro = getText(dest.section03Intro, "");
+const section03Items = dest.section03Items?.map(item => ({
+  icon: item.itemIcon,
+  title: getText(item.itemTitle, ""),
+  subtitle: getText(item.itemSubtitle, ""),
+})) || [];
+
+// Section 04
+const section04Label = getText(dest.section04Label, "");
+const section04Title = getText(dest.section04Title, "");
+const section04Text = getText(dest.section04Text, "");
+const section04Quote = getText(dest.section04Quote, "");
+const section04Tags = getLocalizedArray(dest.section04Tags, lang);
+
+const langPrefix = "/en";
+---
+
+<BaseLayout
+  title={`${name} | Destination Wedding BrightOlive`}
+  description={shortDescription || subtitle}
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[70vh] flex items-end overflow-hidden">
+    {heroImage && (
+      <div class="absolute inset-0">
+        <img
+          src={heroImage}
+          alt={name}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
+      </div>
+    )}
+
+    <div class="container mx-auto px-8 lg:px-16 relative pb-16 lg:pb-24">
+      <div class="max-w-4xl">
+        <div class="flex items-center mb-6 fade-in">
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="text-white/70 text-sm font-light hover:text-white transition-colors"
+          >
+            Destination wedding
+          </a>
+          <span class="mx-3 text-white/50">→</span>
+          <span class="text-white text-sm font-light">{name}</span>
+        </div>
+
+        {heroLabel && (
+          <div class="flex items-center mb-4 fade-in fade-in-delay-1">
+            <div class="w-12 h-px bg-white/50"></div>
+            <span class="ml-4 text-xs tracking-[0.4em] text-white/80 uppercase font-light">
+              {heroLabel}
+            </span>
+          </div>
+        )}
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 leading-tight fade-in fade-in-delay-2">
+          <Fragment set:html={name.replace(/\n/g, '<br />')} />
+        </h1>
+
+        {heroIntro && (
+          <p class="text-lg md:text-xl font-light text-white/90 leading-relaxed max-w-2xl fade-in fade-in-delay-3">
+            {heroIntro}
+          </p>
+        )}
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center fade-in fade-in-delay-4">
+      <div class="text-xs tracking-[0.3em] text-white/60 uppercase mb-3">
+        Discover
+      </div>
+      <div class="w-px h-12 bg-white/30 relative overflow-hidden">
+        <div class="absolute top-0 w-full h-8 bg-white/80 animate-scroll"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  {(introQuote || introCards.length > 0 || introText) && (
+    <section class="py-20 lg:py-28 bg-white">
+      <div class="container mx-auto px-8 lg:px-16">
+        <div class="max-w-4xl mx-auto">
+          {introQuote && (
+            <div class="text-center mb-16 fade-in">
+              <div class="text-[80px] font-serif text-primary/10 leading-none mb-[-20px]">"</div>
+              <blockquote class="text-2xl md:text-3xl font-light text-gray-900 leading-relaxed italic">
+                {introQuote}
+              </blockquote>
+            </div>
+          )}
+
+          {introCards.length > 0 && (
+            <div class="grid md:grid-cols-3 gap-6 mb-16 fade-in fade-in-delay-1">
+              {introCards.map(card => (
+                <div class="text-center p-6 bg-neutral">
+                  <div class="text-4xl font-light text-primary mb-2">{card.value}</div>
+                  <p class="text-sm font-light text-gray-600">{card.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {introText && (
+            <div class="prose prose-lg max-w-none fade-in fade-in-delay-2">
+              <p class="text-lg font-light text-gray-700 leading-relaxed whitespace-pre-line">
+                {introText}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 01 -->
+  {section01Title && (
+    <section class="py-20 lg:py-28 bg-neutral relative overflow-hidden">
+      <div class="container mx-auto px-8 lg:px-16 relative">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div class="lg:col-span-6 fade-in">
+            <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]">01</div>
+
+            {section01Label && (
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-px bg-primary"></div>
+                <span class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                  {section01Label}
+                </span>
+              </div>
+            )}
+
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight">
+              <Fragment set:html={section01Title.replace(/\n/g, '<br />')} />
+            </h2>
+
+            {section01Text && (
+              <div class="text-base font-light text-gray-700 leading-relaxed whitespace-pre-line">
+                {section01Text}
+              </div>
+            )}
+          </div>
+
+          {section01BoxTitle && (
+            <div class="lg:col-span-6 fade-in fade-in-delay-1">
+              <div class="relative">
+                <div class="bg-primary p-8 lg:p-12 text-white">
+                  <Icon name={dest.section01BoxIcon || "lucide:grape"} class="w-12 h-12 mb-6 text-accent" />
+                  <h3 class="text-2xl font-light mb-4">{section01BoxTitle}</h3>
+                  <ul class="space-y-3 text-white/90 font-light">
+                    {section01BoxPoints.map(point => (
+                      <li class="flex items-start">
+                        <Icon name="lucide:check" class="w-4 h-4 mr-3 mt-1 text-accent shrink-0" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary/20 -z-10"></div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 02 -->
+  {section02Title && (
+    <section class="py-20 lg:py-28 bg-white">
+      <div class="container mx-auto px-8 lg:px-16">
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+          <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]">02</div>
+          {section02Label && (
+            <div class="flex items-center justify-center mb-4">
+              <div class="w-12 h-px bg-primary"></div>
+              <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                {section02Label}
+              </span>
+              <div class="w-12 h-px bg-primary"></div>
+            </div>
+          )}
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6">
+            <Fragment set:html={section02Title.replace(/\n/g, '<br />')} />
+          </h2>
+          {section02Intro && (
+            <p class="text-lg font-light text-gray-600">{section02Intro}</p>
+          )}
+        </div>
+
+        {section02Cards.length > 0 && (
+          <div class="grid md:grid-cols-3 gap-8">
+            {section02Cards.map((card, idx) => (
+              <div class={`group fade-in fade-in-delay-${idx + 1}`}>
+                <div class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg">
+                  <Icon name={card.icon || "lucide:landmark"} class="w-8 h-8 mb-4 text-primary" />
+                  <h3 class="text-xl font-light text-gray-900 mb-3">{card.title}</h3>
+                  <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">{card.text}</p>
+                  {card.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2">
+                      {card.tags.map(tag => (
+                        <span class="text-xs px-2 py-1 bg-primary/10 text-primary">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {section02Highlight && (
+          <div class="mt-12 p-8 lg:p-12 bg-linear-to-r from-primary/5 to-transparent border-l-4 border-primary fade-in fade-in-delay-4">
+            <p class="text-lg font-light text-gray-700 leading-relaxed">{section02Highlight}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Section 03 -->
+  {section03Title && (
+    <section class="py-20 lg:py-28 bg-primary text-white relative overflow-hidden">
+      <div class="container mx-auto px-8 lg:px-16 relative">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="fade-in">
+            <div class="text-[120px] font-light text-white/10 leading-none mb-[-40px]">03</div>
+
+            {section03Label && (
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-px bg-white/50"></div>
+                <span class="ml-4 text-xs tracking-[0.4em] uppercase font-light opacity-80">
+                  {section03Label}
+                </span>
+              </div>
+            )}
+
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight">
+              <Fragment set:html={section03Title.replace(/\n/g, '<br />')} />
+            </h2>
+
+            {section03Intro && (
+              <p class="text-lg font-light leading-relaxed opacity-90">{section03Intro}</p>
+            )}
+          </div>
+
+          {section03Items.length > 0 && (
+            <div class="space-y-4 fade-in fade-in-delay-1">
+              {section03Items.map(item => (
+                <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+                  <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0">
+                    <Icon name={item.icon || "lucide:sparkles"} class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 class="font-light text-lg">{item.title}</h4>
+                    <p class="text-sm opacity-80 font-light">{item.subtitle}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 04 -->
+  {section04Title && (
+    <section class="py-20 lg:py-28 bg-white">
+      <div class="container mx-auto px-8 lg:px-16">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px] fade-in">04</div>
+
+          {section04Label && (
+            <div class="flex items-center justify-center mb-4 fade-in">
+              <div class="w-12 h-px bg-primary"></div>
+              <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                {section04Label}
+              </span>
+              <div class="w-12 h-px bg-primary"></div>
+            </div>
+          )}
+
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 fade-in fade-in-delay-1">
+            <Fragment set:html={section04Title.replace(/\n/g, '<br />')} />
+          </h2>
+
+          {section04Text && (
+            <p class="text-lg font-light text-gray-600 leading-relaxed mb-8 fade-in fade-in-delay-2">
+              {section04Text}
+            </p>
+          )}
+
+          {section04Quote && (
+            <blockquote class="text-xl md:text-2xl font-light text-gray-900 italic mb-12 fade-in fade-in-delay-3">
+              {section04Quote}
+            </blockquote>
+          )}
+
+          {section04Tags.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in fade-in-delay-3">
+              {section04Tags.map(tag => (
+                <span class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="py-20 lg:py-28 bg-neutral">
+    <div class="container mx-auto px-8 lg:px-16">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <h2 class="text-3xl md:text-4xl font-light text-gray-900 mb-6">
+          In love with {name}?
+        </h2>
+
+        <p class="text-lg font-light text-gray-600 leading-relaxed mb-10">
+          Tell me your dream and together we'll find the perfect location for your wedding.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={langPrefix + "/contatti"}
+            class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
+          >
+            Contact Me
+          </a>
+          <a
+            href={langPrefix + "/destination-wedding"}
+            class="inline-flex items-center justify-center px-10 py-4 border border-primary text-primary text-sm font-light tracking-wider uppercase hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            Other Destinations
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 2s ease-in-out infinite;
+  }
+</style>

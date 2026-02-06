@@ -1,92 +1,49 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getTranslation } from "../i18n/translations";
+import { getServicesPage, getServices, getLocalized, getLocalizedArray, type Language } from "../lib/sanity";
 
-const lang = "it";
-const t = (key: any) => getTranslation(lang, key);
+const lang: Language = "it";
+
+// Fetch dati da Sanity
+const [servicesPage, servicesData] = await Promise.all([
+    getServicesPage(),
+    getServices()
+]);
 
 // Prefisso per i link
 const langPrefix = lang === "it" ? "" : `/${lang}`;
 
-const services = [
-    {
-        id: "coordinamento",
-        number: "01",
-        icon: "lucide:calendar",
-        nameKey: "service_coord_name",
-        taglineKey: "service_coord_tagline",
-        introKey: "service_coord_intro",
-        idealKey: "service_coord_ideal",
-        whatLabelKey: "service_coord_what_label",
-        includeKeys: [
-            "service_coord_include_1",
-            "service_coord_include_2",
-            "service_coord_include_3",
-            "service_coord_include_4",
-            "service_coord_include_5",
-            "service_coord_include_6"
-        ],
-        howLabelKey: "service_coord_how_label",
-        stepsKeys: [
-            "service_coord_step_1",
-            "service_coord_step_2",
-            "service_coord_step_3",
-            "service_coord_step_4"
-        ]
-    },
-    {
-        id: "wedding-totale",
-        number: "02",
-        icon: "lucide:sparkles",
-        nameKey: "service_total_name",
-        taglineKey: "service_total_tagline",
-        introKey: "service_total_intro",
-        idealKey: "service_total_ideal",
-        whatLabelKey: "service_total_what_label",
-        includeKeys: [
-            "service_total_include_1",
-            "service_total_include_2",
-            "service_total_include_3",
-            "service_total_include_4",
-            "service_total_include_5",
-            "service_total_include_6",
-            "service_total_include_7",
-            "service_total_include_8"
-        ],
-        howLabelKey: "service_total_how_label",
-        stepsKeys: [
-            "service_total_step_1",
-            "service_total_step_2",
-            "service_total_step_3",
-            "service_total_step_4"
-        ]
-    },
-    {
-        id: "consulenza",
-        number: "03",
-        icon: "lucide:message-circle",
-        nameKey: "service_consult_name",
-        taglineKey: "service_consult_tagline",
-        introKey: "service_consult_intro",
-        idealKey: "service_consult_ideal",
-        whatLabelKey: "service_consult_what_label",
-        includeKeys: [
-            "service_consult_include_1",
-            "service_consult_include_2",
-            "service_consult_include_3",
-            "service_consult_include_4",
-            "service_consult_include_5",
-            "service_consult_include_6"
-        ],
-        howLabelKey: "service_consult_how_label",
-        stepsKeys: [
-            "service_consult_step_1",
-            "service_consult_step_2",
-            "service_consult_step_3",
-            "service_consult_step_4"
-        ]
-    }
-];
+// Helper
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Dati header/CTA
+const heroLabel = getText(servicesPage?.heroLabel, "I Servizi");
+const heroTitle = getText(servicesPage?.heroTitle, "Soluzioni su misura");
+const heroSubtitle = getText(servicesPage?.heroSubtitle, "per il tuo matrimonio");
+const heroText = getText(servicesPage?.heroText);
+const processLabel = getText(servicesPage?.processLabel, "Il processo");
+const processTitle = getText(servicesPage?.processTitle, "Come lavoriamo insieme");
+const processSteps = servicesPage?.processSteps || [];
+const ctaTitle = getText(servicesPage?.ctaTitle);
+const ctaText = getText(servicesPage?.ctaText);
+const ctaButton = getText(servicesPage?.ctaButton, "Scrivimi");
+
+// Prepara servizi
+const services = servicesData.map((service) => ({
+    slug: service.slug?.current || "",
+    number: service.number || "01",
+    name: getText(service.name),
+    tagline: getText(service.tagline),
+    intro: getText(service.intro),
+    ideal: getText(service.ideal),
+    whatLabel: getText(service.whatLabel, "Cosa include"),
+    includes: getLocalizedArray(service.includes, lang),
+    howLabel: getText(service.howLabel, "Come funziona"),
+    steps: getLocalizedArray(service.steps, lang),
+}));
 ---
 
 <BaseLayout
@@ -102,20 +59,20 @@ const services = [
                 <div class="flex items-center justify-center mb-6 fade-in">
                     <div class="w-16 h-px bg-primary"></div>
                     <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
-                        {t("services_page_hero_label")}
+                        {heroLabel}
                     </span>
                     <div class="w-16 h-px bg-primary"></div>
                 </div>
 
                 <!-- Titolo -->
                 <h1 class="text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-4 leading-tight fade-in fade-in-delay-1">
-                    {t("services_page_hero_title")} <br />
-                    <span class="text-primary italic">{t("services_page_hero_subtitle")}</span>
+                    {heroTitle} <br />
+                    <span class="text-primary italic">{heroSubtitle}</span>
                 </h1>
 
                 <!-- Descrizione -->
                 <p class="text-lg md:text-xl font-light text-gray-600 leading-relaxed fade-in fade-in-delay-2">
-                    {t("services_page_hero_text")}
+                    {heroText}
                 </p>
             </div>
         </div>
@@ -135,12 +92,12 @@ const services = [
 
                         <!-- Titolo servizio -->
                         <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-3">
-                            {t(service.nameKey)}
+                            {service.name}
                         </h2>
 
                         <!-- Tagline -->
                         <p class="text-xl font-light text-primary italic mb-8">
-                            {t(service.taglineKey)}
+                            {service.tagline}
                         </p>
 
                         <!-- Separatore -->
@@ -152,23 +109,25 @@ const services = [
 
                         <!-- Intro -->
                         <p class="text-base md:text-lg font-light text-gray-600 leading-relaxed mb-6">
-                            {t(service.introKey)}
+                            {service.intro}
                         </p>
 
                         <!-- Per chi è ideale -->
-                        <div class="bg-primary/5 border-l-2 border-primary p-6 mb-10">
-                            <p class="text-sm font-normal text-gray-700 leading-relaxed">
-                                <strong class="text-primary">Per chi è ideale:</strong> {t(service.idealKey)}
-                            </p>
-                        </div>
+                        {service.ideal && (
+                            <div class="bg-primary/5 border-l-2 border-primary p-6 mb-10">
+                                <p class="text-sm font-normal text-gray-700 leading-relaxed">
+                                    <strong class="text-primary">Per chi è ideale:</strong> {service.ideal}
+                                </p>
+                            </div>
+                        )}
 
                         <!-- Cosa Include -->
                         <h3 class="text-2xl font-light text-gray-900 mb-6">
-                            {t(service.whatLabelKey)}
+                            {service.whatLabel}
                         </h3>
 
                         <div class="space-y-4 mb-10">
-                            {service.includeKeys.map((key: string) => (
+                            {service.includes.map((include: string) => (
                                 <div class="flex items-start">
                                     <div class="shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center mt-0.5">
                                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,7 +135,7 @@ const services = [
                                         </svg>
                                     </div>
                                     <p class="ml-4 text-base font-light text-gray-700 leading-relaxed">
-                                        {t(key)}
+                                        {include}
                                     </p>
                                 </div>
                             ))}
@@ -189,11 +148,11 @@ const services = [
                             <!-- Card Come Funziona -->
                             <div class="bg-white p-8 lg:p-10 shadow-lg">
                                 <h3 class="text-2xl font-light text-gray-900 mb-8">
-                                    {t(service.howLabelKey)}
+                                    {service.howLabel}
                                 </h3>
 
                                 <div class="space-y-8">
-                                    {service.stepsKeys.map((key: string, stepIndex: number) => (
+                                    {service.steps.map((step: string, stepIndex: number) => (
                                         <div class="flex items-start">
                                             <div class="shrink-0">
                                                 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -203,7 +162,7 @@ const services = [
                                                 </div>
                                             </div>
                                             <p class="ml-4 mt-2 text-base font-light text-gray-700 leading-relaxed">
-                                                {t(key)}
+                                                {step}
                                             </p>
                                         </div>
                                     ))}
@@ -246,28 +205,28 @@ const services = [
                 <div class="flex items-center justify-center mb-6">
                     <div class="w-16 h-px bg-white/40"></div>
                     <span class="mx-4 text-xs tracking-[0.4em] uppercase font-light">
-                        {t("services_page_process_label")}
+                        {processLabel}
                     </span>
                     <div class="w-16 h-px bg-white/40"></div>
                 </div>
 
                 <h2 class="text-4xl md:text-5xl font-light mb-4">
-                    {t("services_page_process_title")}
+                    {processTitle}
                 </h2>
             </div>
 
             <!-- Steps Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                {[1, 2, 3, 4].map((step) => (
-                    <div class={`text-center fade-in fade-in-delay-${step}`}>
+                {processSteps.map((step, stepNum) => (
+                    <div class={`text-center fade-in fade-in-delay-${stepNum + 1}`}>
                         <!-- Numero grande -->
                         <div class="text-7xl font-light text-white/20 mb-4">
-                            {step.toString().padStart(2, '0')}
+                            {(stepNum + 1).toString().padStart(2, '0')}
                         </div>
 
                         <!-- Titolo -->
                         <h3 class="text-xl font-light mb-4">
-                            {t(`services_page_process_${step}_title`)}
+                            {getText(step.title)}
                         </h3>
 
                         <!-- Separatore -->
@@ -279,7 +238,7 @@ const services = [
 
                         <!-- Descrizione -->
                         <p class="text-sm font-light text-white/90 leading-relaxed">
-                            {t(`services_page_process_${step}_text`)}
+                            {getText(step.text)}
                         </p>
                     </div>
                 ))}
@@ -298,18 +257,18 @@ const services = [
                 </div>
 
                 <h2 class="text-3xl md:text-4xl font-light text-gray-900 mb-6">
-                    {t("services_page_cta_title")}
+                    {ctaTitle}
                 </h2>
 
                 <p class="text-lg font-light text-gray-600 leading-relaxed mb-10">
-                    {t("services_page_cta_text")}
+                    {ctaText}
                 </p>
 
                 <a
                     href={langPrefix + "/contatti"}
                     class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
                 >
-                    {t("services_page_cta_button")}
+                    {ctaButton}
                 </a>
             </div>
         </div>

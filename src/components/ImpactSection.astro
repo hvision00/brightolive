@@ -1,13 +1,29 @@
 ---
 // Impact Section Elegante - Versione più corta e concisa
-import { getTranslation, type Language } from "../i18n/translations";
+// AGGIORNATO: Ora legge i dati da Sanity CMS
+
+import { getLocalized, type Language, type HomePage } from "../lib/sanity";
 
 interface Props {
     lang?: Language;
+    data?: HomePage | null;
 }
 
-const { lang = "it" } = Astro.props;
-const t = (key: any) => getTranslation(lang, key);
+const { lang = "it", data } = Astro.props;
+
+// Helper per ottenere testo localizzato con fallback
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Testi - da Sanity con fallback
+const impactLabel = getText(data?.impactLabel, "La nostra filosofia");
+const impactQuote = getText(data?.impactQuote, "Empatia e presenza per sposi e invitati.");
+const impactQuoteHighlight = getText(data?.impactQuoteHighlight, "Un matrimonio che vive nei momenti che crea");
+const impactQuoteEnd = getText(data?.impactQuoteEnd, ", non soltanto nelle foto.");
+const impactSubtext1 = getText(data?.impactSubtext1, "Fornitori selezionati per ogni bisogno.");
+const impactSubtext2 = getText(data?.impactSubtext2, "Un'esperienza che resta nel cuore, oltre le immagini.");
 ---
 
 <section class="relative py-20 lg:py-28 bg-white overflow-hidden">
@@ -42,7 +58,7 @@ const t = (key: any) => getTranslation(lang, key);
                 <span
                     class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
                 >
-                    {t("impact_label")}
+                    {impactLabel}
                 </span>
                 <div class="w-16 h-px bg-primary"></div>
             </div>
@@ -61,11 +77,11 @@ const t = (key: any) => getTranslation(lang, key);
             <blockquote
                 class="text-2xl md:text-3xl lg:text-4xl font-light text-gray-900 leading-relaxed mb-8"
             >
-                {t("impact_quote")}
+                {impactQuote}
                 <br class="hidden md:block" />
                 <span class="text-primary italic"
-                    >{t("impact_quote_highlight")}</span
-                >{t("impact_quote_end")}
+                    >{impactQuoteHighlight}</span
+                >{impactQuoteEnd}
             </blockquote>
 
             <!-- Separatore -->
@@ -78,10 +94,10 @@ const t = (key: any) => getTranslation(lang, key);
             <!-- Sotto-testo -->
             <div class="max-w-2xl mx-auto space-y-4">
                 <p class="text-lg font-light text-gray-600">
-                    {t("impact_subtext_1")}
+                    {impactSubtext1}
                 </p>
                 <p class="text-lg font-light text-gray-600">
-                    {t("impact_subtext_2")}
+                    {impactSubtext2}
                 </p>
             </div>
         </div>

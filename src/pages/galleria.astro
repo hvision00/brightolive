@@ -1,17 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getGalleryPage, getLocalized, getImageUrl, type Language } from "../lib/sanity";
 
-const pageTitle = "Galleria";
-const pageDescription = "Una selezione di atmosfere, dettagli e allestimenti che raccontano il mio stile.";
+const lang: Language = "it";
+const galleryPage = await getGalleryPage();
 
-// Array di immagini della galleria
-const galleryImages = Array.from({ length: 20 }, (_, i) => ({
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+const heroLabel = getText(galleryPage?.heroLabel, "Portfolio");
+const heroTitle = getText(galleryPage?.heroTitle, "Galleria");
+const heroSubtitle = getText(galleryPage?.heroSubtitle, "");
+const heroText = getText(galleryPage?.heroText, "Una selezione di atmosfere, dettagli e allestimenti che raccontano il mio stile.");
+
+const galleryImages = (galleryPage?.images || []).map((img, i) => ({
+  src: getImageUrl(img, 800),
+  alt: `Matrimonio ${i + 1}`,
+}));
+
+// Fallback se non ci sono immagini in Sanity
+const fallbackImages = galleryImages.length > 0 ? galleryImages : Array.from({ length: 20 }, (_, i) => ({
   src: `/gallery/gallery-${i + 1}.jpg`,
   alt: `Matrimonio ${i + 1}`,
 }));
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={heroTitle} description={heroText}>
 
   <!-- Hero Section -->
   <section class="relative py-20 lg:py-32 bg-linear-to-b from-white to-gray-50">
@@ -23,7 +39,7 @@ const galleryImages = Array.from({ length: 20 }, (_, i) => ({
           <span
             class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
           >
-            Portfolio
+            {heroLabel}
           </span>
           <div class="w-16 h-px bg-primary"></div>
         </div>
@@ -32,12 +48,13 @@ const galleryImages = Array.from({ length: 20 }, (_, i) => ({
         <h1
           class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6"
         >
-          Galleria
+          {heroTitle}
+          {heroSubtitle && <><br /><span class="text-primary italic">{heroSubtitle}</span></>}
         </h1>
 
         <!-- Description -->
         <p class="text-lg md:text-xl font-light text-gray-600 max-w-2xl mx-auto">
-          {pageDescription}
+          {heroText}
         </p>
       </div>
     </div>
@@ -49,7 +66,7 @@ const galleryImages = Array.from({ length: 20 }, (_, i) => ({
       <!-- Masonry Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
-          galleryImages.map((image, index) => (
+          fallbackImages.map((image, index) => (
             <div
               class="group relative overflow-hidden rounded-lg aspect-4/5 bg-gray-100 cursor-pointer hover:shadow-2xl transition-all duration-500"
               style={`animation-delay: ${index * 50}ms`}

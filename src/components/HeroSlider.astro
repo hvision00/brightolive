@@ -1,34 +1,58 @@
 ---
 // Hero section Elegante - Design completamente diverso
 // Layout split-screen asimmetrico con eleganza moderna
-import { getTranslation, type Language } from "../i18n/translations";
+// AGGIORNATO: Ora legge i dati da Sanity CMS
+
+import { getLocalized, getImageUrl, type Language, type HomePage } from "../lib/sanity";
 
 interface Props {
   lang?: Language;
+  data?: HomePage | null; // Dati da Sanity
 }
 
-const { lang = "it" } = Astro.props;
-const t = (key: any) => getTranslation(lang, key);
+const { lang = "it", data } = Astro.props;
 
 // Prefisso per i link
 const langPrefix = lang === "it" ? "" : `/${lang}`;
+
+// Helper per ottenere testo localizzato con fallback
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
+
+// Testi - da Sanity se disponibili, altrimenti fallback
+const heroTitle1 = getText(data?.heroTitle1, "Eleganza");
+const heroTitle2 = getText(data?.heroTitle2, "Senza");
+const heroTitle3 = getText(data?.heroTitle3, "Tempo");
+const heroDescription = getText(data?.heroDescription, "Ogni matrimonio è un'opera d'arte. Creo esperienze raffinate dove ogni dettaglio racconta la tua storia con classe e distinzione.");
+const heroCta = getText(data?.heroCta, "Inizia il viaggio");
+const heroFloatingTitle = getText(data?.heroFloatingTitle, "Tu ti sposi");
+const heroFloatingSubtitle = getText(data?.heroFloatingSubtitle, "Io organizzo");
+
+// Immagini - da Sanity se disponibili, altrimenti fallback
+const defaultImages = [
+  '/heroSection/hero-1.jpg',
+  '/heroSection/hero-2.jpg',
+  '/heroSection/hero-3.jpg'
+];
+
+const heroImages = data?.heroImages && data.heroImages.length > 0
+  ? data.heroImages.map(img => getImageUrl(img, 1200))
+  : defaultImages;
 ---
 
 <section
-  x-data="{
+  x-data={`{
         currentSlide: 0,
-        slides: [
-            '/heroSection/hero-1.jpg',
-            '/heroSection/hero-2.jpg',
-            '/heroSection/hero-3.jpg'
-        ],
+        slides: ${JSON.stringify(heroImages)},
         autoplay: null,
         init() {
             this.autoplay = setInterval(() => {
                 this.currentSlide = (this.currentSlide + 1) % this.slides.length;
             }, 5000);
         }
-    }"
+    }`}
   class="relative w-full min-h-screen bg-neutral"
 >
   <!-- Layout Split Screen Asimmetrico -->
@@ -62,15 +86,15 @@ const langPrefix = lang === "it" ? "" : `/${lang}`;
         <h1
           class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.95] text-gray-900 mb-8 fade-in fade-in-delay-2"
         >
-          <span class="block">{t("hero_title_1")}</span>
+          <span class="block">{heroTitle1}</span>
           {
-            t("hero_title_2") && (
+            heroTitle2 && (
               <span class="block text-primary italic font-normal">
-                {t("hero_title_2")}
+                {heroTitle2}
               </span>
             )
           }
-          {t("hero_title_3") && <span class="block">{t("hero_title_3")}</span>}
+          {heroTitle3 && <span class="block">{heroTitle3}</span>}
         </h1>
 
         <!-- Descrizione elegante -->
@@ -78,7 +102,7 @@ const langPrefix = lang === "it" ? "" : `/${lang}`;
           <p
             class="text-lg md:text-xl font-light text-gray-600 leading-relaxed mb-8"
           >
-            {t("hero_description")}
+            {heroDescription}
           </p>
 
           <!-- Separatore elegante -->
@@ -93,7 +117,7 @@ const langPrefix = lang === "it" ? "" : `/${lang}`;
             href={langPrefix + "/contatti"}
             class="inline-flex items-center group text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
           >
-            <span>{t("hero_cta")}</span>
+            <span>{heroCta}</span>
             <svg
               class="w-6 h-6 ml-3 transform group-hover:translate-x-2 transition-transform duration-300"
               fill="none"
@@ -155,12 +179,12 @@ const langPrefix = lang === "it" ? "" : `/${lang}`;
                 class="text-2xl uppercase font-light mb-2"
                 style="font-variant-numeric: oldstyle-nums;"
               >
-                {t("hero_floating_title")}
+                {heroFloatingTitle}
               </div>
               <div
                 class="text-sm tracking-[0.3em] uppercase font-light opacity-90"
               >
-                {t("hero_floating_subtitle")}
+                {heroFloatingSubtitle}
               </div>
             </div>
           </div>

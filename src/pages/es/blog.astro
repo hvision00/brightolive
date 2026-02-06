@@ -1,214 +1,139 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getTranslation } from "../../i18n/translations";
-import { getPostsByLanguage } from "../../lib/wordpress";
+import { getBlogPosts, getLocalized, getImageUrl, type Language } from "../../lib/sanity";
 
-const lang = "es";
-const t = (key: any) => getTranslation(lang, key);
+const lang: Language = "es";
+const posts = await getBlogPosts();
 
-// Prefisso per i link
-const langPrefix = "/es";
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
 
-// Blog posts STATICI (destination wedding articles) - SEMPRE VISIBILI
-const staticBlogPosts = [
-  {
-    id: "prosecco",
-    title: "Casarse en las Colinas del Prosecco",
-    excerpt:
-      "Descubre por qué las Colinas del Prosecco UNESCO son el marco perfecto para una boda auténtica y romántica en el corazón de Veneto.",
-    image: "/destinations/prosecco.jpg",
-    category: t("blog_category_destination"),
-    date: "2024-12-01",
-    link: langPrefix + "/destination-wedding/prosecco",
-    isStatic: true,
-  },
-  {
-    id: "dolomiti",
-    title: "Casarse en los Dolomitas Vénetos",
-    excerpt:
-      "Entre sueño, naturaleza y maravilla. Los Dolomitas ofrecen un escenario único en el mundo para celebrar tu amor rodeado de magnificencia alpina.",
-    image: "/destinations/dolomiti.jpg",
-    category: t("blog_category_destination"),
-    date: "2024-11-28",
-    link: langPrefix + "/destination-wedding/dolomiti",
-    isStatic: true,
-  },
-  {
-    id: "venezia",
-    title: "Venecia: Una Boda de Ensueño en la Serenísima",
-    excerpt:
-      "Canales, palacios históricos y romance eterno. Descubre cómo organizar una boda inolvidable en la ciudad más romántica del mundo.",
-    image: "/destinations/venezia.jpg",
-    category: t("blog_category_destination"),
-    date: "2024-11-25",
-    link: langPrefix + "/destination-wedding/venezia",
-    isStatic: true,
-  },
-  {
-    id: "bassano",
-    title: "Bassano del Grappa: Elegancia e Historia",
-    excerpt:
-      "Un pueblo rico en encanto donde la elegancia del pasado se encuentra con el refinamiento moderno para una boda inolvidable.",
-    image: "/destinations/bassano.jpg",
-    category: t("blog_category_destination"),
-    date: "2024-11-20",
-    link: langPrefix + "/destination-wedding/bassano",
-    isStatic: true,
-  },
-  {
-    id: "padova",
-    title: "Casarse en Padua y las Colinas Euganeas",
-    excerpt:
-      "Villas venecianas históricas, termas, naturaleza y cultura se unen para crear el entorno perfecto para una boda refinada y elegante.",
-    image: "/destinations/padova.jpg",
-    category: t("blog_category_destination"),
-    date: "2024-11-15",
-    link: langPrefix + "/destination-wedding/padova",
-    isStatic: true,
-  },
-];
-
-// Recupera articoli DINAMICI da WordPress
-const wpPosts = await getPostsByLanguage("es", 50);
-
-// Trasforma i post WordPress nel formato del blog
-const dynamicBlogPosts = wpPosts.map((post) => ({
-  id: post.slug,
-  title: post.title,
-  excerpt: post.excerpt.replace(/<[^>]*>/g, ""), // Rimuovi HTML dall'excerpt
-  image: post.featuredImage?.node?.sourceUrl || "/destinations/venezia.jpg", // Fallback image
-  category: post.categories.nodes[0]?.name || t("blog_category_news"),
-  date: post.date,
-  link: langPrefix + "/blog/" + post.slug,
-  isStatic: false,
-}));
-
-// COMBINA: Prima gli articoli statici, poi quelli dinamici
-const blogPosts = [...staticBlogPosts, ...dynamicBlogPosts];
+const formatDate = (dateString: string | undefined) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+};
 ---
 
 <BaseLayout
-  title="Blog | BrightOlive Wedding Planner - Historias e Inspiraciones Bodas"
-  description="Descubre historias, consejos e inspiraciones para tu boda en el norte de Italia. Destination weddings, real weddings y guías para organizar el día perfecto."
+  title="Blog | Wedding Planner BrightOlive"
+  description="Consejos, inspiración e historias de bodas inolvidables en el norte de Italia"
 >
   <!-- Hero Section -->
-  <section class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-neutral">
+  <section class="py-24 lg:py-32 bg-gradient-to-b from-neutral to-white">
     <div class="container mx-auto px-8 lg:px-16">
       <div class="max-w-4xl mx-auto text-center">
         <!-- Label -->
-        <div class="flex items-center justify-center mb-6 fade-in">
+        <div class="flex items-center justify-center mb-6">
           <div class="w-16 h-px bg-primary"></div>
-          <span
-            class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light"
-          >
-            {t("blog_hero_label")}
+          <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+            Blog
           </span>
           <div class="w-16 h-px bg-primary"></div>
         </div>
 
         <!-- Title -->
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 leading-tight fade-in fade-in-delay-1"
-        >
-          {t("blog_hero_title")}
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight">
+          Historias e Inspiración
         </h1>
-        <p
-          class="text-xl md:text-2xl font-light text-primary italic mb-6 fade-in fade-in-delay-2"
-        >
-          {t("blog_hero_subtitle")}
-        </p>
 
         <!-- Description -->
-        <p
-          class="text-lg font-light text-gray-600 leading-relaxed max-w-2xl mx-auto fade-in fade-in-delay-3"
-        >
-          {t("blog_hero_text")}
+        <p class="text-lg md:text-xl font-light text-gray-600 leading-relaxed">
+          Consejos para tu boda, tendencias e historias del mundo del wedding planning
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Blog Grid -->
-  <section class="py-20 lg:py-28 bg-white">
+  <!-- Blog Posts Grid -->
+  <section class="py-16 lg:py-24 bg-white">
     <div class="container mx-auto px-8 lg:px-16">
-      {
-        blogPosts.length > 0 ? (
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {blogPosts.map((post, index) => (
-              <article class={`group fade-in fade-in-delay-${(index % 3) + 1}`}>
-                {/* Image */}
-                <a href={post.link} class="block relative overflow-hidden mb-6">
-                  <div class="aspect-4/3 overflow-hidden bg-gray-100">
+      {posts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {posts.map((post) => {
+            const title = getText(post.title, "Artículo");
+            const excerpt = getText(post.excerpt, "");
+            const categoryName = post.category?.name ? getText(post.category.name, "") : "";
+            const imageUrl = getImageUrl(post.featuredImage, 600);
+            const postDate = formatDate(post.publishedAt);
+            
+            return (
+              <article class="group bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                {/* Featured Image */}
+                <a href={`/es/blog/${post.slug.current}`} class="block aspect-video overflow-hidden bg-gray-200">
+                  {imageUrl ? (
                     <img
-                      src={post.image}
-                      alt={post.title}
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      src={imageUrl}
+                      alt={title}
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                  </div>
-                  {/* Category Badge */}
-                  <div class="absolute top-4 left-4">
-                    <span class="inline-block px-4 py-2 bg-white/95 backdrop-blur-sm text-xs tracking-wider uppercase font-light text-gray-900">
-                      {post.category}
-                    </span>
-                  </div>
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center text-gray-400">
+                      <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                  )}
                 </a>
 
                 {/* Content */}
-                <div class="space-y-3">
-                  {/* Date */}
-                  <time class="text-xs tracking-wider uppercase font-light text-gray-500">
-                    {new Date(post.date).toLocaleDateString("es-ES", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
+                <div class="p-6">
+                  {/* Category & Date */}
+                  <div class="flex items-center justify-between mb-4 text-sm">
+                    {categoryName && (
+                      <span class="text-primary font-light uppercase tracking-wider">
+                        {categoryName}
+                      </span>
+                    )}
+                    {postDate && (
+                      <time class="text-gray-500 font-light">
+                        {postDate}
+                      </time>
+                    )}
+                  </div>
 
                   {/* Title */}
-                  <h2 class="text-2xl font-light text-gray-900 leading-tight">
-                    <a
-                      href={post.link}
-                      class="hover:text-primary transition-colors duration-300"
-                    >
-                      {post.title}
+                  <h2 class="text-xl md:text-2xl font-light text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                    <a href={`/es/blog/${post.slug.current}`}>
+                      {title}
                     </a>
                   </h2>
 
                   {/* Excerpt */}
-                  <p class="text-sm font-light text-gray-600 leading-relaxed">
-                    {post.excerpt}
-                  </p>
+                  {excerpt && (
+                    <p class="text-base font-light text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                      {excerpt}
+                    </p>
+                  )}
 
-                  {/* Read More Link */}
+                  {/* Read More */}
                   <a
-                    href={post.link}
-                    class="inline-flex items-center group/link text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
+                    href={`/es/blog/${post.slug.current}`}
+                    class="inline-flex items-center text-sm font-light text-primary hover:underline"
                   >
-                    <span>{t("blog_read_more")}</span>
-                    <svg
-                      class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
+                    Leer artículo
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                   </a>
                 </div>
               </article>
-            ))}
-          </div>
-        ) : (
-          <div class="text-center py-20">
-            <p class="text-lg font-light text-gray-600">{t("blog_no_posts")}</p>
-          </div>
-        )
-      }
+            );
+          })}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-xl font-light text-gray-500">
+            No hay artículos publicados aún
+          </p>
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>

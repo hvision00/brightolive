@@ -1,187 +1,508 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { getTranslation } from "../../../i18n/translations";
-import { getPostBySlug, getAllPostSlugs } from "../../../lib/wordpress";
+import { getAllBlogSlugs, getBlogPostBySlug, getLocalized, getLocalizedContent, getLocalizedArray, getImageUrl, type Language } from "../../../lib/sanity";
+import { Icon } from "astro-icon/components";
 
-const lang = "en";
-const t = (key: any) => getTranslation(lang, key);
-const langPrefix = "/en";
-
-// Per generare le pagine statiche al build
 export async function getStaticPaths() {
-  const allSlugs = await getAllPostSlugs();
-
-  // Filtra solo gli articoli in inglese
-  const englishSlugs = allSlugs.filter((item) => item.lang === "en");
-
-  return englishSlugs.map((item) => ({
-    params: { slug: item.slug },
+  const slugs = await getAllBlogSlugs();
+  return slugs.map((slug) => ({
+    params: { slug },
   }));
 }
 
 const { slug } = Astro.params;
-
-// Recupera il post da WordPress
-const post = await getPostBySlug(slug!, "en");
+const lang: Language = "en";
+const post = await getBlogPostBySlug(slug!);
 
 if (!post) {
   return Astro.redirect("/404");
 }
 
-// Formatta la data
-const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+const getText = (field: any, fallback: string = "") => {
+  if (!field) return fallback;
+  return getLocalized(field, lang) || fallback;
+};
 
-// Categoria principale
-const mainCategory = post.categories.nodes[0]?.name || t("blog_category_news");
+const title = getText(post.title, "Article");
+const excerpt = getText(post.excerpt, "");
+const heroImage = post.featuredImage ? getImageUrl(post.featuredImage, 1920) : "";
+const categoryName = post.categories?.[0]?.name ? getText(post.categories[0].name, "") : "";
+
+const formatDate = (dateString: string | undefined) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+};
+
+const publishedDate = formatDate(post.publishedAt);
+const isStructured = post.templateType === "structured";
+
+// Template Simple
+const content = !isStructured ? getLocalizedContent(post.content, lang) : "";
+
+// Template Structured
+const heroLabel = getText(post.heroLabel, "");
+const heroQuote = getText(post.introQuote, "");
+const section01Label = getText(post.section01Label, "");
+const section01Title = getText(post.section01Title, "");
+const section01Text = getText(post.section01Text, "");
+const section01BoxTitle = getText(post.section01BoxTitle, "");
+const section01BoxPoints = getLocalizedArray(post.section01BoxPoints, lang);
+const section02Label = getText(post.section02Label, "");
+const section02Title = getText(post.section02Title, "");
+const section02Intro = getText(post.section02Intro, "");
+const section02Highlight = getText(post.section02Highlight, "");
+const section02Cards = post.section02Cards?.map(card => ({
+  icon: card.cardIcon,
+  title: getText(card.cardTitle, ""),
+  text: getText(card.cardText, ""),
+  tags: getLocalizedArray(card.cardTags, lang),
+})) || [];
+const section03Label = getText(post.section03Label, "");
+const section03Title = getText(post.section03Title, "");
+const section03Intro = getText(post.section03Intro, "");
+const section03Items = post.section03Items?.map(item => ({
+  icon: item.itemIcon,
+  title: getText(item.itemTitle, ""),
+  subtitle: getText(item.itemSubtitle, ""),
+})) || [];
+const section04Label = getText(post.section04Label, "");
+const section04Title = getText(post.section04Title, "");
+const section04Text = getText(post.section04Text, "");
+const section04Quote = getText(post.section04Quote, "");
+const section04Tags = getLocalizedArray(post.section04Tags, lang);
+
+const langPrefix = "/en";
 ---
 
 <BaseLayout
-  title={`${post.title} | BrightOlive Wedding Planner`}
-  description={post.excerpt.replace(/<[^>]*>/g, "").slice(0, 160)}
+  title={`${title} | Blog BrightOlive`}
+  description={excerpt}
 >
-  <!-- Article Header -->
-  <article class="pt-32 pb-20 lg:pt-40 lg:pb-28">
-    <!-- Featured Image -->
-    {
-      post.featuredImage?.node?.sourceUrl && (
-        <div class="w-full h-[60vh] md:h-[70vh] overflow-hidden mb-12">
-          <img
-            src={post.featuredImage.node.sourceUrl}
-            alt={post.featuredImage.node.altText || post.title}
-            class="w-full h-full object-cover"
-          />
+  {!isStructured ? (
+    <!-- ========================================
+         TEMPLATE SEMPLICE
+         ======================================== -->
+    <>
+      <!-- Hero Section with Image -->
+      <section class="relative h-[70vh] min-h-[500px] overflow-hidden">
+        {heroImage && (
+          <div class="absolute inset-0">
+            <img
+              src={heroImage}
+              alt={title}
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+          </div>
+        )}
+
+        <div class="relative h-full flex items-center">
+          <div class="container mx-auto px-8 lg:px-16">
+            <div class="max-w-4xl mx-auto text-center text-white">
+              {categoryName && (
+                <div class="flex items-center justify-center mb-6">
+                  <div class="w-12 h-px bg-white/50"></div>
+                  <span class="mx-4 text-xs tracking-[0.4em] uppercase font-light text-white/90">
+                    {categoryName}
+                  </span>
+                  <div class="w-12 h-px bg-white/50"></div>
+                </div>
+              )}
+              
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight">
+                {title}
+              </h1>
+              
+              {publishedDate && (
+                <time class="text-lg font-light text-white/80">
+                  {publishedDate}
+                </time>
+              )}
+            </div>
+          </div>
         </div>
-      )
-    }
+      </section>
 
-    <div class="container mx-auto px-8 lg:px-16">
-      <div class="max-w-4xl mx-auto">
-        <!-- Breadcrumb & Category -->
-        <div class="flex items-center gap-4 mb-6 fade-in">
-          <a
-            href={langPrefix + "/blog"}
-            class="text-sm tracking-wider uppercase font-light text-gray-600 hover:text-primary transition-colors"
-          >
-            ← {t("blog_back_to_blog") || "Back to Blog"}
-          </a>
-          <span class="text-gray-400">|</span>
-          <span
-            class="text-xs tracking-[0.4em] text-primary uppercase font-light"
-          >
-            {mainCategory}
-          </span>
+      {excerpt && (
+        <section class="py-16 lg:py-20 bg-white">
+          <div class="container mx-auto px-8 lg:px-16">
+            <div class="max-w-3xl mx-auto">
+              <p class="text-xl md:text-2xl font-light text-gray-700 leading-relaxed text-center italic">
+                {excerpt}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section class="py-16 lg:py-24 bg-neutral">
+        <div class="container mx-auto px-8 lg:px-16">
+          <div class="max-w-4xl mx-auto">
+            <article class="prose prose-lg max-w-none">
+              <div set:html={content}></div>
+            </article>
+          </div>
         </div>
+      </section>
 
-        <!-- Title -->
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 leading-tight fade-in fade-in-delay-1"
-        >
-          {post.title}
-        </h1>
-
-        <!-- Date -->
-        <time
-          class="text-sm tracking-wider uppercase font-light text-gray-500 fade-in fade-in-delay-2"
-        >
-          {formattedDate}
-        </time>
-
-        <!-- Content -->
-        <div
-          class="prose prose-lg max-w-none mt-12 fade-in fade-in-delay-3"
-          set:html={post.content}
-        />
-
-        <!-- Share & Back Button -->
-        <div class="mt-16 pt-8 border-t border-gray-200">
-          <a
-            href={langPrefix + "/blog"}
-            class="inline-flex items-center group text-gray-900 font-light text-sm tracking-wider uppercase hover:text-primary transition-colors duration-300"
-          >
-            <svg
-              class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
-            </svg>
-            <span>{t("blog_back_to_blog") || "Back to Blog"}</span>
-          </a>
+      <section class="py-20 lg:py-32 bg-white">
+        <div class="container mx-auto px-8 lg:px-16">
+          <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8">
+              Did you enjoy this article?
+            </h2>
+            
+            <p class="text-lg md:text-xl font-light text-gray-600 mb-12 leading-relaxed">
+              Discover how I can help you create your dream wedding in Northern Italy.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={langPrefix + "/contatti"}
+                class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-light text-lg hover:bg-primary/90 transition-colors rounded-sm"
+              >
+                Contact Me
+              </a>
+              
+              <a
+                href={langPrefix + "/blog"}
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-light text-lg hover:border-primary hover:text-primary transition-colors rounded-sm"
+              >
+                More Articles
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </article>
+      </section>
+    </>
+  ) : (
+    <!-- ========================================
+         TEMPLATE STRUTTURATO (stile destination)
+         ======================================== -->
+    <>
+      <!-- Hero Section -->
+      <section class="relative min-h-[70vh] flex items-end overflow-hidden">
+        {heroImage && (
+          <div class="absolute inset-0">
+            <img
+              src={heroImage}
+              alt={title}
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
+          </div>
+        )}
 
-  <!-- Styling for WordPress content -->
-  <style>
-    .prose {
-      color: #374151;
-      line-height: 1.8;
-    }
+        <div class="container mx-auto px-8 lg:px-16 relative pb-16 lg:pb-24">
+          <div class="max-w-4xl">
+            <div class="flex items-center mb-6 fade-in">
+              <a
+                href={langPrefix + "/blog"}
+                class="text-white/70 text-sm font-light hover:text-white transition-colors"
+              >
+                Blog
+              </a>
+              <span class="mx-3 text-white/50">→</span>
+              <span class="text-white text-sm font-light">{categoryName}</span>
+            </div>
 
-    .prose h2 {
-      font-size: 2rem;
-      font-weight: 300;
-      color: #1f2937;
-      margin-top: 3rem;
-      margin-bottom: 1.5rem;
-    }
+            {heroLabel && (
+              <div class="flex items-center mb-4 fade-in fade-in-delay-1">
+                <div class="w-12 h-px bg-white/50"></div>
+                <span class="ml-4 text-xs tracking-[0.4em] text-white/80 uppercase font-light">
+                  {heroLabel}
+                </span>
+              </div>
+            )}
 
-    .prose h3 {
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: #1f2937;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-    }
+            <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 leading-tight fade-in fade-in-delay-2">
+              {title}
+            </h1>
 
-    .prose p {
-      margin-bottom: 1.5rem;
-      font-weight: 300;
-    }
+            {excerpt && (
+              <p class="text-lg md:text-xl font-light text-white/90 leading-relaxed max-w-2xl fade-in fade-in-delay-3">
+                {excerpt}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
 
-    .prose a {
-      color: #8b7355;
-      text-decoration: none;
-      border-bottom: 1px solid #8b7355;
-      transition: opacity 0.3s ease;
-    }
+      <!-- Intro Section -->
+      {heroQuote && (
+        <section class="py-20 lg:py-28 bg-white">
+          <div class="container mx-auto px-8 lg:px-16">
+            <div class="max-w-4xl mx-auto">
+              <div class="text-center mb-8 fade-in">
+                <div class="text-[80px] font-serif text-primary/10 leading-none mb-[-20px]">
+                  "
+                </div>
+                <blockquote class="text-2xl md:text-3xl font-light text-gray-900 leading-relaxed italic">
+                  {heroQuote}
+                </blockquote>
+              </div>
+              {publishedDate && (
+                <p class="text-center text-sm text-gray-500 font-light">
+                  {publishedDate}
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
-    .prose a:hover {
-      opacity: 0.7;
-    }
+      <!-- Section 01 -->
+      {section01Title && (
+        <section class="py-20 lg:py-28 bg-neutral relative overflow-hidden">
+          <div class="container mx-auto px-8 lg:px-16 relative">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <div class="lg:col-span-6 fade-in">
+                <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]">
+                  01
+                </div>
 
-    .prose img {
-      border-radius: 8px;
-      margin: 2rem 0;
-    }
+                {section01Label && (
+                  <div class="flex items-center mb-4">
+                    <div class="w-12 h-px bg-primary"></div>
+                    <span class="ml-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                      {section01Label}
+                    </span>
+                  </div>
+                )}
 
-    .prose ul,
-    .prose ol {
-      margin-bottom: 1.5rem;
-      padding-left: 2rem;
-    }
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 leading-tight">
+                  <Fragment set:html={section01Title.replace(/\n/g, '<br />')} />
+                </h2>
 
-    .prose li {
-      margin-bottom: 0.5rem;
-      font-weight: 300;
-    }
+                {section01Text && (
+                  <div class="text-base font-light text-gray-700 leading-relaxed whitespace-pre-line">
+                    {section01Text}
+                  </div>
+                )}
+              </div>
 
-    .prose blockquote {
-      border-left: 4px solid #8b7355;
-      padding-left: 1.5rem;
-      margin: 2rem 0;
-      font-style: italic;
-      color: #6b7280;
-    }
-  </style>
+              {section01BoxTitle && (
+                <div class="lg:col-span-6 fade-in fade-in-delay-1">
+                  <div class="relative">
+                    <div class="bg-primary p-8 lg:p-12 text-white">
+                      <Icon name={post.section01BoxIcon || "lucide:grape"} class="w-12 h-12 mb-6 text-accent" />
+                      <h3 class="text-2xl font-light mb-4">{section01BoxTitle}</h3>
+                      <ul class="space-y-3 text-white/90 font-light">
+                        {section01BoxPoints.map(point => (
+                          <li class="flex items-start">
+                            <Icon name="lucide:check" class="w-4 h-4 mr-3 mt-1 text-accent shrink-0" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary/20 -z-10"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- Section 02 -->
+      {section02Title && (
+        <section class="py-20 lg:py-28 bg-white">
+          <div class="container mx-auto px-8 lg:px-16">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+              <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px]">
+                02
+              </div>
+              {section02Label && (
+                <div class="flex items-center justify-center mb-4">
+                  <div class="w-12 h-px bg-primary"></div>
+                  <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                    {section02Label}
+                  </span>
+                  <div class="w-12 h-px bg-primary"></div>
+                </div>
+              )}
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6">
+                <Fragment set:html={section02Title.replace(/\n/g, '<br />')} />
+              </h2>
+              {section02Intro && (
+                <p class="text-lg font-light text-gray-600">
+                  {section02Intro}
+                </p>
+              )}
+            </div>
+
+            {section02Cards.length > 0 && (
+              <div class="grid md:grid-cols-3 gap-8">
+                {section02Cards.map((card, idx) => (
+                  <div class={`group fade-in fade-in-delay-${idx + 1}`}>
+                    <div class="bg-neutral p-8 h-full transition-all duration-300 group-hover:shadow-lg">
+                      <Icon name={card.icon || "lucide:landmark"} class="w-8 h-8 mb-4 text-primary" />
+                      <h3 class="text-xl font-light text-gray-900 mb-3">
+                        {card.title}
+                      </h3>
+                      <p class="text-sm font-light text-gray-600 leading-relaxed mb-4">
+                        {card.text}
+                      </p>
+                      {card.tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2">
+                          {card.tags.map(tag => (
+                            <span class="text-xs px-2 py-1 bg-primary/10 text-primary">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {section02Highlight && (
+              <div class="mt-12 p-8 lg:p-12 bg-linear-to-r from-primary/5 to-transparent border-l-4 border-primary fade-in fade-in-delay-4">
+                <p class="text-lg font-light text-gray-700 leading-relaxed">
+                  {section02Highlight}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      <!-- Section 03 -->
+      {section03Title && (
+        <section class="py-20 lg:py-28 bg-primary text-white relative overflow-hidden">
+          <div class="container mx-auto px-8 lg:px-16 relative">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div class="fade-in">
+                <div class="text-[120px] font-light text-white/10 leading-none mb-[-40px]">
+                  03
+                </div>
+
+                {section03Label && (
+                  <div class="flex items-center mb-4">
+                    <div class="w-12 h-px bg-white/50"></div>
+                    <span class="ml-4 text-xs tracking-[0.4em] uppercase font-light opacity-80">
+                      {section03Label}
+                    </span>
+                  </div>
+                )}
+
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight">
+                  <Fragment set:html={section03Title.replace(/\n/g, '<br />')} />
+                </h2>
+
+                {section03Intro && (
+                  <p class="text-lg font-light leading-relaxed opacity-90">
+                    {section03Intro}
+                  </p>
+                )}
+              </div>
+
+              {section03Items.length > 0 && (
+                <div class="space-y-4 fade-in fade-in-delay-1">
+                  {section03Items.map(item => (
+                    <div class="bg-white/10 backdrop-blur-sm p-6 flex items-center">
+                      <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0">
+                        <Icon name={item.icon || "lucide:sparkles"} class="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 class="font-light text-lg">{item.title}</h4>
+                        <p class="text-sm opacity-80 font-light">{item.subtitle}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- Section 04 -->
+      {section04Title && (
+        <section class="py-20 lg:py-28 bg-white">
+          <div class="container mx-auto px-8 lg:px-16">
+            <div class="max-w-4xl mx-auto text-center">
+              <div class="text-[120px] font-light text-primary/10 leading-none mb-[-40px] fade-in">
+                04
+              </div>
+
+              {section04Label && (
+                <div class="flex items-center justify-center mb-4 fade-in">
+                  <div class="w-12 h-px bg-primary"></div>
+                  <span class="mx-4 text-xs tracking-[0.4em] text-gray-600 uppercase font-light">
+                    {section04Label}
+                  </span>
+                  <div class="w-12 h-px bg-primary"></div>
+                </div>
+              )}
+
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6 fade-in fade-in-delay-1">
+                <Fragment set:html={section04Title.replace(/\n/g, '<br />')} />
+              </h2>
+
+              {section04Text && (
+                <p class="text-lg font-light text-gray-600 leading-relaxed mb-8 fade-in fade-in-delay-2">
+                  {section04Text}
+                </p>
+              )}
+
+              {section04Quote && (
+                <blockquote class="text-xl md:text-2xl font-light text-gray-900 italic mb-12 fade-in fade-in-delay-3">
+                  {section04Quote}
+                </blockquote>
+              )}
+
+              {section04Tags.length > 0 && (
+                <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in fade-in-delay-3">
+                  {section04Tags.map(tag => (
+                    <span class="px-5 py-2 border border-primary/30 text-sm font-light text-gray-700">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- CTA Section -->
+      <section class="py-20 lg:py-28 bg-neutral">
+        <div class="container mx-auto px-8 lg:px-16">
+          <div class="max-w-3xl mx-auto text-center fade-in">
+            <h2 class="text-3xl md:text-4xl font-light text-gray-900 mb-6">
+              Did you enjoy this article?
+            </h2>
+
+            <p class="text-lg font-light text-gray-600 leading-relaxed mb-10">
+              Tell me your dream and together we'll create the perfect wedding in Northern Italy.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={langPrefix + "/contatti"}
+                class="inline-flex items-center justify-center px-10 py-4 bg-primary text-white text-sm font-light tracking-wider uppercase hover:bg-secondary transition-all duration-300"
+              >
+                Contact Me
+              </a>
+              <a
+                href={langPrefix + "/blog"}
+                class="inline-flex items-center justify-center px-10 py-4 border border-primary text-primary text-sm font-light tracking-wider uppercase hover:bg-primary hover:text-white transition-all duration-300"
+              >
+                More Articles
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
 </BaseLayout>
