@@ -445,8 +445,9 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 }
 
 export async function getAllServiceSlugs(): Promise<string[]> {
-  const query = `*[_type == "service"].slug.current`;
-  return await client.fetch(query);
+  const query = `*[_type == "service" && defined(slug.current)].slug.current`;
+  const slugs = await client.fetch(query);
+  return slugs.filter((slug: string | null) => slug !== null && slug !== undefined);
 }
 
 // ============================================
@@ -508,8 +509,9 @@ export async function getDestinationBySlug(
 }
 
 export async function getAllDestinationSlugs(): Promise<string[]> {
-  const query = `*[_type == "destination"].slug.current`;
-  return await client.fetch(query);
+  const query = `*[_type == "destination" && defined(slug.current)].slug.current`;
+  const slugs = await client.fetch(query);
+  return slugs.filter((slug: string | null) => slug !== null && slug !== undefined);
 }
 
 // ============================================
@@ -591,8 +593,9 @@ export async function getBlogPostBySlug(
 }
 
 export async function getAllBlogPostSlugs(): Promise<string[]> {
-  const query = `*[_type == "blogPost"].slug.current`;
-  return await client.fetch(query);
+  const query = `*[_type == "blogPost" && defined(slug.current)].slug.current`;
+  const slugs = await client.fetch(query);
+  return slugs.filter((slug: string | null) => slug !== null && slug !== undefined);
 }
 
 // Alias per compatibilità
