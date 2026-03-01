@@ -404,8 +404,8 @@ export async function getHomePageData(): Promise<{
   services: Service[];
 }> {
   const homePage = await client.fetch(`*[_type == "homePage"][0]`);
-  const destinations = await client.fetch(`*[_type == "destination"] | order(order asc)`);
-  const services = await client.fetch(`*[_type == "service"] | order(order asc)`);
+  const destinations = await client.fetch(`*[_type == "destination" && defined(slug.current)] | order(order asc)`);
+  const services = await client.fetch(`*[_type == "service" && defined(slug.current)] | order(order asc)`);
   
   return { homePage, destinations, services };
 }
@@ -435,7 +435,7 @@ export async function getServicesPageData(): Promise<ServicesPage | null> {
 export const getServicesPage = getServicesPageData;
 
 export async function getServices(): Promise<Service[]> {
-  const query = `*[_type == "service"] | order(order asc)`;
+  const query = `*[_type == "service" && defined(slug.current)] | order(order asc)`;
   return await client.fetch(query);
 }
 
@@ -463,7 +463,7 @@ export async function getDestinationsPageData(): Promise<DestinationsPage | null
 export const getDestinationsPage = getDestinationsPageData;
 
 export async function getDestinations(): Promise<Destination[]> {
-  const query = `*[_type == "destination"] | order(order asc)`;
+  const query = `*[_type == "destination" && defined(slug.current)] | order(order asc)`;
   return await client.fetch(query);
 }
 
@@ -520,7 +520,7 @@ export async function getAllDestinationSlugs(): Promise<string[]> {
 
 export async function getBlogPosts(limit?: number): Promise<BlogPost[]> {
   const limitQuery = limit ? `[0...${limit}]` : "";
-  const query = `*[_type == "blogPost"] | order(publishedAt desc)${limitQuery} {
+  const query = `*[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc)${limitQuery} {
     _id,
     slug,
     title,
